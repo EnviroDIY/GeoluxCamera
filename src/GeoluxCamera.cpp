@@ -178,12 +178,12 @@ uint32_t GeoluxCamera::transferImage(Stream* xferStream, int32_t image_size,
             uint8_t k = total_bytes_read % 4 - 1;
             if (k == static_cast<uint8_t>(-1)) { k = 3; }
             prev_bytes[j] = b;
-            if ((b == 0xD9) && (prev_bytes[k] == (char)0xFF)) {
+            if ((b == 0xD9) && ((char)prev_bytes[k] == (char)0xFF)) {
                 eof = 1;
                 // got_end_tag = true;
                 DBG_GLX("\n --Got FFD9 EoF tag--\n");
             }
-            if ((b == 0xD8) && (prev_bytes[k] == (char)0xFF)) {
+            if ((b == 0xD8) && ((char)prev_bytes[k] == (char)0xFF)) {
                 eof = 0;
                 // got_start_tag = true;
                 DBG_GLX("\n --Got FFD8 start tag--");
@@ -203,7 +203,9 @@ uint32_t GeoluxCamera::transferImage(Stream* xferStream, int32_t image_size,
         }
     }
 
+#if defined GEOLUX_DEBUG
     uint32_t transfer_time = millis() - start_xfer_millis;
+#endif
 
     DBG_GLX(GF("Used"), chunk_number, GF("chunks to read"), total_bytes_read,
             GF("bytes in"), chunk_size, GF("bytes chunks."));
@@ -250,15 +252,15 @@ void GeoluxCamera::printCameraInfo(Stream& outStream) {
 }
 
 String GeoluxCamera::getDeviceType() {
-    return getCameraInfoString(GF("#device_type:"));
+    return getCameraInfoString("#device_type:");
 }
 
 String GeoluxCamera::getCameraFirmware() {
-    return getCameraInfoString(GF("#firmware:"));
+    return getCameraInfoString("#firmware:");
 }
 
 uint32_t GeoluxCamera::getCameraSerialNumber() {
-    uint32_t serial_number = getCameraInfoInt(GF("#serial_id:"));
+    uint32_t serial_number = getCameraInfoInt("#serial_id:");
     if (serial_number != static_cast<uint32_t>(-1)) { return serial_number; }
     return 0;
 }
@@ -274,7 +276,7 @@ bool GeoluxCamera::setResolution(const char* resolution) {
 }
 
 String GeoluxCamera::getResolution() {
-    return getCameraInfoString(GF("#resolution:"));
+    return getCameraInfoString("#resolution:");
 }
 
 bool GeoluxCamera::setQuality(uint8_t compression) {
@@ -283,7 +285,7 @@ bool GeoluxCamera::setQuality(uint8_t compression) {
 }
 
 int8_t GeoluxCamera::getQuality() {
-    return static_cast<int8_t>(getCameraInfoInt(GF("#quality:")));
+    return static_cast<int8_t>(getCameraInfoInt("#quality:"));
 }
 
 bool GeoluxCamera::setJPEGMaximumSize(uint16_t size) {
@@ -292,7 +294,7 @@ bool GeoluxCamera::setJPEGMaximumSize(uint16_t size) {
 }
 
 uint32_t GeoluxCamera::getJPEGMaximumSize() {
-    return getCameraInfoInt(GF("#jpeg_maximum_size:"));
+    return getCameraInfoInt("#jpeg_maximum_size:");
 }
 
 bool GeoluxCamera::setNightMode(geolux_night_mode mode) {
@@ -320,7 +322,7 @@ bool GeoluxCamera::setNightMode(const char* mode) {
 }
 
 String GeoluxCamera::getNightMode() {
-    return getCameraInfoString(GF("#night_mode:"));
+    return getCameraInfoString("#night_mode:");
 }
 
 bool GeoluxCamera::setIRLEDMode(geolux_ir_mode mode) {
@@ -348,11 +350,11 @@ bool GeoluxCamera::setIRLEDMode(const char* mode) {
 }
 
 String GeoluxCamera::getIRLEDMode() {
-    return getCameraInfoString(GF("#ir_led_mode:"));
+    return getCameraInfoString("#ir_led_mode:");
 }
 
 bool GeoluxCamera::getIRFilterStatus() {
-    return getCameraInfoString(GF("#ir_filter:")) == "night";
+    return getCameraInfoString("#ir_filter:") == "night";
 }
 
 bool GeoluxCamera::setAutofocusPoint(int8_t x, int8_t y) {
@@ -361,12 +363,11 @@ bool GeoluxCamera::setAutofocusPoint(int8_t x, int8_t y) {
 }
 
 int8_t GeoluxCamera::getAutofocusX() {
-    return static_cast<int8_t>(getCameraInfoInt(GF("#autofocus_point:"), ','));
+    return static_cast<int8_t>(getCameraInfoInt("#autofocus_point:", ','));
 }
 
 int8_t GeoluxCamera::getAutofocusY() {
-    return static_cast<int8_t>(
-        getCameraInfoInt(GF("#autofocus_point:"), '\r', 1, GF(",")));
+    return static_cast<int8_t>(getCameraInfoInt("#autofocus_point:", '\r', 1, ","));
 }
 
 bool GeoluxCamera::setAutoexposureRegion(int8_t x, int8_t y, int8_t width,
@@ -376,30 +377,27 @@ bool GeoluxCamera::setAutoexposureRegion(int8_t x, int8_t y, int8_t width,
 }
 
 int8_t GeoluxCamera::getAutoexposureX() {
-    return static_cast<int8_t>(getCameraInfoInt(GF("#autoexposure_region:"), ','));
+    return static_cast<int8_t>(getCameraInfoInt("#autoexposure_region:", ','));
 }
 
 int8_t GeoluxCamera::getAutoexposureY() {
-    return static_cast<int8_t>(
-        getCameraInfoInt(GF("#autoexposure_region:"), ',', 1, GF(",")));
+    return static_cast<int8_t>(getCameraInfoInt("#autoexposure_region:", ',', 1, ","));
 }
 
 int8_t GeoluxCamera::getAutoexposureWidth() {
-    return static_cast<int8_t>(
-        getCameraInfoInt(GF("#autoexposure_region:"), ',', 2, GF(",")));
+    return static_cast<int8_t>(getCameraInfoInt("#autoexposure_region:", ',', 2, ","));
 }
 
 int8_t GeoluxCamera::getAutoexposureHeight() {
-    return static_cast<int8_t>(
-        getCameraInfoInt(GF("#autoexposure_region:"), '\r', 3, GF(",")));
+    return static_cast<int8_t>(getCameraInfoInt("#autoexposure_region:", '\r', 3, ","));
 }
 
 uint32_t GeoluxCamera::getExposureTime() {
-    return getCameraInfoInt(GF("#exposure:"));
+    return getCameraInfoInt("#exposure:");
 }
 
 uint32_t GeoluxCamera::getImageBrightness() {
-    return getCameraInfoInt(GF("#image_brightness:"));
+    return getCameraInfoInt("#image_brightness:");
 }
 
 bool GeoluxCamera::setWhiteBalanceOffset(int8_t red, int8_t green, int8_t blue) {
@@ -408,15 +406,15 @@ bool GeoluxCamera::setWhiteBalanceOffset(int8_t red, int8_t green, int8_t blue) 
 }
 
 int8_t GeoluxCamera::getWhiteBalanceOffsetRed() {
-    return static_cast<int8_t>(getCameraInfoInt(GF("#wb_offset:"), ','));
+    return static_cast<int8_t>(getCameraInfoInt("#wb_offset:"), ',');
 }
 
 int8_t GeoluxCamera::getWhiteBalanceOffsetGreen() {
-    return static_cast<int8_t>(getCameraInfoInt(GF("#wb_offset:"), ',', 1, GF(",")));
+    return static_cast<int8_t>(getCameraInfoInt("#wb_offset:", ',', 1, ","));
 }
 
 int8_t GeoluxCamera::getWhiteBalanceOffsetBlue() {
-    return static_cast<int8_t>(getCameraInfoInt(GF("#wb_offset:"), '\r', 2, GF(",")));
+    return static_cast<int8_t>(getCameraInfoInt("#wb_offset:", '\r', 2, ","));
 }
 
 bool GeoluxCamera::setColorCorrectionMode(int8_t mode) {
@@ -425,7 +423,7 @@ bool GeoluxCamera::setColorCorrectionMode(int8_t mode) {
 }
 
 bool GeoluxCamera::getColorCorrectionMode() {
-    return getCameraInfoString(GF("#color_correction_mode:")) == "on";
+    return getCameraInfoString("#color_correction_mode:") == "on";
 }
 
 bool GeoluxCamera::setAutoSnapshotInterval(uint32_t mode) {
@@ -434,7 +432,7 @@ bool GeoluxCamera::setAutoSnapshotInterval(uint32_t mode) {
 }
 
 uint32_t GeoluxCamera::getAutoSnapshotInterval() {
-    String snapInterval = getCameraInfoString(GF("#auto_snapshot_interval:"));
+    String snapInterval = getCameraInfoString("#auto_snapshot_interval:");
     if (snapInterval == "off") return 0;
     return snapInterval.toInt();
 }
@@ -445,7 +443,7 @@ bool GeoluxCamera::moveFocus(int8_t offset) {
 }
 
 int16_t GeoluxCamera::getFocusPosition() {
-    return static_cast<int16_t>(getCameraInfoInt(GF("#focus_position:")));
+    return static_cast<int16_t>(getCameraInfoInt("#focus_position:"));
 }
 
 bool GeoluxCamera::moveZoom(int8_t offset) {
@@ -454,7 +452,7 @@ bool GeoluxCamera::moveZoom(int8_t offset) {
 }
 
 int8_t GeoluxCamera::getZoomPosition() {
-    return static_cast<int8_t>(getCameraInfoInt(GF("#zoom_position:")));
+    return static_cast<int8_t>(getCameraInfoInt("#zoom_position:"));
 }
 
 bool GeoluxCamera::sleep(uint32_t sleepTimeout) {
@@ -588,7 +586,7 @@ long GeoluxCamera::getCameraInfoInt(const char* searchStartTag, char searchEndTa
     // if we read 11 or more bytes, it's an overflow
     if (bytes_read && bytes_read < 11) {
         buf[bytes_read] = '\0';
-        resp            = atoll(buf);
+        resp            = atol(buf);
     }
     // read out and dump the rest of the lines
     while (_stream->find('#')) { _stream->readStringUntil('\n'); }
