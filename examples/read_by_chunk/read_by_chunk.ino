@@ -39,6 +39,10 @@ const uint8_t SD_CS_PIN = SS;
 // Assume built-in SD is used.
 const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 #endif  // SDCARD_SS_PIN
+#ifndef SDCARD_SPI
+#define SDCARD_SPI SPI
+#endif  // SDCARD_SPI
+
 
 #if (defined(ARDUINO_ARCH_SAMD)) && !defined(__SAMD51__)
 // Dispite the 48MHz clock speed, the max SPI speed of a SAMD21 is 12 MHz
@@ -76,6 +80,37 @@ FsFile metadataFile;
 #else  // SD_FAT_TYPE
 #error Invalid SD_FAT_TYPE
 #endif  // SD_FAT_TYPE
+
+// Construct a Serial object for Modbus
+#if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_FEATHER328P)
+// The Uno only has 1 hardware serial port, which is dedicated to comunication with the
+// computer. If using an Uno, you will be restricted to using AltSofSerial or
+// SoftwareSerial
+#include <SoftwareSerial.h>
+const int SSRxPin = 10;  // Receive pin for software serial (Rx on RS485 adapter)
+const int SSTxPin = 11;  // Send pin for software serial (Tx on RS485 adapter)
+#pragma message("Using Software Serial for the Uno on pins 10 and 11")
+SoftwareSerial cameraSerial(SSRxPin, SSTxPin);
+// AltSoftSerial cameraSerial;
+#elif defined ESP8266
+#include <SoftwareSerial.h>
+#pragma message("Using Software Serial for the ESP8266")
+SoftwareSerial cameraSerial;
+#elif defined(NRF52832_FEATHER) || defined(ARDUINO_NRF52840_FEATHER)
+#pragma message("Using TinyUSB for the NRF52")
+#include <Adafruit_TinyUSB.h>
+HardwareSerial& cameraSerial = Serial1;
+#elif !defined(NO_GLOBAL_SERIAL1) && !defined(STM32_CORE_VERSION)
+// This is just a assigning another name to the same port, for convienence
+// Unless it is unavailable, always prefer hardware serial.
+#pragma message("Using HarwareSerial / Serial1")
+HardwareSerial& cameraSerial = Serial1;
+#else
+// This is just a assigning another name to the same port, for convienence
+// Unless it is unavailable, always prefer hardware serial.
+#pragma message("Using HarwareSerial / Serial")
+HardwareSerial& cameraSerial = Serial;
+#endif
 
 uint16_t                    image_number = 1;  // for file naming
 uint32_t                    start_millis = 0;  // for tracking timing
@@ -131,8 +166,8 @@ void setup() {
     Serial.println("Geolux Camera Demo!");
     Serial.println();
 
-    Serial1.begin(serialBaud);
-    camera.begin(Serial1);
+    cameraSerial.begin(serialBaud);
+    camera.begin(cameraSerial);
     camera.streamDump();  // dump anything in the stream, just in case
 
 
@@ -144,7 +179,7 @@ void setup() {
     digitalWrite(camera_power_pin, HIGH);
     Serial.println(F("Wait up to 5s for power to settle and camera to warm up"));
     // wait until the start up message comes over
-    while (Serial1.available() < 15 && millis() - start_millis < 5000L) {}
+    while (cameraSerial.available() < 15 && millis() - start_millis < 5000L) {}
     Serial.print(F("Camera booted after "));
     Serial.print(millis() - start_millis);
     Serial.println(F("ms"));
@@ -218,7 +253,7 @@ void loop() {
         return;
     }
     // dump anything in the camera stream, just in case
-    while (Serial1.available()) { Serial1.read(); }
+    while (cameraSerial.available()) { cameraSerial.read(); }
 
     // see if the card is present and can be initialized:
     if (!sd.begin(customSdConfig)) {
@@ -298,7 +333,7 @@ void loop() {
     Serial.println(" bytes.");
 
     // dump anything in the camera stream, just in case
-    while (Serial1.available()) { Serial1.read(); }
+    while (cameraSerial.available()) { cameraSerial.read(); }
 
     // Read all the data up to # bytes!
     int32_t total_bytes_read    = 0;  // for the number of bytes read
@@ -306,14 +341,12 @@ void loop() {
     int32_t bytes_remaining     = image_size;
     int32_t chunk_number        = 0;
     int32_t chunk_size          = 512;  // don't go below 256
-    int32_t start_next_chunk    = 0;
     int32_t chunks_needed       = ceil(image_size / chunk_size);
 
     start_millis = millis();
 
     while (total_bytes_read < image_size && millis() - start_millis < 120000L) {
         uint8_t buffer[chunk_size];
-        auto*   write_start   = buffer;
         int32_t bytesToRead   = min(chunk_size, max(bytes_remaining, 1));
         int32_t bytes_read    = 0;
         int32_t bytes_written = 0;

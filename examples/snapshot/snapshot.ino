@@ -31,6 +31,40 @@ const uint8_t SD_CS_PIN = SS;
 // Assume built-in SD is used.
 const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 #endif  // SDCARD_SS_PIN
+#ifndef SDCARD_SPI
+#define SDCARD_SPI SPI
+#endif  // SDCARD_SPI
+
+// Construct a Serial object for Modbus
+#if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_FEATHER328P)
+// The Uno only has 1 hardware serial port, which is dedicated to comunication with the
+// computer. If using an Uno, you will be restricted to using AltSofSerial or
+// SoftwareSerial
+#include <SoftwareSerial.h>
+const int SSRxPin = 10;  // Receive pin for software serial (Rx on RS485 adapter)
+const int SSTxPin = 11;  // Send pin for software serial (Tx on RS485 adapter)
+#pragma message("Using Software Serial for the Uno on pins 10 and 11")
+SoftwareSerial cameraSerial(SSRxPin, SSTxPin);
+// AltSoftSerial cameraSerial;
+#elif defined ESP8266
+#include <SoftwareSerial.h>
+#pragma message("Using Software Serial for the ESP8266")
+SoftwareSerial cameraSerial;
+#elif defined(NRF52832_FEATHER) || defined(ARDUINO_NRF52840_FEATHER)
+#pragma message("Using TinyUSB for the NRF52")
+#include <Adafruit_TinyUSB.h>
+HardwareSerial& cameraSerial = Serial1;
+#elif !defined(NO_GLOBAL_SERIAL1) && !defined(STM32_CORE_VERSION)
+// This is just a assigning another name to the same port, for convienence
+// Unless it is unavailable, always prefer hardware serial.
+#pragma message("Using HarwareSerial / Serial1")
+HardwareSerial& cameraSerial = Serial1;
+#else
+// This is just a assigning another name to the same port, for convienence
+// Unless it is unavailable, always prefer hardware serial.
+#pragma message("Using HarwareSerial / Serial")
+HardwareSerial& cameraSerial = Serial;
+#endif
 
 #if (defined(ARDUINO_ARCH_SAMD)) && !defined(__SAMD51__)
 // Dispite the 48MHz clock speed, the max SPI speed of a SAMD21 is 12 MHz
@@ -116,8 +150,8 @@ void setup() {
     Serial.println("Geolux Camera Demo!");
     Serial.println();
 
-    Serial1.begin(serialBaud);
-    camera.begin(Serial1);
+    cameraSerial.begin(serialBaud);
+    camera.begin(cameraSerial);
     camera.streamDump();  // dump anything in the stream, just in case
 
 
@@ -129,7 +163,7 @@ void setup() {
     digitalWrite(camera_power_pin, HIGH);
     Serial.println(F("Wait up to 5s for power to settle and camera to warm up"));
     // wait until the start up message comes over
-    while (Serial1.available() < 15 && millis() - start_millis < 5000L) {}
+    while (cameraSerial.available() < 15 && millis() - start_millis < 5000L) {}
     Serial.print(F("Camera booted after "));
     Serial.print(millis() - start_millis);
     Serial.println(F("ms"));
@@ -204,7 +238,7 @@ void loop() {
         return;
     }
     // dump anything in the camera stream, just in case
-    while (Serial1.available()) { Serial1.read(); }
+    while (cameraSerial.available()) { cameraSerial.read(); }
 
     // see if the card is present and can be initialized:
     if (!sd.begin(customSdConfig)) {
@@ -284,7 +318,7 @@ void loop() {
     Serial.println(" bytes.");
 
     // dump anything in the camera stream, just in case
-    while (Serial1.available()) { Serial1.read(); }
+    while (cameraSerial.available()) { cameraSerial.read(); }
 
     // transfer the image from the camera to a file on the SD card
     uint32_t bytes_transferred = camera.transferImage(imgFile, image_size);
