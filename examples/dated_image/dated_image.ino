@@ -64,11 +64,11 @@ SdSpiConfig customSdConfig(static_cast<SdCsPin_t>(SD_CS_PIN), (uint8_t)(DEDICATE
 
 
 // construct the SD card and file instances
-#if SD_FAT_TYPE == 0
+#if SD_FAT_TYPE == 0 && !defined(ESP8266)
 SdFat sd;
 File  imgFile;
 File  metadataFile;
-#elif SD_FAT_TYPE == 1
+#elif SD_FAT_TYPE == 1 || defined(ESP8266)
 SdFat32 sd;
 File32  imgFile;
 File32  metadataFile;

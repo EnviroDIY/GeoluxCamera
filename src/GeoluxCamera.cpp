@@ -112,7 +112,9 @@ uint32_t GeoluxCamera::transferImage(Stream* xferStream, int32_t image_size,
     uint32_t start_xfer_millis = millis();
 
     while (!eof && millis() - start_xfer_millis < 120000L) {
-        int32_t bytesToRead   = min(chunk_size, max(bytes_remaining, 1));
+        int32_t bytesToRead =
+            min(chunk_size,
+                static_cast<int32_t>(max(bytes_remaining, static_cast<int32_t>(1))));
         int32_t bytes_read    = 0;
         int32_t bytes_written = 0;
 
@@ -125,8 +127,9 @@ uint32_t GeoluxCamera::transferImage(Stream* xferStream, int32_t image_size,
             DBG_GLX("\nNo response!");
             continue;
         }
-        max_command_response = max(max_command_response,
-                                   millis() - start_command_millis);
+        max_command_response =
+            max(max_command_response,
+                static_cast<uint32_t>(millis() - start_command_millis));
 #ifdef GEOLUX_DEBUG
         // print something to show we're not frozen
         GEOLUX_DEBUG.print('.');
@@ -140,7 +143,8 @@ uint32_t GeoluxCamera::transferImage(Stream* xferStream, int32_t image_size,
                 DBG_GLX("\nNo more characters available!");
                 break;
             }
-            max_char_spacing = max(max_char_spacing, millis() - start_avail_time);
+            max_char_spacing = max(max_char_spacing,
+                                   static_cast<uint32_t>(millis() - start_avail_time));
             uint8_t b        = _stream->read();
             bytes_read++;
             total_bytes_read++;

@@ -62,10 +62,11 @@ SdSpiConfig customSdConfig(static_cast<SdCsPin_t>(SD_CS_PIN), (uint8_t)(DEDICATE
 
 
 // construct the SD card and file instances
-#if SD_FAT_TYPE == 0
+#if SD_FAT_TYPE == 0 && !defined(ESP8266)
 SdFat sd;
 File  imgFile;
-#elif SD_FAT_TYPE == 1
+File  metadataFile;
+#elif SD_FAT_TYPE == 1 || defined(ESP8266)
 SdFat32 sd;
 File32  imgFile;
 File32  metadataFile;
@@ -340,7 +341,13 @@ void loop() {
     int32_t total_bytes_written = 0;  // for the number of bytes written
     int32_t bytes_remaining     = image_size;
     int32_t chunk_number        = 0;
-    int32_t chunk_size          = 512;  // don't go below 256
+
+#if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_LEONARDO) || \
+    defined(ARDUINO_AVR_FEATHER328P) || defined(ARDUINO_AVR_FEATHER32U4)
+    int32_t chunk_size = 256;  // don't go below 256
+#else
+    int32_t chunk_size = 512;  // don't go below 256
+#endif
     int32_t chunks_needed       = ceil(image_size / chunk_size);
 
     start_millis = millis();
