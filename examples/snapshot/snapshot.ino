@@ -35,6 +35,46 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 #define SDCARD_SPI SPI
 #endif  // SDCARD_SPI
 
+#if (defined(ARDUINO_ARCH_SAMD)) && !defined(__SAMD51__)
+// Dispite the 48MHz clock speed, the max SPI speed of a SAMD21 is 12 MHz
+// see https://github.com/arduino/ArduinoCore-samd/pull/212
+// The Adafruit SAMD core does NOT automatically manage the SPI speed, so
+// this needs to be set.
+SdSpiConfig customSdConfig(static_cast<SdCsPin_t>(SD_CS_PIN), (uint8_t)(DEDICATED_SPI),
+                           SD_SCK_MHZ(12), &SDCARD_SPI);
+#elif defined(ARDUINO_ARCH_SAMD)
+// The SAMD51 is fast enough to handle SPI_FULL_SPEED=SD_SCK_MHZ(50).
+// The SPI library of the Adafruit/Arduino AVR core will automatically
+// adjust the full speed of the SPI clock down to whatever the board can
+// handle.
+SdSpiConfig customSdConfig(static_cast<SdCsPin_t>(SD_CS_PIN), (uint8_t)(DEDICATED_SPI),
+                           SPI_FULL_SPEED, &SDCARD_SPI);
+#else
+SdSpiConfig customSdConfig(static_cast<SdCsPin_t>(SD_CS_PIN));
+#endif
+
+
+// construct the SD card and file instances
+#if SD_FAT_TYPE == 0 && !defined(ESP8266) && !(defined(__AVR__) && FLASHEND < 0X8000)
+SdFat sd;
+File  imgFile;
+File  metadataFile;
+#elif SD_FAT_TYPE == 1 || defined(ESP8266) || (defined(__AVR__) && FLASHEND < 0X8000)
+SdFat32 sd;
+File32  imgFile;
+File32  metadataFile;
+#elif SD_FAT_TYPE == 2
+SdExFat sd;
+ExFile  imgFile;
+ExFile  metadataFile;
+#elif SD_FAT_TYPE == 3
+SdFs   sd;
+FsFile imgFile;
+FsFile metadataFile;
+#else  // SD_FAT_TYPE
+#error Invalid SD_FAT_TYPE
+#endif  // SD_FAT_TYPE
+
 // Construct a Serial object for Modbus
 #if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_FEATHER328P)
 // The Uno only has 1 hardware serial port, which is dedicated to comunication with the
@@ -65,44 +105,6 @@ HardwareSerial& cameraSerial = Serial1;
 #pragma message("Using HarwareSerial / Serial")
 HardwareSerial& cameraSerial = Serial;
 #endif
-
-#if (defined(ARDUINO_ARCH_SAMD)) && !defined(__SAMD51__)
-// Dispite the 48MHz clock speed, the max SPI speed of a SAMD21 is 12 MHz
-// see https://github.com/arduino/ArduinoCore-samd/pull/212
-// The Adafruit SAMD core does NOT automatically manage the SPI speed, so
-// this needs to be set.
-SdSpiConfig customSdConfig(static_cast<SdCsPin_t>(SD_CS_PIN), (uint8_t)(DEDICATED_SPI),
-                           SD_SCK_MHZ(12), &SDCARD_SPI);
-#else
-// The SAMD51 is fast enough to handle SPI_FULL_SPEED=SD_SCK_MHZ(50).
-// The SPI library of the Adafruit/Arduino AVR core will automatically
-// adjust the full speed of the SPI clock down to whatever the board can
-// handle.
-SdSpiConfig customSdConfig(static_cast<SdCsPin_t>(SD_CS_PIN), (uint8_t)(DEDICATED_SPI),
-                           SPI_FULL_SPEED, &SDCARD_SPI);
-#endif
-
-
-// construct the SD card and file instances
-#if SD_FAT_TYPE == 0 && !defined(ESP8266)
-SdFat sd;
-File  imgFile;
-File  metadataFile;
-#elif SD_FAT_TYPE == 1 || defined(ESP8266)
-SdFat32 sd;
-File32  imgFile;
-File32  metadataFile;
-#elif SD_FAT_TYPE == 2
-SdExFat sd;
-ExFile  imgFile;
-ExFile  metadataFile;
-#elif SD_FAT_TYPE == 3
-SdFs   sd;
-FsFile imgFile;
-FsFile metadataFile;
-#else  // SD_FAT_TYPE
-#error Invalid SD_FAT_TYPE
-#endif  // SD_FAT_TYPE
 
 uint16_t                    image_number = 1;  // for file naming
 uint32_t                    start_millis = 0;  // for tracking timing

@@ -53,22 +53,24 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 // this needs to be set.
 SdSpiConfig customSdConfig(static_cast<SdCsPin_t>(SD_CS_PIN), (uint8_t)(DEDICATED_SPI),
                            SD_SCK_MHZ(12), &SDCARD_SPI);
-#else
+#elif defined(ARDUINO_ARCH_SAMD)
 // The SAMD51 is fast enough to handle SPI_FULL_SPEED=SD_SCK_MHZ(50).
 // The SPI library of the Adafruit/Arduino AVR core will automatically
 // adjust the full speed of the SPI clock down to whatever the board can
 // handle.
 SdSpiConfig customSdConfig(static_cast<SdCsPin_t>(SD_CS_PIN), (uint8_t)(DEDICATED_SPI),
                            SPI_FULL_SPEED, &SDCARD_SPI);
+#else
+SdSpiConfig customSdConfig(static_cast<SdCsPin_t>(SD_CS_PIN));
 #endif
 
 
 // construct the SD card and file instances
-#if SD_FAT_TYPE == 0 && !defined(ESP8266)
+#if SD_FAT_TYPE == 0 && !defined(ESP8266) && !(defined(__AVR__) && FLASHEND < 0X8000)
 SdFat sd;
 File  imgFile;
 File  metadataFile;
-#elif SD_FAT_TYPE == 1 || defined(ESP8266)
+#elif SD_FAT_TYPE == 1 || defined(ESP8266) || (defined(__AVR__) && FLASHEND < 0X8000)
 SdFat32 sd;
 File32  imgFile;
 File32  metadataFile;
