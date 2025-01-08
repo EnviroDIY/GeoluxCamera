@@ -354,7 +354,8 @@ void loop() {
 
     while (total_bytes_read < image_size && millis() - start_millis < 120000L) {
         uint8_t buffer[chunk_size];
-        int32_t bytesToRead   = min(chunk_size, max(bytes_remaining, 1));
+        int32_t bytesToRead   = min(chunk_size,
+                                    max(bytes_remaining, static_cast<int32_t>(1)));
         int32_t bytes_read    = 0;
         int32_t bytes_written = 0;
 
