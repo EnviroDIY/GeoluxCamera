@@ -20,6 +20,11 @@
       "note": "For the RV-8803 RTC",
       "frameworks": "arduino",
       "platforms": "atmelavr, atmelsam"
+    },
+    {
+      "name": "ESP8266SdFat",
+      "owner": "earlephilhower",
+      "version": "https://github.com/earlephilhower/ESP8266SdFat"
     }
   ]
 }
