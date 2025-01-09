@@ -1,0 +1,3667 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <title>GeoluxCamera class | Geolux Camera0.1.0</title>
+  <link rel="stylesheet" href="m-EnviroDIY+documentation.compiled.css" />
+
+<style id="wp-emoji-styles-inline-css" type="text/css">
+  img.wp-smiley,
+  img.emoji {
+    display: inline !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 1em !important;
+    width: 1em !important;
+    margin: 0 0.07em !important;
+    vertical-align: -0.1em !important;
+    background: none !important;
+    padding: 0 !important;
+  }
+</style>
+<link
+  rel="stylesheet"
+  id="gp-parent-style-css"
+  href="https://www.envirodiy.org/wp-content/themes/socialize/style.css?ver=6.5.4"
+  type="text/css"
+  media="all"
+/>
+<link
+  rel="stylesheet"
+  id="redux-extendify-styles-css"
+  href="https://www.envirodiy.org/wp-content/themes/socialize/lib/framework/redux/assets/css/extendify-utilities.css?ver=4.4.11"
+  type="text/css"
+  media="all"
+/>
+<style id="ghostpool-style-inline-css" type="text/css">
+  #gp-main-header {
+    min-height: 80px;
+  }
+  .gp-desktop-scrolling #gp-main-header {
+    min-height: 80px;
+  }
+  .gp-header-standard #gp-logo {
+    padding: 19px 0;
+  }
+  .gp-desktop-scrolling.gp-header-standard #gp-logo {
+    padding: 12.5px 0;
+  }
+  .gp-header-standard #gp-primary-main-nav .menu > li > a {
+    padding: 30.5px 0;
+  }
+  .gp-header-standard #gp-cart-button,
+  .gp-header-standard #gp-search-button,
+  .gp-header-standard #gp-profile-button {
+    padding: 31px 0;
+  }
+  .gp-desktop-scrolling.gp-header-standard #gp-primary-main-nav .menu > li > a {
+    padding: 30.5px 0;
+  }
+  .gp-desktop-scrolling.gp-header-standard #gp-cart-button,
+  .gp-desktop-scrolling.gp-header-standard #gp-search-button,
+  .gp-desktop-scrolling.gp-header-standard #gp-profile-button {
+    padding: 31px 0;
+  }
+  .gp-nav .menu > .gp-standard-menu > .sub-menu > li:hover > a {
+    color: #fff;
+  }
+  .gp-theme li:hover .gp-primary-dropdown-icon {
+    color: #fff;
+  }
+  .gp-theme .sub-menu li:hover .gp-secondary-dropdown-icon {
+    color: #fff;
+  }
+  .gp-header-centered #gp-cart-button,
+  .gp-header-centered #gp-search-button,
+  .gp-header-centered #gp-profile-button {
+    line-height: 18px;
+  }
+  .gp-header-standard #gp-secondary-main-nav .menu > li > a {
+    padding: 31.5px 0;
+  }
+  .gp-desktop-scrolling.gp-header-standard #gp-secondary-main-nav .menu > li > a {
+    padding: 31.5px 0;
+  }
+  .gp-header-centered #gp-secondary-main-nav .menu > li > a {
+    line-height: 16px;
+  }
+  .gp-active {
+    color: #000;
+  }
+  .gp-theme .widget.buddypress div.item-options a.selected:hover {
+    color: #0579bd !important;
+  }
+  .gp-theme #buddypress .activity-list .activity-content blockquote a {
+    color: #0579bd;
+  }
+  .gp-theme #buddypress .activity-list .activity-content blockquote a:hover {
+    color: #000;
+  }
+  @media only screen and (max-width: 1082px) {
+    .gp-header-standard #gp-primary-main-nav .menu > li > a {
+      padding: 30.5px 0;
+    }
+    .gp-desktop-scrolling.gp-header-standard #gp-primary-main-nav .menu > li > a {
+      padding: 30.5px 0;
+    }
+    .gp-header-standard #gp-cart-button,
+    .gp-header-standard #gp-search-button,
+    .gp-header-standard #gp-profile-button {
+      padding: 31px 0;
+    }
+    .gp-desktop-scrolling.gp-header-standard #gp-cart-button,
+    .gp-desktop-scrolling.gp-header-standard #gp-search-button,
+    .gp-desktop-scrolling.gp-header-standard #gp-profile-button {
+      padding: 31px 0;
+    }
+    .gp-header-standard #gp-secondary-main-nav .menu > li > a {
+      padding: 31.5px 0;
+    }
+    .gp-desktop-scrolling.gp-header-standard #gp-secondary-main-nav .menu > li > a {
+      padding: 31.5px 0;
+    }
+  }
+  @media only screen and (max-width: 1023px) {
+    .gp-responsive #gp-main-header {
+      min-height: 80px;
+    }
+    .gp-responsive #gp-logo {
+      padding: 26px 0;
+    }
+    .gp-responsive #gp-mobile-nav-button,
+    .gp-responsive #gp-cart-button,
+    .gp-responsive #gp-search-button,
+    .gp-responsive #gp-profile-button {
+      padding: 31px 0;
+    }
+  }
+</style>
+<link
+  rel="stylesheet"
+  id="fontawesome-css"
+  href="https://www.envirodiy.org/wp-content/themes/socialize/lib/fonts/font-awesome/css/font-awesome.min.css?ver=6.5.4"
+  type="text/css"
+  media="all"
+/>
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.5.4"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.5.4"
+  media="print"
+  onload="this.media='all'"
+/>
+<noscript
+  ><link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.5.4"
+/></noscript>
+
+<style type="text/css" id="wp-custom-css">
+  /* Print Styles */
+  @media print {
+    @page {
+      margin: 10mm 0;
+    }
+    body {
+      background: white;
+      color: black;
+      background-image: none;
+      margin: 0 !important;
+      padding: 0;
+    }
+
+    body:not(.gp-full-page-page-header) .gp-page-header.gp-has-text:before,
+    body:not(.gp-full-page-page-header)
+      .gp-page-header.gp-has-teaser-video.gp-has-text
+      .gp-video-header:before {
+      background-image: none !important;
+    }
+    /* End print styles */
+
+    #gp-main-header,
+    #gp-small-header,
+    #gp-header-area,
+    #gp-footer,
+    #gp-sidebar-right,
+    #swrc-post-navigation,
+    .hkb-subheader,
+    .hkb-feedback,
+    .hkb-mainpage__sidebar,
+    .print-page {
+      display: none;
+    }
+    .hkb-mainpage-wrapper {
+      padding: 0 !important;
+      background-image: none !important;
+    }
+    a#gp-to-top,
+    span#toTopHover {
+      display: none;
+    }
+    a[href]:after {
+      content: ' (' attr(href) ')';
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: 1.25em;
+      page-break-after: avoid;
+      page-break-inside: avoid;
+    }
+    .hkb-article__content h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: 1.25em;
+      page-break-after: avoid;
+      page-break-inside: avoid;
+    }
+    table {
+      page-break-before: avoid;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+    img {
+      page-break-inside: avoid;
+      visibility: visible;
+      float: none;
+    }
+    blockquote,
+    table,
+    pre {
+      page-break-inside: avoid;
+    }
+    ul,
+    ol,
+    dl {
+      page-break-before: avoid;
+    }
+  }
+
+  /*Gutenberg styles*/
+  /*Buttons*/
+  a.wp-block-button__link {
+    background-color: #538122;
+    border-radius: 5px;
+    text-decoration: none !important;
+  }
+  .wp-block-button__link:hover {
+    background: #365516 !important;
+    color: #ffffff !important;
+  }
+  figcaption {
+    font-style: italic;
+  }
+  /*End Gutenberg styles*/
+  #gp-content a,
+  .gp-sidebar a {
+    font-weight: 400;
+    text-decoration: underline;
+  }
+  /*BuddyPress styles*/
+  /*Make activity feed content darker*/
+  #buddypress .activity-list .activity-content .activity-inner p {
+    color: #000000;
+  }
+  /*Hide activity filter on activity page*/
+  #activity-filter-select.last {
+    display: none !important;
+  }
+  /*Hide disabled BuddyPress status updates on profile page, activity page*/
+  #latest-update {
+    display: none;
+  }
+  .item-title .update {
+    display: none;
+  }
+  /*Prevent display of comment/favorite links in activity stream. Because the comments do not get applied to posts or forum topics, they just confuse users*/
+  .gp-theme #buddypress .activity-list div.activity-meta a.button,
+  .gp-theme #buddypress .activity .acomment-options a,
+  .gp-theme #buddypress .activity-list li.load-newest a,
+  .widget.buddypress div.item-options a.selected {
+    color: #26a9e0;
+    display: none;
+  }
+  /*End BuddyPress styles*/
+  /* Style print link */
+  .pdfprnt-buttons > a > span {
+    margin: 15px 0;
+    padding-left: 0;
+    text-decoration: underline;
+  }
+  /*Change caption text color and size*/
+  .wp-caption-text {
+    color: #333;
+    font-size: 14px;
+  }
+  /*Collapse table borders */
+  #gp-content table {
+    border-collapse: collapse;
+  }
+  /*Add borders to Tableizer tables */
+  .tableizer table,
+  th,
+  td {
+    border: 1px solid #333;
+  }
+  /*Nested list styles*/
+  #gp-content,
+  .hkb-article ol ol li {
+    list-style-type: lower-alpha;
+  }
+  #gp-content,
+  .hkb-article ol ol ol li {
+    list-style-type: lower-roman;
+  }
+  #gp-content,
+  .hkb-article ul ul li {
+    list-style-type: circle !important;
+  }
+  /* Add border */
+  tr:last-child td {
+    border-width: 1px;
+  }
+  /*bbPress*/
+  /* Make forum title and description larger, remove link underlining */
+  div.bbp-forum-content {
+    font-size: 22px;
+    line-height: 28px;
+  }
+  div.bbp-forum-content p {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  #bbpress-forums a.bbp-forum-title {
+    text-decoration: none;
+  }
+  .widgettitle {
+    border-bottom: 3px solid #92d050 !important;
+  }
+  .bbp-author-name {
+    font-size: 14px;
+  }
+  /*End bbpress styles*/
+  #gp-copyright-text,
+  #gp-copyright-text a:link,
+  #gp-copyright-text a:visited {
+    color: #fff;
+    font-weight: 400;
+  }
+  /*WooCommerce styles*/
+  bdi {
+    color: #538122;
+    font-weight: 500;
+  }
+  a.button.product_type_simple {
+    display: none;
+  }
+  p.stock.out-of-stock {
+    color: red;
+    font-weight: 500;
+  }
+  .products li * {
+    text-decoration: none !important;
+  }
+  div.gp-entry-cats {
+    color: #333333;
+  }
+  span.woocommerce-Price-amount.amount {
+    text-decoration: none !important;
+  }
+  /* Hide additional information tab */
+  div.woocommerce-tabs {
+    display: none !important;
+  }
+  /*End WooCommerce styles*/
+  /*The Events Calendar*/
+  #tribe-events-content a {
+    color: #0579bd;
+  }
+  #tribe-events-content .wp-block-button__link {
+    color: #ffffff;
+  }
+  #gp-sidebar-right
+    > div
+    > div.tribe-common.tribe-events.tribe-events-view.tribe-events-view--widget-events-list.tribe-events-widget {
+    background-color: #fff;
+    padding: 15px;
+  }
+  #gp-sidebar-right
+    > div
+    > div.tribe-common.tribe-events.tribe-events-view.tribe-events-view--widget-events-list.tribe-events-widget
+    > div
+    > header {
+    text-transform: uppercase;
+    color: #000;
+    border-bottom: 3px solid #92d050;
+  }
+  #gp-sidebar-right
+    > div
+    > div.tribe-common.tribe-events.tribe-events-view.tribe-events-view--widget-events-list.tribe-events-widget
+    > div
+    > header
+    > h3 {
+    font-family: Roboto !important;
+    font-size: 14px !important;
+    font-weight: 500;
+    padding-bottom: 11px;
+  }
+  #gp-sidebar-right
+    > div
+    > div.tribe-common.tribe-events.tribe-events-view.tribe-events-view--widget-events-list.tribe-events-widget
+    > div
+    > div.tribe-events-widget-events-list__view-more.tribe-common-b1.tribe-common-b2--min-medium
+    > a {
+    color: #26a9e0;
+  }
+  /*Hero Knowledge Base styles*/
+  #hkb .hkb-fullwcontainer {
+    max-width: var(--hkb-main-container-width);
+    margin: 0 auto;
+    padding: 20px 20px;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  h1.hkb-article__title {
+    font-weight: 300 !important;
+    margin: 0 0 0.5em !important;
+  }
+  .hkb-categoryheader__title {
+    font-weight: 300 !important;
+    font-size: 40px !important;
+  }
+  .hkb-articlepreview__title a {
+    font-weight: 300 !important;
+    font-size: 28px !important;
+    text-decoration: underline !important;
+    color: #0579bd !important;
+    font-size: 28px !important;
+  }
+  #hkb a {
+    text-decoration: underline;
+    font-weight: 400;
+  }
+  a.hkb_widget_exit__btn {
+    background-color: #538122 !important;
+    border-radius: 5px;
+    text-decoration: none !important;
+  }
+  a.hkb_widget_exit__btn:hover {
+    background: #365516 !important;
+    color: #ffffff !important;
+  }
+  /* End Heroic KB styles */
+  #swrc-post-navigation a {
+    font-size: small;
+  }
+  p.last-updated {
+    font-size: 12px;
+    font-style: italic;
+  }
+  aside#gp-sidebar-right.gp-sidebar p.last-updated {
+    display: none;
+  }
+  #gp-content p.last-updated {
+    display: none;
+  }
+  #gp-content ul {
+    margin: 0 0 0 20px !important;
+  }
+</style>
+<style id="socialize-dynamic-css" title="dynamic-css" class="redux-options-output">
+  #footer-image img {
+    margin-top: 10px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+  }
+  body {
+    background-color: #f1f1f1;
+  }
+  body:not(.gp-full-page-page-header) #gp-page-wrapper,
+  body:not(.gp-full-page-page-header) #gp-small-header .gp-container,
+  .gp-homepage .widgettitle.gp-fancy-title:before {
+    background-color: #e8e8e8;
+  }
+  body:not(.gp-full-page-page-header) #gp-small-header .gp-left-triangle {
+    border-left-color: #e8e8e8;
+  }
+  body:not(.gp-full-page-page-header) #gp-small-header .gp-right-triangle {
+    border-bottom-color: #e8e8e8;
+  }
+  #gp-content {
+    background-color: #ffffff;
+  }
+  body {
+    font-family: Roboto, 'Arial Black', Gadget, sans-serif;
+    line-height: 28px;
+    font-weight: 300;
+    font-style: normal;
+    color: #000;
+    font-size: 16px;
+  }
+  a {
+    color: #0579bd;
+  }
+  a:hover {
+    color: #000;
+  }
+  h1 {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    line-height: 40px;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 36px;
+  }
+  h2 {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    line-height: 32px;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 28px;
+  }
+  h3,
+  #tab-description h2,
+  .woocommerce #comments h2,
+  .woocommerce #reviews h3,
+  .woocommerce .related h2,
+  .woocommerce-checkout .woocommerce h2,
+  .woocommerce-checkout .woocommerce h3 {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    line-height: 28px;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+  }
+  h4 {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    line-height: 30px;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+  }
+  h5 {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    line-height: 26px;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+  }
+  h6 {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+  }
+  .gp-entry-meta .gp-post-meta-row-1,
+  .gp-homepage #gp-content .gp-vc-element-3,
+  .gp-homepage #gp-content .gp-vc-element-4,
+  .gp-homepage #gp-content .gp-vc-element-5,
+  .gp-homepage #gp-content .gp-vc-element-6,
+  #comments .commentlist li .comment_container,
+  .gp-loop-divider:before,
+  .gp-recent-comments ul li,
+  .gp-search {
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .gp-entry-video-wrapper .gp-entry-meta .gp-post-meta-row-1,
+  .gp-footer-widget .gp-recent-comments ul li {
+    border-top: 1px solid #50504b;
+    border-bottom: 1px solid #50504b;
+  }
+  #gp-main-header {
+    background-color: #222222;
+  }
+  .gp-desktop-scrolling #gp-main-header {
+    background-color: #222222;
+  }
+  #gp-primary-main-nav .menu > li,
+  #gp-primary-main-nav .menu > li > a {
+    font-family: Roboto;
+    text-transform: none;
+    line-height: 16px;
+    font-weight: 400;
+    font-style: normal;
+    color: #ababab;
+    font-size: 16px;
+  }
+  #gp-primary-main-nav .menu > li:hover > a,
+  #gp-primary-main-nav .menu > li > a {
+    color: #fff;
+  }
+  #gp-primary-main-nav .menu > li:hover > a:hover,
+  #gp-primary-main-nav .menu > li > a:hover {
+    color: #fff;
+  }
+  #gp-primary-main-nav .menu > li > a:hover,
+  #gp-primary-main-nav .menu > li:hover > a {
+    border-top: 3px solid #fff;
+  }
+  #gp-secondary-main-nav .menu > li,
+  #gp-secondary-main-nav .menu > li > a {
+    font-family: Roboto;
+    text-transform: none;
+    line-height: 14px;
+    font-weight: 400;
+    font-style: normal;
+    color: #fff;
+    font-size: 14px;
+  }
+  #gp-secondary-main-nav .menu > li:hover > a,
+  #gp-secondary-main-nav .menu > li > a {
+    color: #fff;
+  }
+  #gp-secondary-main-nav .menu > li:hover > a:hover,
+  #gp-secondary-main-nav .menu > li > a:hover {
+    color: #fff;
+  }
+  #gp-secondary-main-nav .menu > li > a:hover,
+  #gp-secondary-main-nav .menu > li:hover > a {
+    border-top: 3px solid #fff;
+  }
+  #gp-search-button,
+  #gp-cart-button {
+    color: #fff;
+  }
+  #gp-search-button:hover,
+  #gp-cart-button:hover {
+    color: #fff;
+  }
+  .gp-nav .sub-menu,
+  .gp-nav .menu li .gp-menu-tabs li:hover,
+  .gp-nav .menu li .gp-menu-tabs li.gp-selected,
+  #gp-search-box {
+    background-color: #fff;
+  }
+  .gp-nav .menu > .gp-standard-menu > .sub-menu > li a:hover,
+  .gp-nav .menu > .gp-standard-menu > .sub-menu > li:hover > a {
+    background-color: #353535;
+  }
+  .gp-nav .gp-standard-menu .sub-menu li,
+  .gp-nav .gp-standard-menu .sub-menu li a,
+  .gp-nav li.gp-megamenu .sub-menu li,
+  .gp-nav .gp-megamenu .sub-menu li a {
+    font-family: Roboto;
+    font-weight: 400;
+    font-style: normal;
+    color: #000;
+    font-size: 14px;
+  }
+  .gp-nav .menu > .gp-standard-menu > .sub-menu > li a {
+    color: #000;
+  }
+  .gp-nav .menu > .gp-standard-menu > .sub-menu > li a:hover {
+    color: #fff;
+  }
+  .gp-nav .sub-menu li,
+  #gp-dropdowncart .total,
+  #gp-dropdowncart .buttons {
+    border-top: 1px solid #e0e0e0;
+  }
+  .gp-nav .gp-megamenu > .sub-menu > li > a,
+  .gp-nav .gp-megamenu > .sub-menu > li > span {
+    color: #000000;
+  }
+  .gp-nav li.gp-megamenu a {
+    color: #000;
+  }
+  .gp-nav li.gp-megamenu a:hover {
+    color: #e93100;
+  }
+  .gp-primary-dropdown-icon {
+    color: #fff;
+  }
+  .gp-primary-dropdown-icon:hover {
+    color: #fff;
+  }
+  .gp-secondary-dropdown-icon {
+    color: #000;
+  }
+  .gp-secondary-dropdown-icon:hover {
+    color: #fff;
+  }
+  .gp-menu-tabs {
+    background-color: #353535;
+  }
+  .gp-nav .menu li .gp-menu-tabs li {
+    color: #ffffff;
+  }
+  .gp-nav .menu li .gp-menu-tabs li:hover,
+  .gp-nav .menu li .gp-menu-tabs li.gp-selected {
+    color: #e93100;
+  }
+  #gp-small-header #gp-top-nav {
+    background-color: #26a9e0;
+  }
+  #gp-small-header .menu > li,
+  #gp-small-header .menu > li > a {
+    color: #ffffff;
+  }
+  #gp-small-header .menu > li:hover,
+  #gp-small-header .menu > li > a:hover {
+    color: #e0e0e0;
+  }
+  #gp-mobile-nav-button,
+  #gp-profile-button,
+  #gp-mobile-nav-close-button {
+    color: #ffffff;
+  }
+  #gp-mobile-nav {
+    background-color: #fff;
+  }
+  #gp-mobile-nav-close-button {
+    background-color: #0579bd;
+  }
+  #gp-mobile-nav li {
+    color: #000000;
+  }
+  #gp-mobile-nav .menu li span,
+  #gp-mobile-nav .menu li a {
+    color: #000;
+  }
+  #gp-mobile-nav .menu li span:hover,
+  #gp-mobile-nav .menu li a:hover {
+    color: #000;
+  }
+  #gp-mobile-nav li a:hover {
+    background-color: #f1f1f1;
+  }
+  #gp-mobile-nav li {
+    border-top: 1px solid #e0e0e0;
+  }
+  #gp-mobile-nav .gp-megamenu > .sub-menu > li > a {
+    color: #000000;
+  }
+  .gp-large-page-header .gp-page-header,
+  .gp-fullwidth-page-header .gp-page-header,
+  #gp-full-page-bg {
+    background-color: #353535;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+  }
+  .gp-page-header h1,
+  .gp-page-header h2 {
+    font-family: Roboto;
+    line-height: 90px;
+    font-weight: normal;
+    font-style: normal;
+    color: #fff;
+    font-size: 80px;
+  }
+  .gp-page-header .gp-container {
+    height: 250px;
+  }
+  .gp-entry-title,
+  .woocommerce .page-title,
+  .woocommerce div.product .entry-title.product_title {
+    font-family: Roboto;
+    line-height: 46px;
+    font-weight: 300;
+    font-style: normal;
+    color: #000;
+    font-size: 40px;
+  }
+  .gp-subtitle {
+    font-family: Roboto;
+    line-height: 32px;
+    font-weight: 300;
+    font-style: normal;
+    color: #0579bd;
+    font-size: 20px;
+  }
+  #gp-post-links a,
+  .gp-pagination-arrows a.prev,
+  .gp-pagination-arrows a.next,
+  .gp-carousel-wrapper .flex-direction-nav a {
+    color: #aaa;
+  }
+  #gp-post-links a:hover,
+  .gp-pagination-arrows a.prev:hover,
+  .gp-pagination-arrows a.next:hover,
+  .gp-carousel-wrapper .flex-direction-nav a:hover {
+    color: #333;
+  }
+  .gp-entry-meta,
+  .gp-meta-comments a {
+    color: #aaaaaa;
+  }
+  .gp-entry-cats,
+  .gp-entry-cats a,
+  .gp-entry-cats a:hover {
+    color: #ffffff;
+  }
+  .gp-entry-cats {
+    background-color: #92d050;
+  }
+  .gp-entry-tags a,
+  .gp-entry-tags a:hover {
+    color: #ffffff;
+  }
+  .gp-entry-tags a {
+    background-color: #353535;
+  }
+  .gp-author-info,
+  #gp-post-navigation #gp-share-icons {
+    background-color: #353535;
+  }
+  .gp-author-info,
+  .gp-author-info a,
+  #gp-post-navigation #gp-share-icons h3 {
+    line-height: 24px;
+    color: #fff;
+    font-size: 14px;
+  }
+  .gp-author-info a {
+    color: #b1b1b1;
+  }
+  .gp-author-info a:hover {
+    color: #fff;
+  }
+  .gp-entry-video-wrapper {
+    background-color: #353535;
+  }
+  .gp-entry-video-wrapper .gp-entry-title {
+    color: #ffffff;
+  }
+  .gp-entry-video-wrapper .gp-video-description {
+    color: #777777;
+  }
+  blockquote {
+    background-color: #0579bd;
+  }
+  blockquote,
+  blockquote a,
+  blockquote a:hover {
+    font-family: 'Roboto Slab';
+    line-height: 38px;
+    font-weight: 400;
+    font-style: normal;
+    color: #fff;
+    font-size: 24px;
+  }
+  .gp-loop-title {
+    line-height: 22px;
+    font-weight: 400;
+    font-size: 19px;
+  }
+  .gp-blog-large .gp-loop-title {
+    line-height: 46px;
+    font-weight: 200;
+    font-size: 40px;
+  }
+  .gp-loop-title a,
+  .bboss_search_item .entry-title a {
+    color: #000;
+  }
+  .gp-loop-title a:hover,
+  .bboss_search_item .entry-title a:hover {
+    color: #0579bd;
+  }
+  .gp-loop-text,
+  .gp-login-wrapper p {
+    color: #545454;
+  }
+  .gp-loop-meta,
+  .gp-loop-meta a,
+  #gp-breadcrumbs,
+  #gp-breadcrumbs a,
+  .woocommerce .woocommerce-breadcrumb a,
+  .woocommerce .woocommerce-breadcrumb,
+  .comment-text time,
+  div.bbp-breadcrumb,
+  div.bbp-breadcrumb a,
+  .gp-statistics-wrapper .gp-stat-title,
+  .widget_display_replies ul li div,
+  .widget_display_topics ul li div {
+    color: #545454;
+  }
+  .gp-loop-cats,
+  .gp-loop-cats a,
+  .gp-loop-cats a:hover {
+    color: #545454;
+  }
+  .gp-loop-tags,
+  .gp-loop-tags a,
+  .gp-loop-tags a:hover {
+    color: #0579bd;
+  }
+  .gp-blog-masonry section,
+  section.sticky {
+    background-color: #f8f8f8;
+  }
+  ul.page-numbers .page-numbers {
+    background-color: #538122;
+  }
+  ul.page-numbers .page-numbers:hover,
+  ul.page-numbers .page-numbers.current,
+  ul.page-numbers > span.page-numbers {
+    background-color: #353535;
+  }
+  ul.page-numbers .page-numbers {
+    color: #ffffff;
+  }
+  .widgettitle,
+  .widget-title,
+  .wp-block-search__label {
+    font-family: Roboto;
+    line-height: 18px;
+    font-weight: 500;
+    font-style: normal;
+    color: #000;
+    font-size: 14px;
+  }
+  .widgettitle a,
+  .widget-title a,
+  .wp-block-search__label {
+    color: #0579bd;
+  }
+  .widgettitle a:hover,
+  .widget-title a:hover,
+  .wp-block-search__label:hover {
+    color: #000;
+  }
+  .gp-sidebar .widgettitle,
+  .widgettitle.gp-standard-title,
+  .gp-sidebar .widget-title,
+  .gp-sidebar .wp-block-search__label {
+    border-bottom: 3px solid #538122;
+  }
+  .widget,
+  .gp-vc-element,
+  .widgettitle.gp-fancy-title .gp-widget-title,
+  .widgettitle.gp-fancy-title .gp-element-icon,
+  .widget .woocommerce {
+    background-color: #ffffff;
+  }
+  .widgettitle.gp-fancy-title .gp-triangle {
+    border-left-color: #ffffff;
+  }
+  input,
+  textarea,
+  .gp-search-bar,
+  .wp-block-search__input,
+  .gp-theme #buddypress .dir-search input[type='search'],
+  .gp-theme #buddypress .dir-search input[type='text'],
+  .gp-theme #buddypress .groups-members-search input[type='search'],
+  .gp-theme #buddypress .standard-form input[type='color'],
+  .gp-theme #buddypress .standard-form input[type='date'],
+  .gp-theme #buddypress .standard-form input[type='datetime-local'],
+  .gp-theme #buddypress .standard-form input[type='datetime'],
+  .gp-theme #buddypress .standard-form input[type='email'],
+  .gp-theme #buddypress .standard-form input[type='month'],
+  .gp-theme #buddypress .standard-form input[type='number'],
+  .gp-theme #buddypress .standard-form input[type='password'],
+  .gp-theme #buddypress .standard-form input[type='range'],
+  .gp-theme #buddypress .standard-form input[type='search'],
+  .gp-theme #buddypress .standard-form input[type='tel'],
+  .gp-theme #buddypress .standard-form input[type='text'],
+  .gp-theme #buddypress .standard-form input[type='time'],
+  .gp-theme #buddypress .standard-form input[type='url'],
+  .gp-theme #buddypress .standard-form input[type='week'],
+  .gp-theme #buddypress .standard-form textarea,
+  .gp-theme #buddypress div.activity-comments form .ac-textarea,
+  .gp-theme #buddypress form#whats-new-form textarea {
+    background-color: #fafafa;
+  }
+  input,
+  textarea,
+  .gp-search-bar,
+  .wp-block-search__input,
+  .gp-login-wrapper .gp-login-icon,
+  .gp-login-wrapper .gp-password-icon,
+  .gp-login-wrapper .gp-email-icon,
+  .gp-theme #buddypress .dir-search input[type='search'],
+  .gp-theme #buddypress .dir-search input[type='text'],
+  .gp-theme #buddypress .groups-members-search input[type='search'],
+  .gp-theme #buddypress .standard-form input[type='color'],
+  .gp-theme #buddypress .standard-form input[type='date'],
+  .gp-theme #buddypress .standard-form input[type='datetime-local'],
+  .gp-theme #buddypress .standard-form input[type='datetime'],
+  .gp-theme #buddypress .standard-form input[type='email'],
+  .gp-theme #buddypress .standard-form input[type='month'],
+  .gp-theme #buddypress .standard-form input[type='number'],
+  .gp-theme #buddypress .standard-form input[type='password'],
+  .gp-theme #buddypress .standard-form input[type='range'],
+  .gp-theme #buddypress .standard-form input[type='search'],
+  .gp-theme #buddypress .standard-form input[type='tel'],
+  .gp-theme #buddypress .standard-form input[type='text'],
+  .gp-theme #buddypress .standard-form input[type='time'],
+  .gp-theme #buddypress .standard-form input[type='url'],
+  .gp-theme #buddypress .standard-form input[type='week'],
+  .gp-theme #buddypress .standard-form textarea,
+  .gp-theme #buddypress div.activity-comments form .ac-textarea,
+  .bb-global-search-ac.ui-autocomplete {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+  }
+  input,
+  textarea,
+  .gp-search-bar,
+  .wp-block-search__input,
+  .gp-theme #buddypress .dir-search input[type='search'],
+  .gp-theme #buddypress .dir-search input[type='text'],
+  .gp-theme #buddypress .groups-members-search input[type='search'],
+  .gp-theme #buddypress .groups-members-search input[type='text'],
+  .gp-theme #buddypress .standard-form input[type='color'],
+  .gp-theme #buddypress .standard-form input[type='date'],
+  .gp-theme #buddypress .standard-form input[type='datetime-local'],
+  .gp-theme #buddypress .standard-form input[type='datetime'],
+  .gp-theme #buddypress .standard-form input[type='email'],
+  .gp-theme #buddypress .standard-form input[type='month'],
+  .gp-theme #buddypress .standard-form input[type='number'],
+  .gp-theme #buddypress .standard-form input[type='password'],
+  .gp-theme #buddypress .standard-form input[type='range'],
+  .gp-theme #buddypress .standard-form input[type='search'],
+  .gp-theme #buddypress .standard-form input[type='tel'],
+  .gp-theme #buddypress .standard-form input[type='text'],
+  .gp-theme #buddypress .standard-form input[type='time'],
+  .gp-theme #buddypress .standard-form input[type='url'],
+  .gp-theme #buddypress .standard-form input[type='week'],
+  .gp-theme #buddypress .standard-form textarea,
+  .gp-theme #buddypress div.activity-comments form .ac-textarea,
+  .gp-theme #buddypress form#whats-new-form textarea {
+    color: #000000;
+  }
+  select,
+  .gp-theme #buddypress .standard-form select,
+  .gp-theme #buddypress form#whats-new-form #whats-new-options select,
+  #buddypress .standard-form select:focus {
+    background-color: #353535;
+  }
+  select,
+  .gp-theme #buddypress .standard-form select,
+  .gp-theme #buddypress form#whats-new-form #whats-new-options select {
+    color: #ffffff;
+  }
+  input[type='button'],
+  input[type='submit'],
+  input[type='reset'],
+  button,
+  .button,
+  .wp-block-search__button,
+  .gp-theme #buddypress .comment-reply-link,
+  .gp-notification-counter,
+  #gp-cart-counter,
+  .gp-theme #buddypress a.button,
+  .gp-theme #buddypress button,
+  .gp-theme #buddypress div.generic-button a,
+  .gp-theme #buddypress input[type='button'],
+  .gp-theme #buddypress input[type='reset'],
+  .gp-theme #buddypress input[type='submit'],
+  .gp-theme #buddypress ul.button-nav li a,
+  a.bp-title-button,
+  .gp-theme #buddypress .activity-list #reply-title small a span,
+  .gp-theme #buddypress .activity-list a.bp-primary-action span,
+  .tribe-events-calendar thead th,
+  #tribe-events .tribe-events-button,
+  #tribe-events .tribe-events-button:hover,
+  #tribe_events_filters_wrapper input[type='submit'],
+  .tribe-events-button,
+  .tribe-events-button.tribe-active:hover,
+  .tribe-events-button.tribe-inactive,
+  .tribe-events-button:hover,
+  .tribe-events-calendar td.tribe-events-present div[id*='tribe-events-daynum-'],
+  .tribe-events-calendar td.tribe-events-present div[id*='tribe-events-daynum-'] > a,
+  #tribe-bar-form .tribe-bar-submit input[type='submit'],
+  .woocommerce #respond input#submit.alt,
+  .woocommerce a.button.alt,
+  .woocommerce button.button.alt,
+  .woocommerce input.button.alt,
+  #gp-dropdowncart .woocommerce a.button {
+    background-color: #0579bd;
+  }
+  input[type='button']:hover,
+  input[type='submit']:hover,
+  input[type='reset']:hover,
+  button:hover,
+  .button:hover,
+  .wp-block-search__button:hover,
+  .gp-theme #buddypress .comment-reply-link:hover,
+  .gp-theme #buddypress a.button:hover,
+  .gp-theme #buddypress button:hover,
+  .gp-theme #buddypress div.generic-button a:hover,
+  .gp-theme #buddypress input[type='button']:hover,
+  .gp-theme #buddypress input[type='reset']:hover,
+  .gp-theme #buddypress input[type='submit']:hover,
+  .gp-theme #buddypress ul.button-nav li a:hover,
+  a.bp-title-button:hover,
+  .gp-theme #buddypress .activity-list #reply-title small a:hover span,
+  .gp-theme #buddypress .activity-list a.bp-primary-action:hover span,
+  .woocommerce #respond input#submit.alt:hover,
+  .woocommerce a.button.alt:hover,
+  .woocommerce button.button.alt:hover,
+  .woocommerce input.button.alt:hover,
+  #gp-dropdowncart .woocommerce a.button:hover {
+    background-color: #353535;
+  }
+  input[type='button'],
+  input[type='submit'],
+  input[type='reset'],
+  button,
+  .button,
+  .wp-block-search__button,
+  a.gp-notification-counter,
+  a.gp-notification-counter:hover,
+  #gp-cart-counter:hover,
+  .gp-theme #buddypress .comment-reply-link,
+  .gp-theme #buddypress a.button,
+  .gp-theme #buddypress button,
+  .gp-theme #buddypress div.generic-button a,
+  .gp-theme #buddypress input[type='button'],
+  .gp-theme #buddypress input[type='reset'],
+  .gp-theme #buddypress input[type='submit'],
+  .gp-theme #buddypress ul.button-nav li a,
+  a.bp-title-button,
+  .gp-theme #buddypress .activity-list #reply-title small a span,
+  .gp-theme #buddypress .activity-list a.bp-primary-action span,
+  #gp-dropdowncart .woocommerce a.button {
+    color: #ffffff;
+  }
+  input[type='button']:hover,
+  input[type='submit']:hover,
+  input[type='reset']:hover,
+  button,
+  .button:hover,
+  .wp-block-search__button:hover,
+  .gp-theme #buddypress .comment-reply-link:hover,
+  .gp-theme #buddypress a.button:hover,
+  .gp-theme #buddypress button:hover,
+  .gp-theme #buddypress div.generic-button a:hover,
+  .gp-theme #buddypress input[type='button']:hover,
+  .gp-theme #buddypress input[type='reset']:hover,
+  .gp-theme #buddypress input[type='submit']:hover,
+  .gp-theme #buddypress ul.button-nav li a:hover,
+  a.bp-title-button:hover,
+  .gp-theme #buddypress .activity-list #reply-title small a span,
+  .gp-theme #buddypress .activity-list a.bp-primary-action span,
+  #gp-dropdowncart .woocommerce a.button:hover {
+    color: #ffffff;
+  }
+  #gp-footer {
+    background-color: #353535;
+  }
+  .gp-footer-widget .widgettitle,
+  .gp-footer-widget .widget-title,
+  .gp-footer-widget .wp-block-search__label {
+    font-family: Roboto;
+    line-height: 20px;
+    font-weight: 300;
+    font-style: normal;
+    color: #fff;
+    font-size: 16px;
+  }
+  .gp-footer-widget {
+    font-family: Roboto;
+    line-height: 20px;
+    font-weight: 300;
+    font-style: normal;
+    color: #ffffff;
+    font-size: 14px;
+  }
+  .gp-footer-widget a {
+    color: #f9bd16;
+  }
+  .gp-footer-widget a:hover {
+    color: #b1b1b1;
+  }
+  #gp-copyright {
+    background-color: #353535;
+  }
+  #gp-copyright {
+    border-top: 1px solid #444;
+  }
+  #gp-copyright {
+    color: #777777;
+  }
+  #gp-copyright a {
+    color: #999;
+  }
+  #gp-copyright a:hover {
+    color: #e0e0e0;
+  }
+  #gp-to-top {
+    background-color: #0579bd;
+  }
+  #gp-to-top {
+    color: #ffffff;
+  }
+</style>
+  <link rel="icon" href="enviroDIY_Favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#cb4b16" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="clipboard.js"></script>
+</head>
+
+<body
+    class="theme-socialize page-template-socialize-child gp-theme gp-responsive gp-wide-layout gp-retina gp-normal-scrolling gp-no-back-to-top gp-relative-header gp-header-standard gp-cart-disabled gp-search-all gp-profile-disabled gp-small-header-all gp-standard-page-header gp-no-sidebar"
+>
+	<div id="gp-site-wrapper">
+
+  <nav id="gp-mobile-nav">
+    <div id="gp-mobile-nav-close-button"></div>
+    <ul class="menu">
+      <li
+        class="gp-standard-menu gp-columns-1 gp-show-all main-menu-item menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children"
+      >
+<a href="index.html" class="menu-link main-menu-link">About</a>        <ul class="sub-menu menu-odd menu-depth-1">
+          <li
+            class="gp-standard-menu gp-menu-link gp-show-all sub-menu-item menu-item-odd menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"
+          >
+<a href="change_log.html">ChangeLog</a>          </li>
+        </ul>
+      </li>
+      <li
+        class="gp-standard-menu gp-columns-1 gp-show-all main-menu-item menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"
+      >
+<a href="class_geolux_camera.html">The GeoluxCamera Class</a>      </li>
+      <li
+        class="gp-standard-menu gp-columns-1 gp-show-all main-menu-item menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children"
+      >
+<a href="page_the_examples.html" class="menu-link main-menu-link">Examples Using the Geolux Camera</a>        <ul class="sub-menu menu-odd menu-depth-1">
+          <li
+            class="gp-standard-menu gp-menu-link gp-show-all sub-menu-item menu-item-odd menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"
+          >
+<a href="snapshot_8ino-example.html">Saving a Snapshot to an SD Card</a>          </li>
+          <li
+            class="gp-standard-menu gp-menu-link gp-show-all sub-menu-item menu-item-odd menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"
+          >
+<a href="image_8ino-example.html">Using a RV-8803 to Timestamp a Snapshot</a>          </li>
+          <li
+            class="gp-standard-menu gp-menu-link gp-show-all sub-menu-item menu-item-odd menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"
+          >
+<a href="read_by_chunk_8ino-example.html">Reading the Image File in Chunks</a>          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav> <!-- gp-mobile-nav -->
+  <div id="gp-mobile-nav-bg"></div>
+
+  <div id="gp-page-wrapper">
+
+    <header id="gp-main-header">
+      <div class="gp-container">
+        <div id="gp-logo">
+          <a href="index.html" title="Geolux Camera 0.1.0">
+            <img
+              src="gp-desktop-logo.png"
+              alt="Geolux Camera 0.1.0"
+              width="200"
+              height="42"
+              class="gp-desktop-logo"
+            />
+            <img
+              src="gp-scrolling-logo.png"
+              alt="Geolux Camera 0.1.0"
+              width="264"
+              height="55"
+              class="gp-scrolling-logo"
+            />
+            <img
+              src="gp-mobile-logo.png"
+              alt="Geolux Camera 0.1.0"
+              width="132"
+              height="28"
+              class="gp-mobile-logo"
+            />
+          </a>
+        </div> <!-- gp-logo -->
+
+        <a id="gp-mobile-nav-button"></a>
+
+        <nav id="gp-main-nav" class="gp-nav">
+          <nav id="gp-primary-main-nav">
+            <ul id="menu-main-menu-1" class="menu">
+              <li
+                class="gp-standard-menu gp-columns-1 gp-show-all main-menu-item menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children"
+              >
+<a href="index.html" class="menu-link main-menu-link" >About</a>                <ul class="sub-menu menu-odd menu-depth-1">
+                  <li
+                    class="gp-standard-menu gp-menu-link gp-show-all sub-menu-item menu-item-odd menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"
+                  >
+<a href="change_log.html">ChangeLog</a>                  </li>
+                </ul>
+              </li>
+              <li
+                class="gp-standard-menu gp-columns-1 gp-show-all main-menu-item menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"
+              >
+<a href="class_geolux_camera.html">The GeoluxCamera Class</a>              </li>
+              <li
+                class="gp-standard-menu gp-columns-1 gp-show-all main-menu-item menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children"
+              >
+<a href="page_the_examples.html" class="menu-link main-menu-link" >Examples Using the Geolux Camera</a>                <ul class="sub-menu menu-odd menu-depth-1">
+                  <li
+                    class="gp-standard-menu gp-menu-link gp-show-all sub-menu-item menu-item-odd menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"
+                  >
+<a href="snapshot_8ino-example.html">Saving a Snapshot to an SD Card</a>                  </li>
+                  <li
+                    class="gp-standard-menu gp-menu-link gp-show-all sub-menu-item menu-item-odd menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"
+                  >
+<a href="image_8ino-example.html">Using a RV-8803 to Timestamp a Snapshot</a>                  </li>
+                  <li
+                    class="gp-standard-menu gp-menu-link gp-show-all sub-menu-item menu-item-odd menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"
+                  >
+<a href="read_by_chunk_8ino-example.html">Reading the Image File in Chunks</a>                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav> <!-- gp-primary-main-nav -->
+
+          <div id="gp-search">
+            <div id="m-search-button" class="m-show-m" onclick="return showSearch()">
+            </div> <!-- gp-search-box -->
+          </div> <!-- gp-search -->
+
+          <nav id="gp-secondary-main-nav"></nav>
+        </nav> <!-- gp-main-nav -->
+      </div> <!-- gp-container -->
+    </header> <!-- gp-main-header -->
+
+    <header id="gp-small-header">
+      <div class="gp-container">
+        <div class="gp-left-triangle"></div>
+        <div class="gp-right-triangle"></div>
+
+        <nav id="gp-top-nav" class="gp-nav">
+          <div id="gp-left-top-nav">
+            <p style="color:#fff">An Arduino library for communication with Geolux serial camera.</p>
+          </div>
+
+          <div id="gp-right-top-nav">
+            <ul id="menu-icon-links" class="menu">
+              <li
+                class="gp-standard-menu gp-columns-1 gp-show-all main-menu-item menu-item-even menu-item-depth-0 fa fa-github menu-item menu-item-type-custom menu-item-object-custom"
+              >
+                <a
+                  title="See it on GitHub"
+                  href="https://github.com/EnviroDIY/GeoluxCamera"
+                  class="menu-link main-menu-link"
+                  >See the source code on GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+
+        </nav>
+      </div>
+    </header> <!-- gp-small-header -->
+
+    <div id="gp-fixed-header-padding"></div>
+
+    <div class="m-doc-search" id="search">
+      <a href="#!" onclick="return hideSearch()"></a>
+      <div id="gp-header-area">
+        <div class="gp-container">
+          <div style="background-color:#fff;padding:20px;">
+            <div class="m-doc-search-header m-text m-small">
+              <div><span class="m-label m-info">Tab</span> / <span class="m-label m-info">T</span> to search, <span class="m-label m-info">Esc</span> to close</div>
+              <div id="search-symbolcount">&hellip;</div>
+            </div>
+            <div class="m-doc-search-content">
+              <form>
+                <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+              </form>
+              <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+              <div id="search-help" class="m-text m-dim m-text-center">
+                <p class="m-noindent">Search for symbols, directories, files, pages or
+            topics. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+              </div>
+              <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+              <ul id="search-results"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="search-v2.js"></script>
+    <script src="searchdata-v2.js" async="async"></script>
+
+    <div class="gp-clear"></div>
+
+    <div id="gp-content-wrapper" class="gp-container">
+      <div id="gp-inner-container">
+        <div id="gp-left-column">
+          <div id="gp-content">
+
+            <main>
+              <article>
+                <div class="breadcrumbs" typeof="BreadcrumbList" vocab="http://schema.org/">
+        <span class="m-breadcrumb">
+          <a href="index.html">
+            Geolux Camera
+          </a> &gt; <wbr/>
+        </span>
+        <span class="m-breadcrumb">
+          <a href="annotated.html">
+            Classes
+          </a> &gt; <wbr/>
+        </span>
+                <span class="m-breadcrumb">
+          GeoluxCamera
+        </span>
+        <br>
+                </div>
+                <header class="gp-entry-header">
+                  <h1 class="gp-entry-title" itemprop="headline">
+
+            <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="_geolux_camera_8h.html">&lt;src/GeoluxCamera.h&gt;</a></div>
+
+            GeoluxCamera
+            <span class="m-thin">class</span>
+
+                </h1>
+                </header>
+        <p>The class for the Geoluxh HydroCAM.</p>
+        <nav class="m-block m-default">
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+              </ul>
+            </li>
+            <li>
+              Detailed Descriptions
+              <ul>
+                <li><a href="#enum-details">Enums</a></li>
+                <li><a href="#function-details">Functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <section id="pub-types">
+          <h2>Public types</h2>
+          <dl class="m-doc">
+                          <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_status</a> { </span><span class="m-doc-wrap"><a href="#af27739bd27e7b09d5ea1ab607520223ba5f185f52a20da43e27a77b285c59b71e" class="m-doc">OK</a> = 1,
+              <a href="#af27739bd27e7b09d5ea1ab607520223baaa09f3c35e9355fc896ac1e5afdd974d" class="m-doc">ERROR</a>,
+              <a href="#af27739bd27e7b09d5ea1ab607520223baa32996969729c02f31687380bbc399c5" class="m-doc">BUSY</a>,
+              <a href="#af27739bd27e7b09d5ea1ab607520223ba1074e14e121ecd149127cbef47ba2973" class="m-doc">NONE</a> }</span>
+            </dt>
+            <dd>The possible camera statuses.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a42b93152ee76d1f653d5880185c01343" class="m-doc">geolux_night_mode</a> { </span><span class="m-doc-wrap"><a href="#a42b93152ee76d1f653d5880185c01343a0270f54a68974e43606d7cabfdf18a90" class="m-doc">DAY</a> = 0,
+              <a href="#a42b93152ee76d1f653d5880185c01343a4f9326bd9dcaf8df5ccc38b502e214a5" class="m-doc">NIGHT</a>,
+              <a href="#a42b93152ee76d1f653d5880185c01343a8bd33b2d60fce6ad5639f3e824359444" class="m-doc">AUTO</a> }</span>
+            </dt>
+            <dd>The possible camera IR filter (day/night) modes.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#a89e49cc3c84656ea074745d0a01e4137" class="m-doc">geolux_ir_mode</a> { </span><span class="m-doc-wrap"><a href="#a89e49cc3c84656ea074745d0a01e4137a780b639e2812da8c2c52f25e0f2ec3b5" class="m-doc">IR_ON</a> = 0,
+              <a href="#a89e49cc3c84656ea074745d0a01e4137a2e85937a8a94662632630ae8aff3a139" class="m-doc">IR_OFF</a>,
+              <a href="#a89e49cc3c84656ea074745d0a01e4137ad230783011680d352f58171c7b51e654" class="m-doc">IR_AUTO</a> }</span>
+            </dt>
+            <dd>The possible camera IR LED modes.</dd>
+          </dl>
+        </section>
+        <hr>
+        <section id="typeless-methods">
+          <h2>Constructors, destructors, conversion operators</h2>
+          <dl class="m-doc">
+                          <dt id="a36fcae0c034c8a5a0682a33a0788b38e">
+              <span class="m-doc-wrap-bumper"><span class="m-dim"></span><a href="#a36fcae0c034c8a5a0682a33a0788b38e" class="m-doc-self">GeoluxCamera</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Construct a new <a href="class_geolux_camera.html" class="m-doc">GeoluxCamera</a> object - no action needed.</dd>
+                          <dt id="af717b9c35d07243a6fac89832a7e114c">
+              <span class="m-doc-wrap-bumper"><span class="m-dim"></span><a href="#af717b9c35d07243a6fac89832a7e114c" class="m-doc-self">~GeoluxCamera</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Destroy the <a href="class_geolux_camera.html" class="m-doc">GeoluxCamera</a> object - no action needed.</dd>
+          </dl>
+        </section>
+        <hr>
+        <section id="pub-methods">
+          <h2>Public functions</h2>
+          <dl class="m-doc">
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#a4113088b8409e7f9fbe163cc8c383fc6" class="m-doc">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream*</span> <span class="m-param">stream</span>)</span>
+            </dt>
+            <dd>Sets up the camera module; identical to GeoluxCamera::init().</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#a9506e5e8f24b4b73ffeb59a7653bc084" class="m-doc">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream&amp;</span> <span class="m-param">stream</span>)</span>
+            </dt>
+            <dd>Sets up the camera module; identical to GeoluxCamera::init().</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#ad298742e43ebff1318c5100beb8df7c3" class="m-doc">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">HardwareSerial*</span> <span class="m-param">stream</span>)</span>
+            </dt>
+            <dd>Sets up the camera module; identical to GeoluxCamera::init().</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#a67b5a6e64feb618d9d0861ff2cff2fb4" class="m-doc">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">HardwareSerial&amp;</span> <span class="m-param">stream</span>)</span>
+            </dt>
+            <dd>Sets up the camera module; identical to GeoluxCamera::init().</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim"><a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_<wbr />status</a> </span><a href="#ab453cb2ac47069faf2437aca6dff6765" class="m-doc">takeSnapshot</a>(</span><span class="m-doc-wrap">) -&gt; <a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_<wbr />status</a></span>
+            </dt>
+            <dd>This command requests that the camera starts taking the next snapshot.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim"><a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_<wbr />status</a> </span><a href="#aac74a385c3ec6df42ebae43ded3f5aa2" class="m-doc">getStatus</a>(</span><span class="m-doc-wrap">) -&gt; <a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_<wbr />status</a></span>
+            </dt>
+            <dd>Get the camera status.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int32_t </span><a href="#a18f8de055ec9470cd348e86303e8bd71" class="m-doc">getImageSize</a>(</span><span class="m-doc-wrap">) -&gt; int32_t</span>
+            </dt>
+            <dd>Get the size of any available image.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t </span><a href="#a9020dc570b47f41685e36e302c1a3d55" class="m-doc">getImageChunk</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint8_t*</span> <span class="m-param">buf</span>,
+              <span class="m-dim">size_t</span> <span class="m-param">offset</span>,
+              <span class="m-dim">size_t</span> <span class="m-param">length</span>) -&gt; uint32_t</span>
+            </dt>
+            <dd>This command requests the camera to send the image data chunk.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t </span><a href="#a98ed9498870863ef264a07592127a05a" class="m-doc">transferImage</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream*</span> <span class="m-param">xferStream</span>,
+              <span class="m-dim">int32_t</span> <span class="m-param">image_size</span><span class="m-dim"> = 0</span>,
+              <span class="m-dim">int32_t</span> <span class="m-param">chunk_size</span><span class="m-dim"> = 16384</span>) -&gt; uint32_t</span>
+            </dt>
+            <dd>Transfer the image data from the camera stream to a secondary stream (like the print input of an SD card).</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t </span><a href="#a7711179cb038adfb6c447ef8d114f8ce" class="m-doc">transferImage</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream&amp;</span> <span class="m-param">xferStream</span>,
+              <span class="m-dim">int32_t</span> <span class="m-param">image_size</span><span class="m-dim"> = 0</span>,
+              <span class="m-dim">int32_t</span> <span class="m-param">chunk_size</span><span class="m-dim"> = 16384</span>) -&gt; uint32_t</span>
+            </dt>
+            <dd>Transfer the image data from the camera stream to a secondary stream (like the print input of an SD card).</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a1a9c219c9d7b56699fcdc301e57ffee4" class="m-doc">restart</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Restart the module.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#ad09b2d6dfba268d83c84bf2d226e0ef7" class="m-doc">printCameraInfo</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream*</span> <span class="m-param">outStream</span>)</span>
+            </dt>
+            <dd>Prints information about the camera the the input stream.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#a137f0e78aebfccd7734ef857e1ae2518" class="m-doc">printCameraInfo</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream&amp;</span> <span class="m-param">outStream</span>)</span>
+            </dt>
+            <dd>Prints information about the camera the the input stream.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String </span><a href="#a9b3bff3911169288d37a59208badcd53" class="m-doc">getDeviceType</a>(</span><span class="m-doc-wrap">) -&gt; String</span>
+            </dt>
+            <dd>Get the camera&#x27;s device type.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String </span><a href="#aad20f4aa29e63307c86673cb80f2a211" class="m-doc">getCameraFirmware</a>(</span><span class="m-doc-wrap">) -&gt; String</span>
+            </dt>
+            <dd>Get the camera firmware information.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t </span><a href="#a544eda9aae8fb936d47c1b864ab0fdfa" class="m-doc">getCameraSerialNumber</a>(</span><span class="m-doc-wrap">) -&gt; uint32_t</span>
+            </dt>
+            <dd>Get the camera serial number.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a7528d3579f37be0082694fc5349a9f98" class="m-doc">runAutofocus</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>This command starts the process of moving the lens focus and searching for sharpest image around the center point defined and stored with the #set_autofocus_point command.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#aaf38a48ddaa95b588f4ee5302ff33404" class="m-doc">setResolution</a>(</span><span class="m-doc-wrap"><span class="m-dim">const char*</span> <span class="m-param">resolution</span>) -&gt; bool</span>
+            </dt>
+            <dd>This command changes the image resolution.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String </span><a href="#ad1b7eba306b8215c47e531cd6634b3ff" class="m-doc">getResolution</a>(</span><span class="m-doc-wrap">) -&gt; String</span>
+            </dt>
+            <dd>Get the camera resolution.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a61e6cbcdc98790a16846b1eec0429431" class="m-doc">setQuality</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint8_t</span> <span class="m-param">compression</span>) -&gt; bool</span>
+            </dt>
+            <dd>This command changes the JPEG quality parameter, which can be in the range between 1 and 100.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#a6a92369e57862cbaaef677d977da1475" class="m-doc">getQuality</a>(</span><span class="m-doc-wrap">) -&gt; int8_t</span>
+            </dt>
+            <dd>Get the JPEG quality parameter value.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a29b808dbd797c9fc25a86f380ae46d4e" class="m-doc">setJPEGMaximumSize</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint16_t</span> <span class="m-param">size</span>) -&gt; bool</span>
+            </dt>
+            <dd>This command changes the JPEG maximum file size which is a decimal number in kB which specifies the maximum JPEG file size generated after a snapshot is taken.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t </span><a href="#a063623c405c88e9b3bb35c886bb53d5a" class="m-doc">getJPEGMaximumSize</a>(</span><span class="m-doc-wrap">) -&gt; uint32_t</span>
+            </dt>
+            <dd>Get the JPEG maximum file size.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a18bbe1ed545323b3db538db54b890ba6" class="m-doc">setNightMode</a>(</span><span class="m-doc-wrap"><span class="m-dim"><a href="#a42b93152ee76d1f653d5880185c01343" class="m-doc">geolux_<wbr />night_<wbr />mode</a></span> <span class="m-param">mode</span>) -&gt; bool</span>
+            </dt>
+            <dd>Changes the camera mode according to the given MODE parameter which can be either day, night or auto.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a1f7f83985e78df969a2a7cfd510e8419" class="m-doc">setNightMode</a>(</span><span class="m-doc-wrap"><span class="m-dim">const char*</span> <span class="m-param">mode</span>) -&gt; bool</span>
+            </dt>
+            <dd>Changes the camera mode according to the given MODE parameter which can be either day, night or auto.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String </span><a href="#af90d62c75a22b7501ad4ca99c36f9c63" class="m-doc">getNightMode</a>(</span><span class="m-doc-wrap">) -&gt; String</span>
+            </dt>
+            <dd>Get the current night mode setting.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a692075a2c0969e0a173c630abd10ed9f" class="m-doc">setIRLEDMode</a>(</span><span class="m-doc-wrap"><span class="m-dim"><a href="#a89e49cc3c84656ea074745d0a01e4137" class="m-doc">geolux_<wbr />ir_<wbr />mode</a></span> <span class="m-param">mode</span>) -&gt; bool</span>
+            </dt>
+            <dd>Changes the camera’s IR LED mode according to the given parameter which can be either off, on or auto.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a22a85c138f9a4b551cdb6ae1f21ab376" class="m-doc">setIRLEDMode</a>(</span><span class="m-doc-wrap"><span class="m-dim">const char*</span> <span class="m-param">mode</span>) -&gt; bool</span>
+            </dt>
+            <dd>Changes the camera’s IR LED mode according to the given parameter which can be either off, on or auto.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String </span><a href="#a2efd348fd538e3a6680ce41374ca7da7" class="m-doc">getIRLEDMode</a>(</span><span class="m-doc-wrap">) -&gt; String</span>
+            </dt>
+            <dd>Get the camera’s IR LED mode.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a4cc8428e7724b9199a3a8ce6ad65bf94" class="m-doc">getIRFilterStatus</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Check if the IR filter is currently in place on the camera.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a0e0647698857e2298a2625d99987eed6" class="m-doc">setAutofocusPoint</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span class="m-param">x</span>,
+              <span class="m-dim">int8_t</span> <span class="m-param">y</span>) -&gt; bool</span>
+            </dt>
+            <dd>Configures the point used for the autofocus operation.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#a57722419ffed3c131721af5241a40709" class="m-doc">getAutofocusX</a>(</span><span class="m-doc-wrap">) -&gt; int8_t</span>
+            </dt>
+            <dd>Get the position of the focus on the x axis.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#a93ec36494747d0587d8bdd40f3db2a52" class="m-doc">getAutofocusY</a>(</span><span class="m-doc-wrap">) -&gt; int8_t</span>
+            </dt>
+            <dd>Get the position of the focus on the y axis.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a0c2475061559000c3f0095e6773f80bd" class="m-doc">setAutoexposureRegion</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span class="m-param">x</span>,
+              <span class="m-dim">int8_t</span> <span class="m-param">y</span>,
+              <span class="m-dim">int8_t</span> <span class="m-param">width</span>,
+              <span class="m-dim">int8_t</span> <span class="m-param">height</span>) -&gt; bool</span>
+            </dt>
+            <dd>Configures the area used to measure brightness for the auto-exposure operation.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#a895eaa17f8dd38d22558c8b2677055ee" class="m-doc">getAutoexposureX</a>(</span><span class="m-doc-wrap">) -&gt; int8_t</span>
+            </dt>
+            <dd>Get the left edge of the auto exposure measurement region.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#ac1494992ce64e7f2f41e90ca7872635f" class="m-doc">getAutoexposureY</a>(</span><span class="m-doc-wrap">) -&gt; int8_t</span>
+            </dt>
+            <dd>Get the bottom edge of the auto exposure measurement region.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#a60cdfb2aca98a26d087bd7ccc2718407" class="m-doc">getAutoexposureWidth</a>(</span><span class="m-doc-wrap">) -&gt; int8_t</span>
+            </dt>
+            <dd>Get the width of the auto exposure measurement region.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#a5bafb77ab2ab0d52bde49a5751f35faa" class="m-doc">getAutoexposureHeight</a>(</span><span class="m-doc-wrap">) -&gt; int8_t</span>
+            </dt>
+            <dd>Get the height of the auto exposure measurement region.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t </span><a href="#ab0bc070c48eaf418b2145f6c6b702c07" class="m-doc">getExposureTime</a>(</span><span class="m-doc-wrap">) -&gt; uint32_t</span>
+            </dt>
+            <dd>Get the current exposure time (shutter width).</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t </span><a href="#aa0a41b048ef9cb16a77262cdd696f638" class="m-doc">getImageBrightness</a>(</span><span class="m-doc-wrap">) -&gt; uint32_t</span>
+            </dt>
+            <dd>Get the mean image brightness.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a71af3005cd1d25d8f893958868a3e164" class="m-doc">setWhiteBalanceOffset</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span class="m-param">red</span>,
+              <span class="m-dim">int8_t</span> <span class="m-param">green</span>,
+              <span class="m-dim">int8_t</span> <span class="m-param">blue</span>) -&gt; bool</span>
+            </dt>
+            <dd>Configures the white balance offset parameters for the red, green, and blue color components.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#a5dde042f2da452db1ef752737b4a1291" class="m-doc">getWhiteBalanceOffsetRed</a>(</span><span class="m-doc-wrap">) -&gt; int8_t</span>
+            </dt>
+            <dd>Get the white balance offset in the red color channel.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#a24d16ec3d6108c7955ab1704ad75d063" class="m-doc">getWhiteBalanceOffsetGreen</a>(</span><span class="m-doc-wrap">) -&gt; int8_t</span>
+            </dt>
+            <dd>Get the white balance offset in the green color channel.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#a676f78b01e82c17e428a3b6492fcfdce" class="m-doc">getWhiteBalanceOffsetBlue</a>(</span><span class="m-doc-wrap">) -&gt; int8_t</span>
+            </dt>
+            <dd>Get the white balance offset in the blue color channel.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a96023cb7b7ec71d9604c79628a7c84c5" class="m-doc">setColorCorrectionMode</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span class="m-param">mode</span>) -&gt; bool</span>
+            </dt>
+            <dd>Sets the color correction mode. Valid values are integers between 0 and 3.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#abccddf164e24f9dee4ea8c8a37861912" class="m-doc">getColorCorrectionMode</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Check whether color correction is currently being applied.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a3ca674465a6227d6210cbdc29989c558" class="m-doc">setAutoSnapshotInterval</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint32_t</span> <span class="m-param">interval</span>) -&gt; bool</span>
+            </dt>
+            <dd>Sets the time interval in minutes for autonomous periodic snapshot operation.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t </span><a href="#a127f35054585dd1d617dd9279c1a75d3" class="m-doc">getAutoSnapshotInterval</a>(</span><span class="m-doc-wrap">) -&gt; uint32_t</span>
+            </dt>
+            <dd>Get the auto snapshot interval.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#aac555e18dea5bae6f667e399d2dcc3f1" class="m-doc">moveFocus</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span class="m-param">offset</span>) -&gt; bool</span>
+            </dt>
+            <dd>This command forces the camera to move the focus of the lens for a given number of steps.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int16_t </span><a href="#afa021694b76f1582f2623fcbb270aea2" class="m-doc">getFocusPosition</a>(</span><span class="m-doc-wrap">) -&gt; int16_t</span>
+            </dt>
+            <dd>Get the current focus position.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a8afb92eb0265117a74123916125aabc3" class="m-doc">moveZoom</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span class="m-param">offset</span>) -&gt; bool</span>
+            </dt>
+            <dd>This command forces the camera to change the lens zoom for a given number of steps.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#abd78b959f07e817ecce6c2170b6ff2c1" class="m-doc">getZoomPosition</a>(</span><span class="m-doc-wrap">) -&gt; int8_t</span>
+            </dt>
+            <dd>Get the current zoom position.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a4b4e7c62de9d895cf2e2481a4098e85b" class="m-doc">sleep</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint32_t</span> <span class="m-param">sleepTimeout</span>) -&gt; bool</span>
+            </dt>
+            <dd>Put the module to sleep, starting from the time the command is issued and ending when sleep timer expires.</dd>
+                          <dt>
+              <div class="m-doc-template">template&lt;<span class="m-dim">typename...</span>  <span class="m-param">Args</span>&gt;</div>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#a7b607c0131f9d7f421ecd4e3205934bf" class="m-doc">sendCommand</a>(</span><span class="m-doc-wrap"><span class="m-dim">Args...</span> <span class="m-param">cmd</span>)</span>
+            </dt>
+            <dd>Recursive variadic template to send commands.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t </span><a href="#a69ce1209ea5ea1ae617690349766609a" class="m-doc">waitForReady</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint32_t</span> <span class="m-param">initial_delay</span><span class="m-dim"> = 0</span>,
+              <span class="m-dim">uint32_t</span> <span class="m-param">timeout</span><span class="m-dim"> = 60000L</span>) -&gt; uint32_t</span>
+            </dt>
+            <dd><strong>Blocking</strong> delay until the camera status returns a status of &quot;OK&quot;, &quot;READY&quot; or &quot;NONE.&quot;</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#aecb948ab1d0005ea9e4b6bbdf1f09d7e" class="m-doc">waitResponse</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint32_t</span> <span class="m-param">timeout_ms</span>,
+              <span class="m-dim">String&amp;</span> <span class="m-param">data</span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r1</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#ac7732a2cd6b1ec4c9c479395bfaa9ab0" class="m-doc">GEOLUX_<wbr />OK</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r2</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a69263b5178009f8d93e053155e76a239" class="m-doc">GEOLUX_<wbr />ERROR</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r3</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a2a2ba0e334e7c50ef93eb3868ef1b666" class="m-doc">GEOLUX_<wbr />BUSY</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r4</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a7737b92095e8e7c289546294da9b11ac" class="m-doc">GEOLUX_<wbr />NONE</a></span>) -&gt; int8_t</span>
+            </dt>
+            <dd>Listen for responses to commands and handle URCs.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#a2ba44ab9916d6298c558572bfdab2ead" class="m-doc">waitResponse</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint32_t</span> <span class="m-param">timeout_ms</span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r1</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#ac7732a2cd6b1ec4c9c479395bfaa9ab0" class="m-doc">GEOLUX_<wbr />OK</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r2</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a69263b5178009f8d93e053155e76a239" class="m-doc">GEOLUX_<wbr />ERROR</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r3</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a2a2ba0e334e7c50ef93eb3868ef1b666" class="m-doc">GEOLUX_<wbr />BUSY</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r4</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a7737b92095e8e7c289546294da9b11ac" class="m-doc">GEOLUX_<wbr />NONE</a></span>) -&gt; int8_t</span>
+            </dt>
+            <dd>Listen for responses to commands and handle URCs.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t </span><a href="#ae7370c51a087b4133b3c5c6b5ed85ac2" class="m-doc">waitResponse</a>(</span><span class="m-doc-wrap"><span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r1</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#ac7732a2cd6b1ec4c9c479395bfaa9ab0" class="m-doc">GEOLUX_<wbr />OK</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r2</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a69263b5178009f8d93e053155e76a239" class="m-doc">GEOLUX_<wbr />ERROR</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r3</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a2a2ba0e334e7c50ef93eb3868ef1b666" class="m-doc">GEOLUX_<wbr />BUSY</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span class="m-param">r4</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a7737b92095e8e7c289546294da9b11ac" class="m-doc">GEOLUX_<wbr />NONE</a></span>) -&gt; int8_t</span>
+            </dt>
+            <dd>Listen for responses to commands and handle URCs; listening for 1 second.</dd>
+                          <dt>
+              <div class="m-doc-template">template&lt;<span class="m-dim">typename</span>  <span class="m-param">T</span>&gt;</div>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#a3ba0b29f13348fd6055f0dee6f0817a3" class="m-doc">streamWrite</a>(</span><span class="m-doc-wrap"><span class="m-dim">T</span> <span class="m-param">last</span>)</span>
+            </dt>
+            <dd>Utility template for writing on a stream.</dd>
+                          <dt>
+              <div class="m-doc-template">template&lt;<span class="m-dim">typename</span>  <span class="m-param">T</span>, <span class="m-dim">typename...</span>  <span class="m-param">Args</span>&gt;</div>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#ace6e29d16a4762347b4c71782d29bb2e" class="m-doc">streamWrite</a>(</span><span class="m-doc-wrap"><span class="m-dim">T</span> <span class="m-param">head</span>,
+              <span class="m-dim">Args...</span> <span class="m-param">tail</span>)</span>
+            </dt>
+            <dd>Utility template for writing on a stream.</dd>
+                          <dt id="a4e3e92b651096733be845d57fed54350">
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#a4e3e92b651096733be845d57fed54350" class="m-doc-self">streamDump</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Read a throw away any characters left in the camera stream.</dd>
+          </dl>
+        </section>
+        <hr>
+        <section id="pro-methods">
+          <h2>Protected functions</h2>
+          <dl class="m-doc">
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool </span><a href="#a2f976d414f4b7972620017df81dc3b67" class="m-doc">streamFind</a>(</span><span class="m-doc-wrap"><span class="m-dim">char</span> <span class="m-param">target</span>) -&gt; bool</span>
+            </dt>
+            <dd>Find a target character within a stream.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String </span><a href="#a1ed74c5b44177bd82d74a65c6136aea9" class="m-doc">getCameraInfoString</a>(</span><span class="m-doc-wrap"><span class="m-dim">const char*</span> <span class="m-param">searchStartTag</span>,
+              <span class="m-dim">char</span> <span class="m-param">searchEndTag</span><span class="m-dim"> = &#x27;\r&#x27;</span>,
+              <span class="m-dim">int8_t</span> <span class="m-param">numberSkips</span><span class="m-dim"> = 0</span>,
+              <span class="m-dim">const char*</span> <span class="m-param">searchSkipTag</span><span class="m-dim"> = &quot;,&quot;</span>) -&gt; String</span>
+            </dt>
+            <dd>Get a string within the camera info output.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">long </span><a href="#ac6aa1d2c7e87c25d2c12ca3ece96b0c4" class="m-doc">getCameraInfoInt</a>(</span><span class="m-doc-wrap"><span class="m-dim">const char*</span> <span class="m-param">searchStartTag</span>,
+              <span class="m-dim">char</span> <span class="m-param">searchEndTag</span><span class="m-dim"> = &#x27;\r&#x27;</span>,
+              <span class="m-dim">int8_t</span> <span class="m-param">numberSkips</span><span class="m-dim"> = 0</span>,
+              <span class="m-dim">const char*</span> <span class="m-param">searchSkipTag</span><span class="m-dim"> = &quot;,&quot;</span>) -&gt; long</span>
+            </dt>
+            <dd>Get integer within the camera info output.</dd>
+          </dl>
+        </section>
+        <hr>
+        <section id="pro-attribs">
+          <h2>Protected variables</h2>
+          <dl class="m-doc">
+                          <dt id="ab9f4cb0db92cf22333a2e5253969eaa7">
+              <span class="m-dim">Stream*</span> <a href="#ab9f4cb0db92cf22333a2e5253969eaa7" class="m-doc-self">_stream</a>
+            </dt>
+            <dd>The stream instance (serial port) for communication with the Modbus slave (usually over RS485)</dd>
+          </dl>
+        </section>
+        <hr>
+
+
+        <section id="enum-details">
+          <h2>Enum documentation</h2>
+                      <section class="m-doc-details" id="af27739bd27e7b09d5ea1ab607520223b"><div>
+            <h3>
+              enum GeoluxCamera::<wbr /><a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc-self">geolux_status</a>
+            </h3>
+            <p>The possible camera statuses.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#af27739bd27e7b09d5ea1ab607520223ba5f185f52a20da43e27a77b285c59b71e" class="m-doc-self" id="af27739bd27e7b09d5ea1ab607520223ba5f185f52a20da43e27a77b285c59b71e">OK</a></td>
+                  <td>
+                  <p>Status is &quot;OK&quot; or &quot;READY&quot;.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#af27739bd27e7b09d5ea1ab607520223baaa09f3c35e9355fc896ac1e5afdd974d" class="m-doc-self" id="af27739bd27e7b09d5ea1ab607520223baaa09f3c35e9355fc896ac1e5afdd974d">ERROR</a></td>
+                  <td>
+                  <p>Status is in error.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#af27739bd27e7b09d5ea1ab607520223baa32996969729c02f31687380bbc399c5" class="m-doc-self" id="af27739bd27e7b09d5ea1ab607520223baa32996969729c02f31687380bbc399c5">BUSY</a></td>
+                  <td>
+                  <p>Status is &quot;BUSY&quot;.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#af27739bd27e7b09d5ea1ab607520223ba1074e14e121ecd149127cbef47ba2973" class="m-doc-self" id="af27739bd27e7b09d5ea1ab607520223ba1074e14e121ecd149127cbef47ba2973">NONE</a></td>
+                  <td>
+                  <p>Status is &quot;NONE&quot; or unknown.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a42b93152ee76d1f653d5880185c01343"><div>
+            <h3>
+              enum GeoluxCamera::<wbr /><a href="#a42b93152ee76d1f653d5880185c01343" class="m-doc-self">geolux_night_mode</a>
+            </h3>
+            <p>The possible camera IR filter (day/night) modes.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a42b93152ee76d1f653d5880185c01343a0270f54a68974e43606d7cabfdf18a90" class="m-doc-self" id="a42b93152ee76d1f653d5880185c01343a0270f54a68974e43606d7cabfdf18a90">DAY</a></td>
+                  <td>
+                  <p>In day mode, the IR filter in the camera is always active.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a42b93152ee76d1f653d5880185c01343a4f9326bd9dcaf8df5ccc38b502e214a5" class="m-doc-self" id="a42b93152ee76d1f653d5880185c01343a4f9326bd9dcaf8df5ccc38b502e214a5">NIGHT</a></td>
+                  <td>
+                  <p>In night mode, the IR filter is disabled and the camera gives a black and white image.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a42b93152ee76d1f653d5880185c01343a8bd33b2d60fce6ad5639f3e824359444" class="m-doc-self" id="a42b93152ee76d1f653d5880185c01343a8bd33b2d60fce6ad5639f3e824359444">AUTO</a></td>
+                  <td>
+                  <p>In auto mode, the camera measures the current level of environmental illumination and automatically selects the optimal mode for the IR filter.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a89e49cc3c84656ea074745d0a01e4137"><div>
+            <h3>
+              enum GeoluxCamera::<wbr /><a href="#a89e49cc3c84656ea074745d0a01e4137" class="m-doc-self">geolux_ir_mode</a>
+            </h3>
+            <p>The possible camera IR LED modes.</p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#a89e49cc3c84656ea074745d0a01e4137a780b639e2812da8c2c52f25e0f2ec3b5" class="m-doc-self" id="a89e49cc3c84656ea074745d0a01e4137a780b639e2812da8c2c52f25e0f2ec3b5">IR_ON</a></td>
+                  <td>
+                  <p>In on mode, the IR LEDs are on during the night, and off during the day.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a89e49cc3c84656ea074745d0a01e4137a2e85937a8a94662632630ae8aff3a139" class="m-doc-self" id="a89e49cc3c84656ea074745d0a01e4137a2e85937a8a94662632630ae8aff3a139">IR_OFF</a></td>
+                  <td>
+                  <p>In off mode, the IR LEDs are always off.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#a89e49cc3c84656ea074745d0a01e4137ad230783011680d352f58171c7b51e654" class="m-doc-self" id="a89e49cc3c84656ea074745d0a01e4137ad230783011680d352f58171c7b51e654">IR_AUTO</a></td>
+                  <td>
+                  <p>In auto mode, the IR LEDs are active only during image acquisition, autofocus or manual zoom or focus operations.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+        </section>
+        <hr>
+        <section id="function-details">
+          <h2>Function documentation</h2>
+                      <section class="m-doc-details" id="a4113088b8409e7f9fbe163cc8c383fc6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a4113088b8409e7f9fbe163cc8c383fc6" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream*</span> <span
+                    class="m-param">stream</span>)</span></span>
+            </h3>
+            <p>Sets up the camera module; identical to GeoluxCamera::init().</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">stream</span></td>
+                  <td>The stream instance the camera is attached to</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a9506e5e8f24b4b73ffeb59a7653bc084"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a9506e5e8f24b4b73ffeb59a7653bc084" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream&amp;</span> <span
+                    class="m-param">stream</span>)</span></span>
+            </h3>
+            <p>Sets up the camera module; identical to GeoluxCamera::init().</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">stream</span></td>
+                  <td>The stream instance the camera is attached to</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="ad298742e43ebff1318c5100beb8df7c3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#ad298742e43ebff1318c5100beb8df7c3" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">HardwareSerial*</span> <span
+                    class="m-param">stream</span>)</span></span>
+            </h3>
+            <p>Sets up the camera module; identical to GeoluxCamera::init().</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">stream</span></td>
+                  <td>The stream instance the camera is attached to</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a67b5a6e64feb618d9d0861ff2cff2fb4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a67b5a6e64feb618d9d0861ff2cff2fb4" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">HardwareSerial&amp;</span> <span
+                    class="m-param">stream</span>)</span></span>
+            </h3>
+            <p>Sets up the camera module; identical to GeoluxCamera::init().</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">stream</span></td>
+                  <td>The stream instance the camera is attached to</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="ab453cb2ac47069faf2437aca6dff6765"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim"><a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_<wbr />status</a>  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#ab453cb2ac47069faf2437aca6dff6765" class="m-doc-self">takeSnapshot</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>This command requests that the camera starts taking the next snapshot.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim"><a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_<wbr />status</a></span> The status of the latest snapshot</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>Immediately after the command is received, the camera will return the response with the current status, which can be OK, ERR or BUSY. If the response is OK, this means that the camera is now in the process of taking the snapshot and compressing it to JPEG. If the response is BUSY, this means that a previous #take_snapshot, #move_zoom, or #move_focus command has not yet been completed, or the camera is waiting for auto exposure process to determine the best possible exposure for current environment conditions. The ERR response indicates a general error, and the #take_snapshot command should be sent again to retry the operation. After sending the #take_snapshot command, the #get_status command should be periodically sent to check when the snapshot is ready for download.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="aac74a385c3ec6df42ebae43ded3f5aa2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim"><a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_<wbr />status</a>  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#aac74a385c3ec6df42ebae43ded3f5aa2" class="m-doc-self">getStatus</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the camera status.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim"><a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_<wbr />status</a></span> The current camera status</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a18f8de055ec9470cd348e86303e8bd71"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int32_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a18f8de055ec9470cd348e86303e8bd71" class="m-doc-self">getImageSize</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the size of any available image.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int32_t</span> The size of the image, in bytes, or 0 if none is available</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a9020dc570b47f41685e36e302c1a3d55"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a9020dc570b47f41685e36e302c1a3d55" class="m-doc-self">getImageChunk</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint8_t*</span> <span
+                    class="m-param">buf</span>,
+              <span class="m-dim">size_t</span> <span
+                    class="m-param">offset</span>,
+              <span class="m-dim">size_t</span> <span
+                    class="m-param">length</span>)</span></span>
+            </h3>
+            <p>This command requests the camera to send the image data chunk.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">buf</span></td>
+                  <td>A buffer to store the image data in. The buffer should be <strong>at least</strong> 256 bytes; &gt;= 512 is preferred.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">offset</span></td>
+                  <td>The offset of the chunk</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">length</span></td>
+                  <td>The length of data to receive</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">uint32_t</span> The number of bytes returned</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>The image is sent in JPEG format, and can be sent only after the #get_status command returns the status READY. Three parameters need to be supplied to the camera. The OFFSET parameter is the starting offset of the chunk in JPEG image data. The LENGTH parameter is the requested length in bytes of the data chunk to be sent while the FORMAT parameter specifies which format the camera should use to transmit the data chunk, and it can be any of the following: RAW, HEX or BASE64. The image data is returned immediately without any trailing <code>&lt;CR&gt;&lt;LF&gt;</code> pairs. If the format is RAW, then the chunk will not be encoded and raw binary data will be returned. If the format is set to BASE64, the chunk will be BASE64 encoded, and if the format is HEX then each byte in the data chunk will be encoded as two ASCII characters representing the HEX code of the byte. If OFFSET and LENGTH parameters are set so that a part of the chunk (or the whole chunk) is beyond the end of the image data, the camera will return the requested number of bytes, but bytes beyond the end of image will be sent as zeroes</p><aside class="m-note m-info"><h4>Note</h4><p>This command always requests &quot;RAW&quot; data. The &quot;HEX&quot; and &quot;BASE64&quot; requests don&#x27;t work properly on the camera - it is a camera problem not a fault of this library.</p></aside><aside class="m-note m-danger"><h4>Warning</h4><p>This function will automatically trim off the first two bytes junk returned by the camera. Every chunk is returned with two bytes of junk at the beginning and the total data returned is two bytes longer than requested to account for it. This is <strong>NOT</strong> documented anywhere in the camera&#x27;s manual.</p><p>This function does <strong>NOT</strong> trim any trailing zeros from the request. Don&#x27;t request more data than available.</p><p>The offset parameter does <strong>NOT</strong> work as I expected in my testing. The camera appears to return data starting from wherever it left off after the last request. You cannot re-request already sent chunks.</p></aside>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a98ed9498870863ef264a07592127a05a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a98ed9498870863ef264a07592127a05a" class="m-doc-self">transferImage</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream*</span> <span
+                    class="m-param">xferStream</span>,
+              <span class="m-dim">int32_t</span> <span
+                    class="m-param">image_size</span><span class="m-dim"> = 0</span>,
+              <span class="m-dim">int32_t</span> <span
+                    class="m-param">chunk_size</span><span class="m-dim"> = 16384</span>)</span></span>
+            </h3>
+            <p>Transfer the image data from the camera stream to a secondary stream (like the print input of an SD card).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">xferStream</span></td>
+                  <td>The stream to transfer data to</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">image_size</span></td>
+                  <td>The size of image data to transfer. If not specified, the <a href="#a18f8de055ec9470cd348e86303e8bd71" class="m-doc">getImageSize()</a> function is used to query to size from the camera. If the wrong image size is given, the resulting file will not be usable.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">chunk_size</span></td>
+                  <td>The size of chunks to use while talking to the camera; optional with a default value of <a href="_geolux_camera_8h.html#a9c4294f8b4e5a4a57576f14c65f94426" class="m-doc">DEFAULT_<wbr />XFER_<wbr />CHUNK_<wbr />SIZE</a>.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a7711179cb038adfb6c447ef8d114f8ce"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a7711179cb038adfb6c447ef8d114f8ce" class="m-doc-self">transferImage</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream&amp;</span> <span
+                    class="m-param">xferStream</span>,
+              <span class="m-dim">int32_t</span> <span
+                    class="m-param">image_size</span><span class="m-dim"> = 0</span>,
+              <span class="m-dim">int32_t</span> <span
+                    class="m-param">chunk_size</span><span class="m-dim"> = 16384</span>)</span></span>
+            </h3>
+            <p>Transfer the image data from the camera stream to a secondary stream (like the print input of an SD card).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">xferStream</span></td>
+                  <td>The stream to transfer data to</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">image_size</span></td>
+                  <td>The size of image data to transfer. If not specified, the <a href="#a18f8de055ec9470cd348e86303e8bd71" class="m-doc">getImageSize()</a> function is used to query to size from the camera. If the wrong image size is given, the resulting file will not be usable.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">chunk_size</span></td>
+                  <td>The size of chunks to use while talking to the camera; optional with a default value of <a href="_geolux_camera_8h.html#a9c4294f8b4e5a4a57576f14c65f94426" class="m-doc">DEFAULT_<wbr />XFER_<wbr />CHUNK_<wbr />SIZE</a>.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a1a9c219c9d7b56699fcdc301e57ffee4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a1a9c219c9d7b56699fcdc301e57ffee4" class="m-doc-self">restart</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Restart the module.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">bool</span> True if the module was successfully restarted, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="ad09b2d6dfba268d83c84bf2d226e0ef7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#ad09b2d6dfba268d83c84bf2d226e0ef7" class="m-doc-self">printCameraInfo</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream*</span> <span
+                    class="m-param">outStream</span>)</span></span>
+            </h3>
+            <p>Prints information about the camera the the input stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">outStream</span></td>
+                  <td>A stream to print the information to</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a137f0e78aebfccd7734ef857e1ae2518"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a137f0e78aebfccd7734ef857e1ae2518" class="m-doc-self">printCameraInfo</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream&amp;</span> <span
+                    class="m-param">outStream</span>)</span></span>
+            </h3>
+            <p>Prints information about the camera the the input stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">outStream</span></td>
+                  <td>A stream to print the information to</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a9b3bff3911169288d37a59208badcd53"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a9b3bff3911169288d37a59208badcd53" class="m-doc-self">getDeviceType</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the camera&#x27;s device type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">String</span> The device type</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="aad20f4aa29e63307c86673cb80f2a211"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#aad20f4aa29e63307c86673cb80f2a211" class="m-doc-self">getCameraFirmware</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the camera firmware information.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">String</span> The firmware version as major.minor.patch</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a544eda9aae8fb936d47c1b864ab0fdfa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a544eda9aae8fb936d47c1b864ab0fdfa" class="m-doc-self">getCameraSerialNumber</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the camera serial number.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">uint32_t</span> The serial number</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a7528d3579f37be0082694fc5349a9f98"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a7528d3579f37be0082694fc5349a9f98" class="m-doc-self">runAutofocus</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>This command starts the process of moving the lens focus and searching for sharpest image around the center point defined and stored with the #set_autofocus_point command.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">bool</span> True if the autofocus started successfully, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>The returned status can be OK or BUSY, if the previous autofocus command is not completed yet, zoom command is still active or there is other process that could be disrupted by moving lens focus.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="aaf38a48ddaa95b588f4ee5302ff33404"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#aaf38a48ddaa95b588f4ee5302ff33404" class="m-doc-self">setResolution</a>(</span><span class="m-doc-wrap"><span class="m-dim">const char*</span> <span
+                    class="m-param">resolution</span>)</span></span>
+            </h3>
+            <p>This command changes the image resolution.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">resolution</span></td>
+                  <td>The desired resolution</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the resolution was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>The RESOLUTION parameter must be one of the following:</p><ul><li>&quot;160x120&quot; (4:3, 0.019 megapixel, Quarter-QVGA, QQVGA)</li><li>&quot;320x240&quot; (4:3, 0.077 megapixel, Quarter VGA , QVGA)</li><li>&quot;640x480&quot; (4:3, 0.307 megapixel, VGA)</li><li>&quot;800x600&quot; (4:3, 0.48 megapixel, Super VGA, SVGA)</li><li>&quot;1024x768&quot; (4:3, 0.79 megapixel, XGA)</li><li>&quot;1280x960&quot; (4:3, 1.23 megapixel, QuadVGA)</li><li>&quot;1600x1200&quot; (4:3, 1.92 megapixel, Ultra-XGA, UXGA)</li><li>&quot;1920x1080&quot; (16:9, 2.07 megapixel, 1080p, Full HD, FHD)</li><li>&quot;2048x1536&quot; (4:3, 3.15 megapixel, Quad-XGA, QXGA)</li><li>&quot;2592x1944&quot; (4:3, 5.04 megapixel, 1944p)</li></ul><aside class="m-note m-danger"><h4>Warning</h4><p>If this command does not succeeded, check your input resolution. It must match one of the strings from the above list exactly.</p></aside>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="ad1b7eba306b8215c47e531cd6634b3ff"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#ad1b7eba306b8215c47e531cd6634b3ff" class="m-doc-self">getResolution</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the camera resolution.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">String</span> The camera resolution as a string</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a61e6cbcdc98790a16846b1eec0429431"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a61e6cbcdc98790a16846b1eec0429431" class="m-doc-self">setQuality</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint8_t</span> <span
+                    class="m-param">compression</span>)</span></span>
+            </h3>
+            <p>This command changes the JPEG quality parameter, which can be in the range between 1 and 100.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">compression</span></td>
+                  <td>The JPEG quality - 0-100</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the quality/compression was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>100 corresponds to the best image quality with the biggest file size, and lower numbers will give stronger compression. The recommended setting is in the range of 70-80. The returned STATUS can be OK or ERR, if the given parameter is invalid.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a6a92369e57862cbaaef677d977da1475"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a6a92369e57862cbaaef677d977da1475" class="m-doc-self">getQuality</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the JPEG quality parameter value.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int8_t</span> The JPEG quality parameter value</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a29b808dbd797c9fc25a86f380ae46d4e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a29b808dbd797c9fc25a86f380ae46d4e" class="m-doc-self">setJPEGMaximumSize</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint16_t</span> <span
+                    class="m-param">size</span>)</span></span>
+            </h3>
+            <p>This command changes the JPEG maximum file size which is a decimal number in kB which specifies the maximum JPEG file size generated after a snapshot is taken.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">size</span></td>
+                  <td>The maximum JPEG image size in kb.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the maximum image size was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>The camera will try to reduce the quality in several steps to get the file size below the specified limit, and it will generate the minimum file possible if the goal could not be reached. The value 0 means no limit in size is required (no quality reduction is done over the one set in the Flash already). Other values represent maximum JPEG file size requirement in kilobytes, but please note that it may not be possible for HydroCam to satisfy this requirement, and in this case, it will start decreasing image quality internally, starting from the maximum possible quality, but without changing the quality parameter as stored in the Flash memory. As soon as the resulting JPEG file is at or below the required file size, the search will terminate and the file will be generated with the quality reached. If no requirement was met, the resulting file size will be whatever was accomplished in the last step.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a063623c405c88e9b3bb35c886bb53d5a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a063623c405c88e9b3bb35c886bb53d5a" class="m-doc-self">getJPEGMaximumSize</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the JPEG maximum file size.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">uint32_t</span> The JPEG maximum file size</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a18bbe1ed545323b3db538db54b890ba6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a18bbe1ed545323b3db538db54b890ba6" class="m-doc-self">setNightMode</a>(</span><span class="m-doc-wrap"><span class="m-dim"><a href="#a42b93152ee76d1f653d5880185c01343" class="m-doc">geolux_<wbr />night_<wbr />mode</a></span> <span
+                    class="m-param">mode</span>)</span></span>
+            </h3>
+            <p>Changes the camera mode according to the given MODE parameter which can be either day, night or auto.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">mode</span></td>
+                  <td>The mode from the <a href="#a42b93152ee76d1f653d5880185c01343" class="m-doc">GeoluxCamera::<wbr />geolux_night_mode</a> enum</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the night mode was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>In day mode, the IR filter in the camera is always active. In night mode, the IR filter is disabled and the camera gives a black and white image. In auto mode, the camera measures the current level of environmental illumination and automatically selects the optimal mode for the IR filter.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a1f7f83985e78df969a2a7cfd510e8419"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a1f7f83985e78df969a2a7cfd510e8419" class="m-doc-self">setNightMode</a>(</span><span class="m-doc-wrap"><span class="m-dim">const char*</span> <span
+                    class="m-param">mode</span>)</span></span>
+            </h3>
+            <p>Changes the camera mode according to the given MODE parameter which can be either day, night or auto.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">mode</span></td>
+                  <td>The mode as characters, must be one of &quot;day&quot;, &quot;night&quot;, or &quot;auto&quot;.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the night mode was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>In day mode, the IR filter in the camera is always active. In night mode, the IR filter is disabled and the camera gives a black and white image. In auto mode, the camera measures the current level of environmental illumination and automatically selects the optimal mode for the IR filter.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="af90d62c75a22b7501ad4ca99c36f9c63"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#af90d62c75a22b7501ad4ca99c36f9c63" class="m-doc-self">getNightMode</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the current night mode setting.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">String</span> the current night mode setting</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a692075a2c0969e0a173c630abd10ed9f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a692075a2c0969e0a173c630abd10ed9f" class="m-doc-self">setIRLEDMode</a>(</span><span class="m-doc-wrap"><span class="m-dim"><a href="#a89e49cc3c84656ea074745d0a01e4137" class="m-doc">geolux_<wbr />ir_<wbr />mode</a></span> <span
+                    class="m-param">mode</span>)</span></span>
+            </h3>
+            <p>Changes the camera’s IR LED mode according to the given parameter which can be either off, on or auto.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">mode</span></td>
+                  <td>The mode from the <a href="#a89e49cc3c84656ea074745d0a01e4137" class="m-doc">GeoluxCamera::<wbr />geolux_ir_mode</a> enum.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the IR LED mode was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>In off mode, the IR LEDs are always off. In on mode, the IR LEDs are on during the night, and off during the day. In auto mode, the IR LEDs are active only during image acquisition, autofocus or manual zoom or focus operations.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a22a85c138f9a4b551cdb6ae1f21ab376"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a22a85c138f9a4b551cdb6ae1f21ab376" class="m-doc-self">setIRLEDMode</a>(</span><span class="m-doc-wrap"><span class="m-dim">const char*</span> <span
+                    class="m-param">mode</span>)</span></span>
+            </h3>
+            <p>Changes the camera’s IR LED mode according to the given parameter which can be either off, on or auto.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">mode</span></td>
+                  <td>The mode as characters, must be one of &quot;day&quot;, &quot;night&quot;, or &quot;auto&quot;.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the IR LED mode was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>In off mode, the IR LEDs are always off. In on mode, the IR LEDs are on during the night, and off during the day. In auto mode, the IR LEDs are active only during image acquisition, autofocus or manual zoom or focus operations.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a2efd348fd538e3a6680ce41374ca7da7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a2efd348fd538e3a6680ce41374ca7da7" class="m-doc-self">getIRLEDMode</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the camera’s IR LED mode.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">String</span> the camera’s IR LED mode</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a4cc8428e7724b9199a3a8ce6ad65bf94"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a4cc8428e7724b9199a3a8ce6ad65bf94" class="m-doc-self">getIRFilterStatus</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Check if the IR filter is currently in place on the camera.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">bool</span> True if the IR filter is currently on (in night mode), otherwise false (in day mode)</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a0e0647698857e2298a2625d99987eed6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a0e0647698857e2298a2625d99987eed6" class="m-doc-self">setAutofocusPoint</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span
+                    class="m-param">x</span>,
+              <span class="m-dim">int8_t</span> <span
+                    class="m-param">y</span>)</span></span>
+            </h3>
+            <p>Configures the point used for the autofocus operation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">x</span></td>
+                  <td>The position of the focus on the x axis, in percent starting on the left</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">y</span></td>
+                  <td>The position of the focus on the y axis, in percent starting on the bottom</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the autofocus point was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>The x and y coordinates are specified as a percentage of the image size with (0,0) being at the bottom left. The values are in the 0 to 100 range. Change of autofocus coordinates does not apply until a new autofocus request is made using the command #run_autofocus. Please note that autofocus is also performed in the background of the zoom operation, but this autofocus does not use these autofocus point coordinates, as focus in that case is always in the middle of the image, i.e. the autofocus point is (50,50).</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a57722419ffed3c131721af5241a40709"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a57722419ffed3c131721af5241a40709" class="m-doc-self">getAutofocusX</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the position of the focus on the x axis.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int8_t</span> The position of the focus on the x axis, in percent starting on the left.</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a93ec36494747d0587d8bdd40f3db2a52"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a93ec36494747d0587d8bdd40f3db2a52" class="m-doc-self">getAutofocusY</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the position of the focus on the y axis.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int8_t</span> The position of the focus on the y axis, in percent starting on the bottom</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a0c2475061559000c3f0095e6773f80bd"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a0c2475061559000c3f0095e6773f80bd" class="m-doc-self">setAutoexposureRegion</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span
+                    class="m-param">x</span>,
+              <span class="m-dim">int8_t</span> <span
+                    class="m-param">y</span>,
+              <span class="m-dim">int8_t</span> <span
+                    class="m-param">width</span>,
+              <span class="m-dim">int8_t</span> <span
+                    class="m-param">height</span>)</span></span>
+            </h3>
+            <p>Configures the area used to measure brightness for the auto-exposure operation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">x</span></td>
+                  <td>The left edge of the auto exposure measurement region, in percent starting from the left edge of the image</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">y</span></td>
+                  <td>The bottom edge of the auto exposure measurement region, in percent starting from the bottom edge of the image</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">width</span></td>
+                  <td>The width of the auto exposure measurement region, in percent</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">height</span></td>
+                  <td>The height of the auto exposure measurement region, in percent</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the auto-exposure region was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>The x and y coordinates of the center of the area, as well as the width and height of the area are all specified as a percentage of the image size with (0,0) being at the bottom left. The values are in the 0 to 100 range. Please note that if there was a conflict in the values specified, while individual values were still within valid range, the HydroCam will accept and store values specified, but will prioritize the size of the region when calculating image brightness and determine exposure. For example, if the coordinates of the center of the region were x=20 and y=30, while the size of the area was determined by width=200 and height=100, the camera would conclude it was not possible to comply with both requirements and would consider the center to be at x=100 and y=50 when calculating the brightness.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a895eaa17f8dd38d22558c8b2677055ee"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a895eaa17f8dd38d22558c8b2677055ee" class="m-doc-self">getAutoexposureX</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the left edge of the auto exposure measurement region.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int8_t</span> The left edge of the auto exposure measurement region, in percent starting from the left edge of the image</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="ac1494992ce64e7f2f41e90ca7872635f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#ac1494992ce64e7f2f41e90ca7872635f" class="m-doc-self">getAutoexposureY</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the bottom edge of the auto exposure measurement region.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int8_t</span> The bottom edge of the auto exposure measurement region, in percent starting from the bottom edge of the image</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a60cdfb2aca98a26d087bd7ccc2718407"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a60cdfb2aca98a26d087bd7ccc2718407" class="m-doc-self">getAutoexposureWidth</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the width of the auto exposure measurement region.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int8_t</span> The width of the auto exposure measurement region, in percent</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a5bafb77ab2ab0d52bde49a5751f35faa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a5bafb77ab2ab0d52bde49a5751f35faa" class="m-doc-self">getAutoexposureHeight</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the height of the auto exposure measurement region.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int8_t</span> The height of the auto exposure measurement region, in percent</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="ab0bc070c48eaf418b2145f6c6b702c07"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#ab0bc070c48eaf418b2145f6c6b702c07" class="m-doc-self">getExposureTime</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the current exposure time (shutter width).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">uint32_t</span> The current exposure time</td>
+                </tr>
+              </tfoot>
+            </table>
+            <aside class="m-note m-info"><h4>Note</h4><p>The exposure time <strong>CANNOT</strong> be manually set. Only auto exposure is supported. You can set the region over which the auto exposure value is determined.</p></aside><aside class="m-note m-danger"><h4>Warning</h4><p>I do not know the units of the return value!</p></aside>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="aa0a41b048ef9cb16a77262cdd696f638"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#aa0a41b048ef9cb16a77262cdd696f638" class="m-doc-self">getImageBrightness</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the mean image brightness.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">uint32_t</span> The mean image brightness</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a71af3005cd1d25d8f893958868a3e164"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a71af3005cd1d25d8f893958868a3e164" class="m-doc-self">setWhiteBalanceOffset</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span
+                    class="m-param">red</span>,
+              <span class="m-dim">int8_t</span> <span
+                    class="m-param">green</span>,
+              <span class="m-dim">int8_t</span> <span
+                    class="m-param">blue</span>)</span></span>
+            </h3>
+            <p>Configures the white balance offset parameters for the red, green, and blue color components.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">red</span></td>
+                  <td>The white balance offset in the red color channel.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">green</span></td>
+                  <td>The white balance offset in the green color channel.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">blue</span></td>
+                  <td>The white balance offset in the blue color channel.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the white balance offset was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>The values are numbers in the range of 8 to 48. Each parameter is used for its color respectively, internally divided by 10, and used as a multiplier for the default sensor analog gain for that particular color.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a5dde042f2da452db1ef752737b4a1291"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a5dde042f2da452db1ef752737b4a1291" class="m-doc-self">getWhiteBalanceOffsetRed</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the white balance offset in the red color channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int8_t</span> The white balance offset in the red color channel</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a24d16ec3d6108c7955ab1704ad75d063"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a24d16ec3d6108c7955ab1704ad75d063" class="m-doc-self">getWhiteBalanceOffsetGreen</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the white balance offset in the green color channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int8_t</span> The white balance offset in the green color channel</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a676f78b01e82c17e428a3b6492fcfdce"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a676f78b01e82c17e428a3b6492fcfdce" class="m-doc-self">getWhiteBalanceOffsetBlue</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the white balance offset in the blue color channel.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int8_t</span> The white balance offset in the blue color channel</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a96023cb7b7ec71d9604c79628a7c84c5"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a96023cb7b7ec71d9604c79628a7c84c5" class="m-doc-self">setColorCorrectionMode</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span
+                    class="m-param">mode</span>)</span></span>
+            </h3>
+            <p>Sets the color correction mode. Valid values are integers between 0 and 3.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">mode</span></td>
+                  <td>The integer color correction mode.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the color correction mode was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>The resulting effect of value 0 is that white balance correction is turned off, and #get_info command will report the color correction as off. Values 1 to 3 result in the white balance algorithm running with different set of parameters defined for each mode. Please contact the Geolux support for more information about different color correction modes.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="abccddf164e24f9dee4ea8c8a37861912"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#abccddf164e24f9dee4ea8c8a37861912" class="m-doc-self">getColorCorrectionMode</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Check whether color correction is currently being applied.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">bool</span> True if color correction is being applied, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a3ca674465a6227d6210cbdc29989c558"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a3ca674465a6227d6210cbdc29989c558" class="m-doc-self">setAutoSnapshotInterval</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint32_t</span> <span
+                    class="m-param">interval</span>)</span></span>
+            </h3>
+            <p>Sets the time interval in minutes for autonomous periodic snapshot operation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">interval</span></td>
+                  <td>The number of minutes between snapshots.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the auto snapshot inteval was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>A valid argument is the number of minutes between 0 and 65535, with 0 meaning there is no autonomous snapshot operation. If the interval is set to some valid non-zero value, the user should take care that a new snapshot is not requested before the previous one was transferred. This command does not make much sense if only UART is used transfer images as the transfer would not happen automatically, but if FTP upload is enabled, the image will also be transferred to the FTP server automatically.</p><aside class="m-note m-info"><h4>Note</h4><p>Please note that the camera needs to be powered on in order to take periodic snapshots, as there is no battery-operated clock, and the time interval is measured from the power up.</p></aside>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a127f35054585dd1d617dd9279c1a75d3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a127f35054585dd1d617dd9279c1a75d3" class="m-doc-self">getAutoSnapshotInterval</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the auto snapshot interval.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">uint32_t</span> The auto snapshot interval</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="aac555e18dea5bae6f667e399d2dcc3f1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#aac555e18dea5bae6f667e399d2dcc3f1" class="m-doc-self">moveFocus</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span
+                    class="m-param">offset</span>)</span></span>
+            </h3>
+            <p>This command forces the camera to move the focus of the lens for a given number of steps.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">offset</span></td>
+                  <td>The focus offset relative to the starting position.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the focus point was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>The OFFSET parameter can be either a positive or a negative integer number. The focus movement is relative to the starting focus position. The returned STATUS can be either OK or ERR, if the OFFSET is outside of the allowed range (-100 to +100).</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="afa021694b76f1582f2623fcbb270aea2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int16_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#afa021694b76f1582f2623fcbb270aea2" class="m-doc-self">getFocusPosition</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the current focus position.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int16_t</span> The current focus position</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a8afb92eb0265117a74123916125aabc3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a8afb92eb0265117a74123916125aabc3" class="m-doc-self">moveZoom</a>(</span><span class="m-doc-wrap"><span class="m-dim">int8_t</span> <span
+                    class="m-param">offset</span>)</span></span>
+            </h3>
+            <p>This command forces the camera to change the lens zoom for a given number of steps.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">offset</span></td>
+                  <td>The zoom offset relative to the starting zoom position</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the zoom point was successfully changed, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>The OFFSET parameter can be either a positive or a negative integer number. The zoom movement is relative to the starting zoom position. The returned STATUS can be either OK or ERR, if the OFFSET is outside of the allowed range (-100 to +100)</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="abd78b959f07e817ecce6c2170b6ff2c1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#abd78b959f07e817ecce6c2170b6ff2c1" class="m-doc-self">getZoomPosition</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the current zoom position.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td><span class="m-dim">int8_t</span> The current zoom position</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a4b4e7c62de9d895cf2e2481a4098e85b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a4b4e7c62de9d895cf2e2481a4098e85b" class="m-doc-self">sleep</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint32_t</span> <span
+                    class="m-param">sleepTimeout</span>)</span></span>
+            </h3>
+            <p>Put the module to sleep, starting from the time the command is issued and ending when sleep timer expires.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">sleepTimeout</span></td>
+                  <td>The time for the module to sleep, in seconds.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the module accepted the timeout has will go to sleep, otherwise false</td>
+                </tr>
+              </tfoot>
+            </table>
+            <aside class="m-note m-info"><h4>Note</h4><p>There is no way to wake the camera up early! There is also no way to return the sleep timeout after sending the sleep command.</p></aside>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a7b607c0131f9d7f421ecd4e3205934bf"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;<span class="m-dim">typename...</span>  <span class="m-param">Args</span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a7b607c0131f9d7f421ecd4e3205934bf" class="m-doc-self">sendCommand</a>(</span><span class="m-doc-wrap"><span class="m-dim">Args...</span> <span
+                    class="m-param">cmd</span>)</span></span>
+            </h3>
+            <p>Recursive variadic template to send commands.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-template-parameter"  style="width: 1%">Args</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param" ><span class="m-param">cmd</span></td>
+                  <td>The commands to send</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a69ce1209ea5ea1ae617690349766609a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">uint32_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a69ce1209ea5ea1ae617690349766609a" class="m-doc-self">waitForReady</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint32_t</span> <span
+                    class="m-param">initial_delay</span><span class="m-dim"> = 0</span>,
+              <span class="m-dim">uint32_t</span> <span
+                    class="m-param">timeout</span><span class="m-dim"> = 60000L</span>)</span></span>
+            </h3>
+            <p><strong>Blocking</strong> delay until the camera status returns a status of &quot;OK&quot;, &quot;READY&quot; or &quot;NONE.&quot;</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">initial_delay</span></td>
+                  <td>The amount of time to wait before asking the camera for status; optional with a default value of 0. The inital delay is useful to avoid hammering the camera with status requests after starting an operation known to be slow - like autofocus.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">timeout</span></td>
+                  <td>The maximum number of milliseconds to wait; optional with a default of 60,000 (1 minute)</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">uint32_t</span> The number of milliseconds waited, or 0 if the operation timed out</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>We accept &quot;NONE&quot; as ready because the camera sometimes returns &quot;NONE&quot; when it&#x27;s not currently doing anything.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="aecb948ab1d0005ea9e4b6bbdf1f09d7e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#aecb948ab1d0005ea9e4b6bbdf1f09d7e" class="m-doc-self">waitResponse</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint32_t</span> <span
+                    class="m-param">timeout_ms</span>,
+              <span class="m-dim">String&amp;</span> <span
+                    class="m-param">data</span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r1</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#ac7732a2cd6b1ec4c9c479395bfaa9ab0" class="m-doc">GEOLUX_<wbr />OK</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r2</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a69263b5178009f8d93e053155e76a239" class="m-doc">GEOLUX_<wbr />ERROR</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r3</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a2a2ba0e334e7c50ef93eb3868ef1b666" class="m-doc">GEOLUX_<wbr />BUSY</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r4</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a7737b92095e8e7c289546294da9b11ac" class="m-doc">GEOLUX_<wbr />NONE</a></span>)</span></span>
+            </h3>
+            <p>Listen for responses to commands and handle URCs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">timeout_ms</span></td>
+                  <td>The time to wait for a response</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">data</span></td>
+                  <td>A string of data to fill in with response results</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">r1</span></td>
+                  <td>The first output to test against, optional with a default value of &quot;OK&quot;</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">r2</span></td>
+                  <td>The second output to test against, optional with a default value of &quot;ERROR&quot;</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">r3</span></td>
+                  <td>The third output to test against, optional with a default value of &quot;BUSY&quot;</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">r4</span></td>
+                  <td>The fourth output to test against, optional with a default value of &quot;NONE&quot;</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">int8_t</span> the index of the response input</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a2ba44ab9916d6298c558572bfdab2ead"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a2ba44ab9916d6298c558572bfdab2ead" class="m-doc-self">waitResponse</a>(</span><span class="m-doc-wrap"><span class="m-dim">uint32_t</span> <span
+                    class="m-param">timeout_ms</span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r1</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#ac7732a2cd6b1ec4c9c479395bfaa9ab0" class="m-doc">GEOLUX_<wbr />OK</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r2</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a69263b5178009f8d93e053155e76a239" class="m-doc">GEOLUX_<wbr />ERROR</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r3</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a2a2ba0e334e7c50ef93eb3868ef1b666" class="m-doc">GEOLUX_<wbr />BUSY</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r4</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a7737b92095e8e7c289546294da9b11ac" class="m-doc">GEOLUX_<wbr />NONE</a></span>)</span></span>
+            </h3>
+            <p>Listen for responses to commands and handle URCs.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">timeout_ms</span></td>
+                  <td>The time to wait for a response</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">r1</span></td>
+                  <td>The first output to test against, optional with a default value of &quot;OK&quot;</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">r2</span></td>
+                  <td>The second output to test against, optional with a default value of &quot;ERROR&quot;</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">r3</span></td>
+                  <td>The third output to test against, optional with a default value of NULL</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">r4</span></td>
+                  <td>The fourth output to test against, optional with a default value of NULL</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">int8_t</span> the index of the response input</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="ae7370c51a087b4133b3c5c6b5ed85ac2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">int8_t  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#ae7370c51a087b4133b3c5c6b5ed85ac2" class="m-doc-self">waitResponse</a>(</span><span class="m-doc-wrap"><span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r1</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#ac7732a2cd6b1ec4c9c479395bfaa9ab0" class="m-doc">GEOLUX_<wbr />OK</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r2</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a69263b5178009f8d93e053155e76a239" class="m-doc">GEOLUX_<wbr />ERROR</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r3</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a2a2ba0e334e7c50ef93eb3868ef1b666" class="m-doc">GEOLUX_<wbr />BUSY</a></span>,
+              <span class="m-dim"><a href="_geolux_camera_8h.html#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a></span> <span
+                    class="m-param">r4</span><span class="m-dim"> = <a href="_geolux_camera_8h.html#a7737b92095e8e7c289546294da9b11ac" class="m-doc">GEOLUX_<wbr />NONE</a></span>)</span></span>
+            </h3>
+            <p>Listen for responses to commands and handle URCs; listening for 1 second.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">r1</span></td>
+                  <td>The first output to test against, optional with a default value of &quot;OK&quot;</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">r2</span></td>
+                  <td>The second output to test against, optional with a default value of &quot;ERROR&quot;</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">r3</span></td>
+                  <td>The third output to test against, optional with a default value of NULL</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">r4</span></td>
+                  <td>The fourth output to test against, optional with a default value of NULL</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">int8_t</span> the index of the response input</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a3ba0b29f13348fd6055f0dee6f0817a3"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;<span class="m-dim">typename</span>  <span class="m-param">T</span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a3ba0b29f13348fd6055f0dee6f0817a3" class="m-doc-self">streamWrite</a>(</span><span class="m-doc-wrap"><span class="m-dim">T</span> <span
+                    class="m-param">last</span>)</span></span>
+            </h3>
+            <p>Utility template for writing on a stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-template-parameter"  style="width: 1%">T</td>
+                  <td>A printable type</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param" ><span class="m-param">last</span></td>
+                  <td>The last item to print</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Function to print text over the camera stream</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="ace6e29d16a4762347b4c71782d29bb2e"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;<span class="m-dim">typename</span>  <span class="m-param">T</span>, <span class="m-dim">typename...</span>  <span class="m-param">Args</span>&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#ace6e29d16a4762347b4c71782d29bb2e" class="m-doc-self">streamWrite</a>(</span><span class="m-doc-wrap"><span class="m-dim">T</span> <span
+                    class="m-param">head</span>,
+              <span class="m-dim">Args...</span> <span
+                    class="m-param">tail</span>)</span></span>
+            </h3>
+            <p>Utility template for writing on a stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Template parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-template-parameter"  style="width: 1%">T</td>
+                  <td>A printable type</td>
+                </tr>
+                <tr>
+                  <td class="m-template-parameter" >Args</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param" ><span class="m-param">head</span></td>
+                  <td>The first item to print</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">tail</span></td>
+                  <td>The last item to print</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Function to print multiple chunks of printable information over the camera stream</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a2f976d414f4b7972620017df81dc3b67"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">bool  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a2f976d414f4b7972620017df81dc3b67" class="m-doc-self">streamFind</a>(</span><span class="m-doc-wrap"><span class="m-dim">char</span> <span
+                    class="m-param">target</span>)                  <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Find a target character within a stream.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">target</span></td>
+                  <td>The character to find</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">bool</span> True if the target is found, false if the search times out</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p>A pass through to the stream function.</p>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a1ed74c5b44177bd82d74a65c6136aea9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">String  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a1ed74c5b44177bd82d74a65c6136aea9" class="m-doc-self">getCameraInfoString</a>(</span><span class="m-doc-wrap"><span class="m-dim">const char*</span> <span
+                    class="m-param">searchStartTag</span>,
+              <span class="m-dim">char</span> <span
+                    class="m-param">searchEndTag</span><span class="m-dim"> = &#x27;\r&#x27;</span>,
+              <span class="m-dim">int8_t</span> <span
+                    class="m-param">numberSkips</span><span class="m-dim"> = 0</span>,
+              <span class="m-dim">const char*</span> <span
+                    class="m-param">searchSkipTag</span><span class="m-dim"> = &quot;,&quot;</span>)                  <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Get a string within the camera info output.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">searchStartTag</span></td>
+                  <td>The tag/characters preceding the desired info - this should be the text string for the desired information.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">searchEndTag</span></td>
+                  <td>The tag/characters proceeding the desired info - optional with a default of &#x27;\r&#x27;.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">numberSkips</span></td>
+                  <td>The number of times to skip the skip character. This is used for fields where multiple bits of information follow the same data tag. Optional with a default of 0.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">searchSkipTag</span></td>
+                  <td>The search tag to skip before returning a value. This is used for fields where multiple values follow the same search tag separated by a comma or other delimeter. Optional with a default value of &#x27;,&#x27;.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">String</span> The string between the start and end tags.</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="ac6aa1d2c7e87c25d2c12ca3ece96b0c4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim">long  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#ac6aa1d2c7e87c25d2c12ca3ece96b0c4" class="m-doc-self">getCameraInfoInt</a>(</span><span class="m-doc-wrap"><span class="m-dim">const char*</span> <span
+                    class="m-param">searchStartTag</span>,
+              <span class="m-dim">char</span> <span
+                    class="m-param">searchEndTag</span><span class="m-dim"> = &#x27;\r&#x27;</span>,
+              <span class="m-dim">int8_t</span> <span
+                    class="m-param">numberSkips</span><span class="m-dim"> = 0</span>,
+              <span class="m-dim">const char*</span> <span
+                    class="m-param">searchSkipTag</span><span class="m-dim"> = &quot;,&quot;</span>)                  <span class="m-label m-warning">protected</span></span></span>
+            </h3>
+            <p>Get integer within the camera info output.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">searchStartTag</span></td>
+                  <td>The tag/characters preceding the desired info - this should be the text string for the desired information.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">searchEndTag</span></td>
+                  <td>The tag/characters proceeding the desired info - optional with a default of &#x27;\r&#x27;.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">numberSkips</span></td>
+                  <td>The number of times to skip the skip character. This is used for fields where multiple bits of information follow the same data tag. Optional with a default of 0.</td>
+                </tr>
+                <tr>
+                  <td class="m-param" ><span class="m-param">searchSkipTag</span></td>
+                  <td>The search tag to skip before returning a value. This is used for fields where multiple values follow the same search tag separated by a comma or other delimeter. Optional with a default value of &#x27;,&#x27;.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td><span class="m-dim">long</span> The integer between the start and end tags.</td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+        </section>
+        <hr>
+
+              </article>
+            </main>
+
+          </div> <!-- gp-content -->
+        </div> <!-- gp-left-column -->
+      </div> <!-- gp-inner-container -->
+    </div> <!-- gp-content-wrapper -->
+
+    <div id="footer-image">
+      <div class="gp-container">
+        <img
+          src="https://www.envirodiy.org/wp-content/uploads/2016/05/EnviroDIY_LogoMaster_Square_V5_TwoTree_Trans_notext-e1462820115833.png"
+          width="99"
+          height="22"
+          alt=""
+        />
+      </div>
+    </div>
+
+    <footer id="gp-footer">
+      <div id="gp-copyright">
+        <div class="gp-container">
+          <div id="gp-copyright-text">
+            <p>
+              <a href="https://stroudcenter.org/" target="_blank"
+                >EnviroDIY™ is a community for do-it-yourself ideas for environmental
+                science and monitoring. EnviroDIY is an initiative of
+                <a
+                  style="text-decoration: underline"
+                  href="https://stroudcenter.org/"
+                  target="_blank"
+                  >Stroud Water Research Center</a
+                >, which advances knowledge and stewardship of freshwater systems through
+                global research, education, and watershed restoration.
+              </a>
+            </p>
+            <p>
+              All content on EnviroDIY is licensed as Creative Commons
+              Attribution-ShareAlike 4.0 International (CC-BY-SA). Hardware designs on this
+              website are released under the CERN Open Hardware License 1.2.
+              <a style="text-decoration: underline" href="https://envirodiy.org/licenses/"
+                >See all licenses.</a
+              >
+              <a style="text-decoration: underline" href="https://envirodiy.org/terms/"
+                >Terms of Use</a
+              >
+              |
+              <a style="text-decoration: underline" href="https://envirodiy.org/privacy/"
+                >Privacy Policy</a
+              >
+              |
+              <a style="text-decoration: underline" href="https://envirodiy.org/cookies/"
+                >Cookie Policy</a
+              >
+              |
+              <a
+                style="text-decoration: underline"
+                href="https://envirodiy.org/shop-policies/"
+                >Shop Policies</a
+              >
+              |
+              <a style="text-decoration: underline" href="https://envirodiy.org/contact/"
+                >Contact</a
+              >
+            </p>
+            <p>
+              Created with <a href="https://doxygen.org/">Doxygen</a> 1.13.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="gp-clear"></div>
+
+    </div> <!-- gp-site-wrapper -->
+  </div> <!-- gp-site-wrapper -->
+
+</body>
+</html>

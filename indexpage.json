@@ -1,0 +1,89 @@
+{
+  "version": "1.13.1",
+  "compound": {
+    "kind": "page",
+    "id": "indexpage",
+    "name": "Geolux camera library for Arduino",
+    "url_base": "index",
+    "url": "index.html",
+    "include": null,
+    "has_template_details": false,
+    "templates": null,
+    "brief": "",
+    "description": "<p><a name=\"mainpage\"></a></p><p>An Arduino library for communication with the <a href=\"https://www.geolux-radars.com/hydrocam\">Geolux HydroCam</a>.</p><section id=\"read_me_geolux-hydrocam\"><h2>Geolux HydroCam</h2><p>This uses the RS232 interface to communicate with and control the <a href=\"https://www.geolux-radars.com/hydrocam\">Geolux HydroCam</a>. The RS232 connection is on the green and yellow pins of the HydroCam. An RS232-to-TTL adapter is needed between the HydroCam and an Arduino processor.</p><p>The camera requires a 9-27V DC power supply. The specification state that the current consumption is 75 mA (Typical), 150 mA (Maximal). I have not measured consumption to verify. The camera boots very quickly after being powered on - generally a few hundred milliseconds or less. After booting, the camera takes a few seconds to be ready to take a picture. Changing the image settings can also take a few seconds. Running autofocus takes almost 30s.</p><p>The camera supports multiple resolutions between 160x120 and 2592x1944 (5 Megapixel). Larger images take longer to snap. Images from the camera <em>must</em> be offloaded using RS232 at 115200 baud/8N1. It takes almost a minute to transfer a 5mpx image from the camera to an SD card using a 120MHz SAMD51 processor with an SPI SD card. Smaller images take much less time to transfer.</p><p>NOTE: The commands for changing Modbus, FTP, and ethernet connection parameters are **_not_** implemented in this library.</p></section><section id=\"mainpage_contributing\"><h2>Contributing</h2><p>Open an <a href=\"https://github.com/EnviroDIY/ModularSensors/issues\">issue</a> to suggest and discuss potential changes/additions.</p></section><section id=\"mainpage_license\"><h2>License</h2><p>Software sketches and code are released under the BSD 3-Clause License &ndash; See <a href=\"https://github.com/EnviroDIY/GeoluxCamera/blob/master/LICENSE.md\">LICENSE.md</a> file for details.</p><p>Documentation is licensed as <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-ShareAlike 4.0</a> (CC-BY-SA) copyright.</p></section><section id=\"mainpage_acknowledgments\"><h2>Acknowledgments</h2><p><a href=\"http://envirodiy.org/\">EnviroDIY</a>\u2122 is presented by the Stroud Water Research Center, with contributions from a community of enthusiasts sharing do-it-yourself ideas for environmental science and monitoring.</p><p><a href=\"https://github.com/SRGDamia1\">Sara Damiano</a> is the primary developer of the Geolux HydroCam library, with input from <a href=\"https://github.com/EnviroDIY/ModularSensors/graphs/contributors\">other contributors</a>.</p><p>This project has benefited from the support from the following funders:</p><ul><li>USGS Next Generation Water Observing System Rapid Deployment</li><li>Stroud Water Research Center endowment</li></ul></section>",
+    "sections": [
+      [
+        "read_me_geolux-hydrocam",
+        "Geolux HydroCam",
+        []
+      ],
+      [
+        "mainpage_contributing",
+        "Contributing",
+        []
+      ],
+      [
+        "mainpage_license",
+        "License",
+        []
+      ],
+      [
+        "mainpage_acknowledgments",
+        "Acknowledgments",
+        []
+      ]
+    ],
+    "deprecated": null,
+    "since": null,
+    "example_navigation": null,
+    "footer_navigation": null,
+    "topics": [],
+    "dirs": [],
+    "files": [],
+    "namespaces": [],
+    "classes": [],
+    "base_classes": [],
+    "derived_classes": [],
+    "enums": [],
+    "typedefs": [],
+    "funcs": [],
+    "vars": [],
+    "defines": [],
+    "public_types": [],
+    "public_static_funcs": [],
+    "typeless_funcs": [],
+    "public_funcs": [],
+    "signals": [],
+    "public_slots": [],
+    "public_static_vars": [],
+    "public_vars": [],
+    "protected_types": [],
+    "protected_static_funcs": [],
+    "protected_funcs": [],
+    "protected_slots": [],
+    "protected_static_vars": [],
+    "protected_vars": [],
+    "private_funcs": [],
+    "private_slots": [],
+    "related": [],
+    "friend_funcs": [],
+    "groups": [],
+    "has_enum_details": false,
+    "has_typedef_details": false,
+    "has_func_details": false,
+    "has_var_details": false,
+    "has_define_details": false,
+    "breadcrumb": [
+      [
+        "Geolux camera library for Arduino",
+        "index.html"
+      ]
+    ],
+    "breadcrumbGroup": [
+      [
+        "Geolux camera library for Arduino",
+        "index.html"
+      ]
+    ]
+  }
+}

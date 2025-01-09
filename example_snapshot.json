@@ -1,0 +1,72 @@
+{
+  "version": "1.13.1",
+  "compound": {
+    "kind": "page",
+    "id": "example_snapshot",
+    "name": "Snapshot Example",
+    "url_base": "example_snapshot",
+    "url": "example_snapshot.html",
+    "include": null,
+    "has_template_details": false,
+    "templates": null,
+    "brief": "",
+    "description": "<p><a name=\"md_examples_2snapshot_2_read_me\"></a></p><p>This example asks the camera to take a picture and then retrieves the data and writes it to an SD card.</p>",
+    "sections": [],
+    "deprecated": null,
+    "since": null,
+    "example_navigation": null,
+    "footer_navigation": null,
+    "topics": [],
+    "dirs": [],
+    "files": [],
+    "namespaces": [],
+    "classes": [],
+    "base_classes": [],
+    "derived_classes": [],
+    "enums": [],
+    "typedefs": [],
+    "funcs": [],
+    "vars": [],
+    "defines": [],
+    "public_types": [],
+    "public_static_funcs": [],
+    "typeless_funcs": [],
+    "public_funcs": [],
+    "signals": [],
+    "public_slots": [],
+    "public_static_vars": [],
+    "public_vars": [],
+    "protected_types": [],
+    "protected_static_funcs": [],
+    "protected_funcs": [],
+    "protected_slots": [],
+    "protected_static_vars": [],
+    "protected_vars": [],
+    "private_funcs": [],
+    "private_slots": [],
+    "related": [],
+    "friend_funcs": [],
+    "groups": [],
+    "has_enum_details": false,
+    "has_typedef_details": false,
+    "has_func_details": false,
+    "has_var_details": false,
+    "has_define_details": false,
+    "breadcrumb": [
+      [
+        "Examples Using the Geolux Camera",
+        "page_the_examples.html"
+      ],
+      [
+        "Snapshot Example",
+        "example_snapshot.html"
+      ]
+    ],
+    "breadcrumbGroup": [
+      [
+        "Snapshot Example",
+        "example_snapshot.html"
+      ]
+    ]
+  }
+}

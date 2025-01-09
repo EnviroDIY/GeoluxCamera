@@ -1,0 +1,170 @@
+{
+  "version": "1.13.1",
+  "index": {
+    "symbols": [
+      {
+        "id": "class_geolux_camera",
+        "kind": "class",
+        "name": "GeoluxCamera",
+        "url": "class_geolux_camera.html",
+        "brief": "The class for the Geoluxh HydroCAM.",
+        "children": [],
+        "deprecated": null,
+        "since": null,
+        "has_nestable_children": false,
+        "is_final": false
+      }
+    ],
+    "files": [
+      {
+        "id": "dir_49e56c817e5e54854c35e136979f97ca",
+        "kind": "dir",
+        "name": "docs",
+        "url": "dir_49e56c817e5e54854c35e136979f97ca.html",
+        "brief": "Contains extra documentation and files to help build the documentation.",
+        "children": [],
+        "deprecated": null,
+        "since": null,
+        "has_nestable_children": false
+      },
+      {
+        "id": "dir_d28a4824dc47e487b107a5db32ef43c4",
+        "kind": "dir",
+        "name": "examples",
+        "url": "dir_d28a4824dc47e487b107a5db32ef43c4.html",
+        "brief": "Contains all of the example sketches.",
+        "children": [
+          {
+            "id": "dir_9617728e4c2a49a5313a0a0cd4f9ef50",
+            "kind": "dir",
+            "name": "dated_image",
+            "url": "dir_9617728e4c2a49a5313a0a0cd4f9ef50.html",
+            "brief": "Contains the dated_image example.",
+            "children": [],
+            "deprecated": null,
+            "since": null,
+            "has_nestable_children": false
+          },
+          {
+            "id": "dir_02984b29e88026d952a8c8c4f142bb8b",
+            "kind": "dir",
+            "name": "read_by_chunk",
+            "url": "dir_02984b29e88026d952a8c8c4f142bb8b.html",
+            "brief": "Contains the read_by_chunk example.",
+            "children": [],
+            "deprecated": null,
+            "since": null,
+            "has_nestable_children": false
+          },
+          {
+            "id": "dir_55146738c2e35fa1503ced6bb9cfc934",
+            "kind": "dir",
+            "name": "snapshot",
+            "url": "dir_55146738c2e35fa1503ced6bb9cfc934.html",
+            "brief": "Contains the snapshot example.",
+            "children": [],
+            "deprecated": null,
+            "since": null,
+            "has_nestable_children": false
+          }
+        ],
+        "deprecated": null,
+        "since": null,
+        "has_nestable_children": true
+      },
+      {
+        "id": "dir_68267d1309a1af8e8297ef4c3efbcdba",
+        "kind": "dir",
+        "name": "src",
+        "url": "dir_68267d1309a1af8e8297ef4c3efbcdba.html",
+        "brief": "Contains the source code for the Geolux Camera library.",
+        "children": [
+          {
+            "id": "_geolux_camera_8cpp",
+            "kind": "file",
+            "name": "GeoluxCamera.cpp",
+            "url": "_geolux_camera_8cpp.html",
+            "brief": "",
+            "children": [],
+            "deprecated": null,
+            "since": null,
+            "has_nestable_children": false
+          },
+          {
+            "id": "_geolux_camera_8h",
+            "kind": "file",
+            "name": "GeoluxCamera.h",
+            "url": "_geolux_camera_8h.html",
+            "brief": "",
+            "children": [],
+            "deprecated": null,
+            "since": null,
+            "has_nestable_children": false
+          }
+        ],
+        "deprecated": null,
+        "since": null,
+        "has_nestable_children": false
+      }
+    ],
+    "pages": [
+      {
+        "id": "change_log",
+        "kind": "page",
+        "name": "ChangeLog",
+        "url": "change_log.html",
+        "brief": "",
+        "children": [],
+        "deprecated": null,
+        "since": null,
+        "has_nestable_children": false
+      },
+      {
+        "id": "page_the_examples",
+        "kind": "page",
+        "name": "Examples Using the Geolux Camera",
+        "url": "page_the_examples.html",
+        "brief": "",
+        "children": [
+          {
+            "id": "example_snapshot",
+            "kind": "page",
+            "name": "Snapshot Example",
+            "url": "example_snapshot.html",
+            "brief": "",
+            "children": [],
+            "deprecated": null,
+            "since": null,
+            "has_nestable_children": false
+          },
+          {
+            "id": "example_dated_image",
+            "kind": "page",
+            "name": "Dated Image Example",
+            "url": "example_dated_image.html",
+            "brief": "",
+            "children": [],
+            "deprecated": null,
+            "since": null,
+            "has_nestable_children": false
+          },
+          {
+            "id": "example_read_by_chunk",
+            "kind": "page",
+            "name": "Read By Chunk Example",
+            "url": "example_read_by_chunk.html",
+            "brief": "",
+            "children": [],
+            "deprecated": null,
+            "since": null,
+            "has_nestable_children": false
+          }
+        ],
+        "deprecated": null,
+        "since": null,
+        "has_nestable_children": false
+      }
+    ],
+    "topics": []
+  }
+}

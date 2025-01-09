@@ -1,0 +1,72 @@
+{
+  "version": "1.13.1",
+  "compound": {
+    "kind": "file",
+    "id": "_geolux_camera_8cpp",
+    "name": "GeoluxCamera.cpp",
+    "url_base": "_geolux_camera_8cpp",
+    "url": "_geolux_camera_8cpp.html",
+    "include": null,
+    "has_template_details": false,
+    "templates": null,
+    "brief": "",
+    "description": "<aside class=\"m-note m-default\"><h4>Author</h4><p>Sara Damiano</p></aside><aside class=\"m-note m-default\"><h4>Copyright</h4><p>Stroud Water Research Center</p></aside><aside class=\"m-note m-default\"><h4>Date</h4><p>December 2024</p></aside>",
+    "sections": "",
+    "deprecated": null,
+    "since": null,
+    "example_navigation": null,
+    "footer_navigation": null,
+    "topics": [],
+    "dirs": [],
+    "files": [],
+    "namespaces": [],
+    "classes": [],
+    "base_classes": [],
+    "derived_classes": [],
+    "enums": [],
+    "typedefs": [],
+    "funcs": [],
+    "vars": [],
+    "defines": [],
+    "public_types": [],
+    "public_static_funcs": [],
+    "typeless_funcs": [],
+    "public_funcs": [],
+    "signals": [],
+    "public_slots": [],
+    "public_static_vars": [],
+    "public_vars": [],
+    "protected_types": [],
+    "protected_static_funcs": [],
+    "protected_funcs": [],
+    "protected_slots": [],
+    "protected_static_vars": [],
+    "protected_vars": [],
+    "private_funcs": [],
+    "private_slots": [],
+    "related": [],
+    "friend_funcs": [],
+    "groups": [],
+    "has_enum_details": false,
+    "has_typedef_details": false,
+    "has_func_details": false,
+    "has_var_details": false,
+    "has_define_details": false,
+    "breadcrumb": [
+      [
+        "src",
+        "dir_68267d1309a1af8e8297ef4c3efbcdba.html"
+      ],
+      [
+        "GeoluxCamera.cpp",
+        "_geolux_camera_8cpp.html"
+      ]
+    ],
+    "breadcrumbGroup": [
+      [
+        "GeoluxCamera.cpp",
+        "_geolux_camera_8cpp.html"
+      ]
+    ]
+  }
+}
