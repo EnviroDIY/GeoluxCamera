@@ -8,8 +8,15 @@
 #include "GeoluxCamera.h"
 
 GeoluxCamera::GeoluxCamera() {}
+GeoluxCamera::GeoluxCamera(Stream* stream) {
+    _stream = stream;
+}
+GeoluxCamera::GeoluxCamera(Stream& stream) {
+    _stream = &stream;
+}
 GeoluxCamera::~GeoluxCamera() {}
 
+void GeoluxCamera::begin() {}
 void GeoluxCamera::begin(Stream* stream) {
     _stream = stream;
 }

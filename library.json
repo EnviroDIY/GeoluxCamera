@@ -1,6 +1,6 @@
 {
   "name": "GeoluxCamera",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": "Geolux, camera",
   "description": "Arduino library for communication with Geolux serial camera.",
   "repository": {

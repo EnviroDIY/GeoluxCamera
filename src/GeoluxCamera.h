@@ -142,12 +142,25 @@ class GeoluxCamera {
      */
     GeoluxCamera();
     /**
+     * @brief Construct a new GeoluxCamera object with stream attached.
+     *
+     * @param stream The stream instance the camera is attached to
+     */
+    GeoluxCamera(Stream* stream);
+    /** @copydoc GeoluxCamera::GeoluxCamera(Stream* stream) */
+    GeoluxCamera(Stream& stream);
+
+    /**
      * @brief Destroy the GeoluxCamera object - no action needed
      */
     ~GeoluxCamera();
 
     /**
-     * @brief Sets up the camera module; identical to GeoluxCamera::init().
+     * @brief Sets up the camera module
+     */
+    void begin();
+    /**
+     * @brief Sets up the camera module
      *
      * @param stream The stream instance the camera is attached to
      */
