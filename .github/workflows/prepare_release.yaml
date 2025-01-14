@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - main
     # Sequence of patterns matched against refs/tags
     paths:
       - 'VERSION' # Push events when the VERSION file changes
