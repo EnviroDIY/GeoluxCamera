@@ -837,6 +837,7 @@ class GeoluxCamera {
      * @brief Read a throw away any characters left in the camera stream.
      */
     inline void streamDump() {
+        if (!_stream->available()) { delay(25); }
         while (_stream->available()) {
             _stream->read();
             delay(1);
