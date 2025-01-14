@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8" />
-  <title>GeoluxCamera class | Geolux Camera0.1.0</title>
+  <title>GeoluxCamera class | Geolux Camera0.1.2</title>
   <link rel="stylesheet" href="m-EnviroDIY+documentation.compiled.css" />
 
 <style id="wp-emoji-styles-inline-css" type="text/css">
@@ -1257,24 +1257,24 @@
     <header id="gp-main-header">
       <div class="gp-container">
         <div id="gp-logo">
-          <a href="index.html" title="Geolux Camera 0.1.0">
+          <a href="index.html" title="Geolux Camera 0.1.2">
             <img
               src="gp-desktop-logo.png"
-              alt="Geolux Camera 0.1.0"
+              alt="Geolux Camera 0.1.2"
               width="200"
               height="42"
               class="gp-desktop-logo"
             />
             <img
               src="gp-scrolling-logo.png"
-              alt="Geolux Camera 0.1.0"
+              alt="Geolux Camera 0.1.2"
               width="264"
               height="55"
               class="gp-scrolling-logo"
             />
             <img
               src="gp-mobile-logo.png"
-              alt="Geolux Camera 0.1.0"
+              alt="Geolux Camera 0.1.2"
               width="132"
               height="28"
               class="gp-mobile-logo"
@@ -1489,6 +1489,14 @@
               <span class="m-doc-wrap-bumper"><span class="m-dim"></span><a href="#a36fcae0c034c8a5a0682a33a0788b38e" class="m-doc-self">GeoluxCamera</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Construct a new <a href="class_geolux_camera.html" class="m-doc">GeoluxCamera</a> object - no action needed.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim"></span><a href="#ae2948e24ff5072b23e84f6baefb878ba" class="m-doc">GeoluxCamera</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream*</span> <span class="m-param">stream</span>)</span>
+            </dt>
+            <dd>Construct a new <a href="class_geolux_camera.html" class="m-doc">GeoluxCamera</a> object with stream attached.</dd>
+                          <dt>
+              <span class="m-doc-wrap-bumper"><span class="m-dim"></span><a href="#a35ab06b9150381a10171a4d0f26e08a4" class="m-doc">GeoluxCamera</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream&amp;</span> <span class="m-param">stream</span>)</span>
+            </dt>
+            <dd>Construct a new <a href="class_geolux_camera.html" class="m-doc">GeoluxCamera</a> object with stream attached.</dd>
                           <dt id="af717b9c35d07243a6fac89832a7e114c">
               <span class="m-doc-wrap-bumper"><span class="m-dim"></span><a href="#af717b9c35d07243a6fac89832a7e114c" class="m-doc-self">~GeoluxCamera</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
@@ -1499,22 +1507,26 @@
         <section id="pub-methods">
           <h2>Public functions</h2>
           <dl class="m-doc">
+                          <dt id="ac19dfc9918357e6c232c5a9c8c5d1168">
+              <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#ac19dfc9918357e6c232c5a9c8c5d1168" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Sets up the camera module.</dd>
                           <dt>
               <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#a4113088b8409e7f9fbe163cc8c383fc6" class="m-doc">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream*</span> <span class="m-param">stream</span>)</span>
             </dt>
-            <dd>Sets up the camera module; identical to GeoluxCamera::init().</dd>
+            <dd>Sets up the camera module.</dd>
                           <dt>
               <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#a9506e5e8f24b4b73ffeb59a7653bc084" class="m-doc">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream&amp;</span> <span class="m-param">stream</span>)</span>
             </dt>
-            <dd>Sets up the camera module; identical to GeoluxCamera::init().</dd>
+            <dd>Sets up the camera module.</dd>
                           <dt>
               <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#ad298742e43ebff1318c5100beb8df7c3" class="m-doc">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">HardwareSerial*</span> <span class="m-param">stream</span>)</span>
             </dt>
-            <dd>Sets up the camera module; identical to GeoluxCamera::init().</dd>
+            <dd>Sets up the camera module.</dd>
                           <dt>
               <span class="m-doc-wrap-bumper"><span class="m-dim">void </span><a href="#a67b5a6e64feb618d9d0861ff2cff2fb4" class="m-doc">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">HardwareSerial&amp;</span> <span class="m-param">stream</span>)</span>
             </dt>
-            <dd>Sets up the camera module; identical to GeoluxCamera::init().</dd>
+            <dd>Sets up the camera module.</dd>
                           <dt>
               <span class="m-doc-wrap-bumper"><span class="m-dim"><a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_<wbr />status</a> </span><a href="#ab453cb2ac47069faf2437aca6dff6765" class="m-doc">takeSnapshot</a>(</span><span class="m-doc-wrap">) -&gt; <a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_<wbr />status</a></span>
             </dt>
@@ -1919,13 +1931,57 @@
         <hr>
         <section id="function-details">
           <h2>Function documentation</h2>
+                      <section class="m-doc-details" id="ae2948e24ff5072b23e84f6baefb878ba"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim"> GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#ae2948e24ff5072b23e84f6baefb878ba" class="m-doc-self">GeoluxCamera</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream*</span> <span
+                    class="m-param">stream</span>)</span></span>
+            </h3>
+            <p>Construct a new <a href="class_geolux_camera.html" class="m-doc">GeoluxCamera</a> object with stream attached.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">stream</span></td>
+                  <td>The stream instance the camera is attached to</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
+                      <section class="m-doc-details" id="a35ab06b9150381a10171a4d0f26e08a4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><span class="m-dim"> GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
+                    href="#a35ab06b9150381a10171a4d0f26e08a4" class="m-doc-self">GeoluxCamera</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream&amp;</span> <span
+                    class="m-param">stream</span>)</span></span>
+            </h3>
+            <p>Construct a new <a href="class_geolux_camera.html" class="m-doc">GeoluxCamera</a> object with stream attached.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="m-param"  style="width: 1%"><span class="m-param">stream</span></td>
+                  <td>The stream instance the camera is attached to</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <hr>
+          </div>
+        </section>
                       <section class="m-doc-details" id="a4113088b8409e7f9fbe163cc8c383fc6"><div>
             <h3>
               <span class="m-doc-wrap-bumper"><span class="m-dim">void  GeoluxCamera::<wbr /></span></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a
                     href="#a4113088b8409e7f9fbe163cc8c383fc6" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream*</span> <span
                     class="m-param">stream</span>)</span></span>
             </h3>
-            <p>Sets up the camera module; identical to GeoluxCamera::init().</p>
+            <p>Sets up the camera module.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -1947,7 +2003,7 @@
                     href="#a9506e5e8f24b4b73ffeb59a7653bc084" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">Stream&amp;</span> <span
                     class="m-param">stream</span>)</span></span>
             </h3>
-            <p>Sets up the camera module; identical to GeoluxCamera::init().</p>
+            <p>Sets up the camera module.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -1969,7 +2025,7 @@
                     href="#ad298742e43ebff1318c5100beb8df7c3" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">HardwareSerial*</span> <span
                     class="m-param">stream</span>)</span></span>
             </h3>
-            <p>Sets up the camera module; identical to GeoluxCamera::init().</p>
+            <p>Sets up the camera module.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -1991,7 +2047,7 @@
                     href="#a67b5a6e64feb618d9d0861ff2cff2fb4" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap"><span class="m-dim">HardwareSerial&amp;</span> <span
                     class="m-param">stream</span>)</span></span>
             </h3>
-            <p>Sets up the camera module; identical to GeoluxCamera::init().</p>
+            <p>Sets up the camera module.</p>
             <table class="m-table m-fullwidth m-flat">
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>

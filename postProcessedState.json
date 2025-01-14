@@ -252,7 +252,7 @@
       "name": "ChangeLog",
       "url": "change_log.html",
       "brief": "",
-      "has_details": 7,
+      "has_details": 9,
       "children": [],
       "childrenClasses": [],
       "childrenNamespaces": [],
@@ -365,7 +365,7 @@
   ],
   "doxyfile": {
     "PROJECT_NAME": "Geolux Camera",
-    "PROJECT_NUMBER": "0.1.0",
+    "PROJECT_NUMBER": "0.1.2",
     "PROJECT_BRIEF": "An Arduino library for communication with Geolux serial camera.",
     "PROJECT_LOGO": "gp-desktop-logo.png",
     "OUTPUT_DIRECTORY": "../../GeoluxCamera_Doxygen",
