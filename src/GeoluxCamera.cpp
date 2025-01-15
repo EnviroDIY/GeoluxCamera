@@ -43,7 +43,7 @@ GeoluxCamera::geolux_status GeoluxCamera::getStatus() {
     // this returns "READY" instead of "OK" and has no new line
     geolux_status resp = static_cast<geolux_status>(
         waitResponse(GF("READY"), GF("ERR"), GF("BUSY"), GF("NONE")));
-    _stream->readStringUntil('\n');  // skip to the end of the line
+    streamFind('\n');  // skip to the end of the line
     return resp;
 }
 
@@ -53,7 +53,7 @@ int32_t GeoluxCamera::getImageSize() {
     waitResponse(GF("READY"), GF("ERR"), GF("BUSY"), GF("NONE"));
     streamFind(',');  // skip the comma
     uint32_t resp = _stream->parseInt();
-    _stream->readStringUntil('\n');  // skip to the end of the line
+    streamFind('\n');  // skip to the end of the line
     return static_cast<int32_t>(resp);
 }
 
@@ -242,7 +242,7 @@ bool GeoluxCamera::restart() {
     if (resp) {
         waitResponse(10000L,
                      GF("Geolux HydroCAM"));  // wait for a print out after restart
-        _stream->readStringUntil('\n');       // skip to the end of the line
+        streamFind('\n');                     // skip to the end of the line
     }
     return resp;
 }

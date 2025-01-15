@@ -114,10 +114,11 @@ class GeoluxCamera {
  public:
     /// @brief The possible camera statuses
     typedef enum {
-        OK = 1,  ///< Status is "OK" or "READY"
-        ERROR,   ///< Status is in error
-        BUSY,    ///< Status is "BUSY"
-        NONE,    ///< Status is "NONE" or unknown
+        NO_RESPONSE = 0,  ///< The camera didn't respond
+        OK          = 1,  ///< Status is "OK" or "READY"
+        ERROR,            ///< Status is in error
+        BUSY,             ///< Status is "BUSY"
+        NONE,             ///< Status is "NONE" or unknown
     } geolux_status;
     /// The possible camera IR filter (day/night) modes
     typedef enum {
@@ -854,7 +855,13 @@ class GeoluxCamera {
      * @return True if the target is found, false if the search times out
      */
     inline bool streamFind(char target) {
-        return _stream->find(const_cast<char*>(&target), 1);
+        // shorten the stream timeout so we're not waiting forever for a partial chunk
+        uint32_t prev_timeout = _stream->getTimeout();
+        _stream->setTimeout(15L);
+        bool resp = _stream->find(const_cast<char*>(&target), 1);
+        // reset the stream timeout
+        _stream->setTimeout(prev_timeout);
+        return resp;
     }
 
     /**
