@@ -475,11 +475,15 @@ uint32_t GeoluxCamera::waitForReady(uint32_t initial_delay, uint32_t timeout) {
     geolux_status camera_status;
     uint32_t      start_millis = millis();
     delay(initial_delay);
-    do {
-        delay(100);
+    while (camera_status != geolux_status::OK && camera_status != geolux_status::NONE &&
+           millis() - start_millis < timeout) {
         camera_status = getStatus();
-    } while (camera_status != geolux_status::OK &&
-             camera_status != geolux_status::NONE && millis() - start_millis < timeout);
+        // delay to avoid pounding the camera too hard
+        if (camera_status != geolux_status::OK &&
+            camera_status != geolux_status::NONE) {
+            delay(100);
+        }
+    }
     if (camera_status == GeoluxCamera::OK || camera_status == GeoluxCamera::NONE) {
         return millis() - start_millis;
     } else {
