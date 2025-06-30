@@ -27,31 +27,46 @@
 /// The character bit configuration on the HydroCAM; fixed as 8N1
 #define GEOLUX_CAMERA_RS232_CONFIG SERIAL_8N1
 
+// Helpers for strings stored in flash
+// These are blatantly copied from the TinyGSM library
 /**
  * @def GEOLUX_PROGMEM
  * @brief Helper define when dealing with multiple processors variants and memory
  * storage
+ *
+ * @def TINY_GSM_PROGMEM
+ * @brief A macro to use to put strings into flash memory for AVR boards but not
+ * for other boards that don't support it.
+ *
  * @typedef GsmConstStr
- * @brief Helper type def to deal with program memory only available on AVR processors.
- * @def GFP
- * @brief Helper define to use to read from flash memory to a constant string for AVR
- * processors.  An empty define for non-AVR processors.
- * @def GF
- * @brief Helper define to use to write a constant string to flash memory for AVR
- * processors.  An empty define for non-AVR processors.
+ * @brief A type for a string stored in flash memory for AVR boards but not for
+ * boards that don't support it.
+ *
+ * @def GFP(x)
+ * @brief A macro to convert a string into a __FlashStringHelper (aka
+ * GsmConstStr) for AVR boards but not for other boards that don't support it.
+ * @param x The string to convert
+ *
+ * @def GF(x)
+ * @brief A macro to store string in flash memory for AVR boards but not for
+ * other boards that don't support it.
+ * @param x The string to store in flash memory
  */
-#if (defined(__AVR__) || defined(ARDUINO_ARCH_AVR)) && !defined(__AVR_ATmega4809__)
-#define GEOLUX_PROGMEM PROGMEM
+#if (defined(__AVR__) || defined(ARDUINO_ARCH_AVR)) && !defined(__AVR_ATmega4809__) && \
+    !defined(TINY_GSM_PROGMEM) && !defined(GFP) && !defined(GF)
+#define TINY_GSM_PROGMEM PROGMEM
 typedef const __FlashStringHelper* GsmConstStr;
 #define GFP(x) (reinterpret_cast<GsmConstStr>(x))
 #define GF(x) F(x)
-#else
-#define GEOLUX_PROGMEM
+#elif !defined(TINY_GSM_PROGMEM) && !defined(GFP) && !defined(GF)
+#define TINY_GSM_PROGMEM
 typedef const char* GsmConstStr;
 #define GFP(x) x
 #define GF(x) x
 #endif
-
+#if !defined(GEOLUX_PROGMEM)
+#define GEOLUX_PROGMEM TINY_GSM_PROGMEM
+#endif
 
 #ifdef GEOLUX_DEBUG
 namespace {
