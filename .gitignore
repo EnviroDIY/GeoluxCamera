@@ -97,3 +97,4 @@ runDoxygen.bat
 generateKeywords.bat
 output_*.log
 archive/*
+installWorkingDependencies.bat
