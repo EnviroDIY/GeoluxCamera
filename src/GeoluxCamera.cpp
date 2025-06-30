@@ -472,7 +472,7 @@ bool GeoluxCamera::sleep(uint32_t sleepTimeout) {
 }
 
 uint32_t GeoluxCamera::waitForReady(uint32_t initial_delay, uint32_t timeout) {
-    geolux_status camera_status;
+    geolux_status camera_status = geolux_status::NO_RESPONSE;
     uint32_t      start_millis = millis();
     delay(initial_delay);
     while (camera_status != geolux_status::OK && camera_status != geolux_status::NONE &&

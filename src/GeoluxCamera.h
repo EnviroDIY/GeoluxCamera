@@ -915,8 +915,7 @@ class GeoluxCamera {
                           int8_t numberSkips = 0, const char* searchSkipTag = ",");
 
     /**
-     * @brief The stream instance (serial port) for communication with the Modbus slave
-     * (usually over RS485)
+     * @brief The stream instance (serial port) for communication over RS232
      */
     Stream* _stream;
 };
