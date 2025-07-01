@@ -12,13 +12,23 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
+### Added
+
+### Removed
+
+### Fixed
+
+***
+
+## [0.1.3]
+
+### Changed
+
 - Reduced delay in waitForReady()
 
 ### Added
 
 - Added extra sketch with timing tests
-
-### Removed
 
 ### Fixed
 
@@ -47,7 +57,8 @@ Initial release
 
 ***
 
-[Unreleased]: https://github.com/EnviroDIY/GeoluxCamera/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/EnviroDIY/GeoluxCamera/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/EnviroDIY/GeoluxCamera/releases/tag/v0.1.3
 [0.1.2]: https://github.com/EnviroDIY/GeoluxCamera/releases/tag/v0.1.2
 [0.1.1]: https://github.com/EnviroDIY/GeoluxCamera/releases/tag/v0.1.1
 [0.1.0]: https://github.com/EnviroDIY/GeoluxCamera/releases/tag/v0.1.0
