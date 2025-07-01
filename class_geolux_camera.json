@@ -1,5 +1,5 @@
 {
-  "version": "1.13.1",
+  "version": "1.14.0",
   "compound": {
     "kind": "class",
     "id": "class_geolux_camera",
@@ -48,6 +48,15 @@
           "is_protected": false,
           "is_strong": false,
           "values": [
+            {
+              "id": "af27739bd27e7b09d5ea1ab607520223bab40f9b9388df6461949e5b89cae0f746",
+              "name": "NO_RESPONSE",
+              "initializer": "= 0",
+              "brief": "The camera didn&#x27;t respond.",
+              "description": "",
+              "deprecated": null,
+              "since": null
+            },
             {
               "id": "af27739bd27e7b09d5ea1ab607520223ba5f185f52a20da43e27a77b285c59b71e",
               "name": "OK",
@@ -3301,7 +3310,7 @@
         "is_protected": true,
         "is_private": false,
         "name": "_stream",
-        "brief": "The stream instance (serial port) for communication with the Modbus slave (usually over RS485)",
+        "brief": "The stream instance (serial port) for communication over RS232.",
         "description": "",
         "deprecated": null,
         "since": null,

@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8" />
-  <title>src/GeoluxCamera.h file | Geolux Camera0.1.2</title>
+  <title>src/GeoluxCamera.h file | Geolux Camera0.1.3</title>
   <link rel="stylesheet" href="m-EnviroDIY+documentation.compiled.css" />
 
 <style id="wp-emoji-styles-inline-css" type="text/css">
@@ -22,7 +22,7 @@
 <link
   rel="stylesheet"
   id="gp-parent-style-css"
-  href="https://www.envirodiy.org/wp-content/themes/socialize/style.css?ver=6.5.4"
+  href="https://www.envirodiy.org/wp-content/themes/socialize/style.css?ver=6.7.1"
   type="text/css"
   media="all"
 />
@@ -139,25 +139,25 @@
 <link
   rel="stylesheet"
   id="fontawesome-css"
-  href="https://www.envirodiy.org/wp-content/themes/socialize/lib/fonts/font-awesome/css/font-awesome.min.css?ver=6.5.4"
+  href="https://www.envirodiy.org/wp-content/themes/socialize/lib/fonts/font-awesome/css/font-awesome.min.css?ver=6.7.1"
   type="text/css"
   media="all"
 />
 <link
   rel="preload"
   as="style"
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.5.4"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.7.1"
 />
 <link
   rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.5.4"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.7.1"
   media="print"
   onload="this.media='all'"
 />
 <noscript
   ><link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.5.4"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.7.1"
 /></noscript>
 
 <style type="text/css" id="wp-custom-css">
@@ -1257,24 +1257,24 @@
     <header id="gp-main-header">
       <div class="gp-container">
         <div id="gp-logo">
-          <a href="index.html" title="Geolux Camera 0.1.2">
+          <a href="index.html" title="Geolux Camera 0.1.3">
             <img
               src="gp-desktop-logo.png"
-              alt="Geolux Camera 0.1.2"
+              alt="Geolux Camera 0.1.3"
               width="200"
               height="42"
               class="gp-desktop-logo"
             />
             <img
               src="gp-scrolling-logo.png"
-              alt="Geolux Camera 0.1.2"
+              alt="Geolux Camera 0.1.3"
               width="264"
               height="55"
               class="gp-scrolling-logo"
             />
             <img
               src="gp-mobile-logo.png"
-              alt="Geolux Camera 0.1.2"
+              alt="Geolux Camera 0.1.3"
               width="132"
               height="28"
               class="gp-mobile-logo"
@@ -1475,7 +1475,7 @@
             <dt id="a9c8c9c8249f99863e157f8fae76e7cab">
               using <a href="#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc-self">GsmConstStr</a> = <span class="m-dim">const char*</span>
             </dt>
-            <dd>Helper type def to deal with program memory only available on AVR processors.</dd>
+            <dd>A type for a string stored in flash memory for AVR boards but not for boards that don&#x27;t support it.</dd>
           </dl>
         </section>
         <section id="var-members">
@@ -1518,18 +1518,22 @@
               <span class="m-doc-wrap-bumper">#define <a href="#ab0113c5e9120f09fbbcce3d757a9cb6f" class="m-doc-self">GEOLUX_CAMERA_RS232_CONFIG</a><span class="m-dim m-right-m m-text-right"> = SERIAL_8N1</span></span>
             </dt>
             <dd>The character bit configuration on the HydroCAM; fixed as 8N1.</dd>
+            <dt id="af36c4b50d69b1b716166cc5ba6608de9">
+              <span class="m-doc-wrap-bumper">#define <a href="#af36c4b50d69b1b716166cc5ba6608de9" class="m-doc-self">TINY_GSM_PROGMEM</a></span>
+            </dt>
+            <dd>A macro to use to put strings into flash memory for AVR boards but not for other boards that don&#x27;t support it.</dd>
+            <dt id="aeb13a6f7de94e1e36a4ecad3d1abb6d8">
+              <span class="m-doc-wrap-bumper">#define <a href="#aeb13a6f7de94e1e36a4ecad3d1abb6d8" class="m-doc-self">GFP</a>(</span><span class="m-doc-wrap">x)<span class="m-dim m-right-m m-text-right"> = x</span></span>
+            </dt>
+            <dd>A macro to convert a string into a __FlashStringHelper (aka <a href="#a9c8c9c8249f99863e157f8fae76e7cab" class="m-doc">GsmConstStr</a>) for AVR boards but not for other boards that don&#x27;t support it.</dd>
+            <dt id="ad3002787007c15407a2dd49d38ca3227">
+              <span class="m-doc-wrap-bumper">#define <a href="#ad3002787007c15407a2dd49d38ca3227" class="m-doc-self">GF</a>(</span><span class="m-doc-wrap">x)<span class="m-dim m-right-m m-text-right"> = x</span></span>
+            </dt>
+            <dd>A macro to store string in flash memory for AVR boards but not for other boards that don&#x27;t support it.</dd>
             <dt id="acad21f2087680c2523ace2b7275923ba">
               <span class="m-doc-wrap-bumper">#define <a href="#acad21f2087680c2523ace2b7275923ba" class="m-doc-self">GEOLUX_PROGMEM</a></span>
             </dt>
             <dd>Helper define when dealing with multiple processors variants and memory storage.</dd>
-            <dt id="aeb13a6f7de94e1e36a4ecad3d1abb6d8">
-              <span class="m-doc-wrap-bumper">#define <a href="#aeb13a6f7de94e1e36a4ecad3d1abb6d8" class="m-doc-self">GFP</a>(</span><span class="m-doc-wrap">x)<span class="m-dim m-right-m m-text-right"> = x</span></span>
-            </dt>
-            <dd>Helper define to use to read from flash memory to a constant string for AVR processors. An empty define for non-AVR processors.</dd>
-            <dt id="ad3002787007c15407a2dd49d38ca3227">
-              <span class="m-doc-wrap-bumper">#define <a href="#ad3002787007c15407a2dd49d38ca3227" class="m-doc-self">GF</a>(</span><span class="m-doc-wrap">x)<span class="m-dim m-right-m m-text-right"> = x</span></span>
-            </dt>
-            <dd>Helper define to use to write a constant string to flash memory for AVR processors. An empty define for non-AVR processors.</dd>
             <dt id="a7247c2bd03c9f12def4eb5aa14964211">
               <span class="m-doc-wrap-bumper">#define <a href="#a7247c2bd03c9f12def4eb5aa14964211" class="m-doc-self">DBG_GLX</a>(</span><span class="m-doc-wrap">...)</span>
             </dt>
@@ -1621,7 +1625,7 @@
               >
             </p>
             <p>
-              Created with <a href="https://doxygen.org/">Doxygen</a> 1.13.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+              Created with <a href="https://doxygen.org/">Doxygen</a> 1.14.0 and <a href="https://mcss.mosra.cz/">m.css</a>.
             </p>
           </div>
         </div>

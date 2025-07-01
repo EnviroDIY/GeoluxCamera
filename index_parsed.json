@@ -1,5 +1,5 @@
 {
-  "version": "1.13.1",
+  "version": "1.14.0",
   "index": {
     "symbols": [
       {
@@ -160,6 +160,17 @@
             "has_nestable_children": false
           }
         ],
+        "deprecated": null,
+        "since": null,
+        "has_nestable_children": false
+      },
+      {
+        "id": "extra_timing_tests",
+        "kind": "page",
+        "name": "Timing Tests",
+        "url": "extra_timing_tests.html",
+        "brief": "",
+        "children": [],
         "deprecated": null,
         "since": null,
         "has_nestable_children": false

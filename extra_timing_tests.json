@@ -1,0 +1,68 @@
+{
+  "version": "1.14.0",
+  "compound": {
+    "kind": "page",
+    "id": "extra_timing_tests",
+    "name": "Timing Tests",
+    "url_base": "extra_timing_tests",
+    "url": "extra_timing_tests.html",
+    "include": null,
+    "has_template_details": false,
+    "templates": null,
+    "brief": "",
+    "description": "<p><a name=\"md_extras_2timing__tests_2_read_me\"></a></p><p>This is a series of timing tests for the Geolux Hydrocam.</p>",
+    "sections": [],
+    "deprecated": null,
+    "since": null,
+    "example_navigation": null,
+    "footer_navigation": null,
+    "topics": [],
+    "dirs": [],
+    "files": [],
+    "namespaces": [],
+    "classes": [],
+    "base_classes": [],
+    "derived_classes": [],
+    "enums": [],
+    "typedefs": [],
+    "funcs": [],
+    "vars": [],
+    "defines": [],
+    "public_types": [],
+    "public_static_funcs": [],
+    "typeless_funcs": [],
+    "public_funcs": [],
+    "signals": [],
+    "public_slots": [],
+    "public_static_vars": [],
+    "public_vars": [],
+    "protected_types": [],
+    "protected_static_funcs": [],
+    "protected_funcs": [],
+    "protected_slots": [],
+    "protected_static_vars": [],
+    "protected_vars": [],
+    "private_funcs": [],
+    "private_slots": [],
+    "related": [],
+    "friend_funcs": [],
+    "groups": [],
+    "has_enum_details": false,
+    "has_typedef_details": false,
+    "has_func_details": false,
+    "has_var_details": false,
+    "has_define_details": false,
+    "breadcrumb": [
+      [
+        "Timing Tests",
+        "extra_timing_tests.html"
+      ]
+    ],
+    "breadcrumbGroup": [
+      [
+        "Timing Tests",
+        "extra_timing_tests.html"
+      ]
+    ]
+  }
+}

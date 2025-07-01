@@ -1,5 +1,5 @@
 {
-  "version": "1.13.1",
+  "version": "1.14.0",
   "compound": {
     "kind": "page",
     "id": "page_the_examples",
@@ -10,7 +10,7 @@
     "has_template_details": false,
     "templates": null,
     "brief": "",
-    "description": "<p><a name=\"md_examples_2_read_me\"></a></p><p>These example programs demonstrate how to use the Geolux Camera library. Each example has slightly different functionality.</p>",
+    "description": "<p><a name=\"md_examples_2_read_me\"></a></p><p>These example programs demonstrate how to use the Geolux Camera library. Each example has slightly different functionality.</p><p><a href=\"example_snapshot.html\" class=\"m-doc\">DELETE THIS LINK</a></p><p><a href=\"example_dated_image.html\" class=\"m-doc\">DELETE THIS LINK</a></p><p><a href=\"example_read_by_chunk.html\" class=\"m-doc\">DELETE THIS LINK</a></p>",
     "sections": [],
     "deprecated": null,
     "since": null,

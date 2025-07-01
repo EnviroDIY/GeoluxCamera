@@ -1,0 +1,18 @@
+{
+  "is_final": null,
+  "parent": "dir_d28a4824dc47e487b107a5db32ef43c4",
+  "parentGroup": null,
+  "id": "dir_02984b29e88026d952a8c8c4f142bb8b",
+  "kind": "dir",
+  "name": "examples/read_by_chunk",
+  "url": "dir_02984b29e88026d952a8c8c4f142bb8b.html",
+  "brief": "Contains the read_by_chunk example.",
+  "has_details": true,
+  "children": [],
+  "childrenClasses": [],
+  "childrenNamespaces": [],
+  "childrenCompoundRefs": [],
+  "deprecated": null,
+  "since": null,
+  "leaf_name": "read_by_chunk"
+}

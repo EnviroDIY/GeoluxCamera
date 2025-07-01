@@ -1,0 +1,19 @@
+{
+  "is_final": null,
+  "parent": null,
+  "parentGroup": null,
+  "id": "dir_1510bd745cd29c20d24c27171ebe5ba5",
+  "kind": "dir",
+  "name": "extras",
+  "url": "dir_1510bd745cd29c20d24c27171ebe5ba5.html",
+  "brief": "",
+  "has_details": false,
+  "children": [
+    "dir_fdb88d990810aaab658fb48c8c9ef667"
+  ],
+  "childrenClasses": [],
+  "childrenNamespaces": [],
+  "childrenCompoundRefs": [],
+  "deprecated": null,
+  "since": null
+}

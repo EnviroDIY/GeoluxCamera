@@ -1,5 +1,5 @@
 {
-  "version": "1.13.1",
+  "version": "1.14.0",
   "compound": {
     "kind": "example",
     "id": "snapshot_8ino-example",
@@ -17,14 +17,17 @@
     "example_navigation": null,
     "footer_navigation": [
       [
-        "read_by_chunk_8ino-example.html",
-        "read_by_chunk.ino"
+        "dated_image_8ino-example.html",
+        "dated_image.ino"
       ],
       [
         "example_snapshot.html",
         "Snapshot Example"
       ],
-      null
+      [
+        "timing_tests_8ino-example.html",
+        "timing_tests.ino"
+      ]
     ],
     "topics": [],
     "dirs": [],

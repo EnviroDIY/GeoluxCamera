@@ -1,0 +1,22 @@
+{
+  "is_final": null,
+  "parent": null,
+  "parentGroup": null,
+  "id": "page_the_examples",
+  "kind": "page",
+  "name": "Examples Using the Geolux Camera",
+  "url": "page_the_examples.html",
+  "brief": "",
+  "has_details": 5,
+  "children": [
+    "example_snapshot",
+    "example_dated_image",
+    "example_read_by_chunk"
+  ],
+  "childrenClasses": [],
+  "childrenNamespaces": [],
+  "childrenCompoundRefs": [],
+  "deprecated": null,
+  "since": null,
+  "leaf_name": "Examples Using the Geolux Camera"
+}

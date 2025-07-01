@@ -1,5 +1,5 @@
 {
-  "version": "1.13.1",
+  "version": "1.14.0",
   "compound": {
     "kind": "file",
     "id": "_geolux_camera_8h",
@@ -44,7 +44,7 @@
         "type": "const char*",
         "args": "",
         "name": "GsmConstStr",
-        "brief": "Helper type def to deal with program memory only available on AVR processors.",
+        "brief": "A type for a string stored in flash memory for AVR boards but not for boards that don&#x27;t support it.",
         "description": "",
         "deprecated": null,
         "since": null,
@@ -194,12 +194,12 @@
       },
       {
         "base_url": "_geolux_camera_8h.html",
-        "id": "acad21f2087680c2523ace2b7275923ba",
+        "id": "af36c4b50d69b1b716166cc5ba6608de9",
         "include": null,
         "has_details": false,
-        "name": "GEOLUX_PROGMEM",
+        "name": "TINY_GSM_PROGMEM",
         "initializer": null,
-        "brief": "Helper define when dealing with multiple processors variants and memory storage.",
+        "brief": "A macro to use to put strings into flash memory for AVR boards but not for other boards that don&#x27;t support it.",
         "description": "",
         "return_value": null,
         "deprecated": null,
@@ -214,16 +214,16 @@
         "has_details": false,
         "name": "GFP",
         "initializer": "x",
-        "brief": "Helper define to use to read from flash memory to a constant string for AVR processors. An empty define for non-AVR processors.",
+        "brief": "A macro to convert a string into a __FlashStringHelper (aka <a href=\"#a9c8c9c8249f99863e157f8fae76e7cab\" class=\"m-doc\">GsmConstStr</a>) for AVR boards but not for other boards that don&#x27;t support it.",
         "description": "",
         "return_value": null,
         "deprecated": null,
         "since": null,
-        "has_param_details": false,
+        "has_param_details": true,
         "params": [
           [
             "x",
-            ""
+            "The string to convert"
           ]
         ]
       },
@@ -234,18 +234,33 @@
         "has_details": false,
         "name": "GF",
         "initializer": "x",
-        "brief": "Helper define to use to write a constant string to flash memory for AVR processors. An empty define for non-AVR processors.",
+        "brief": "A macro to store string in flash memory for AVR boards but not for other boards that don&#x27;t support it.",
+        "description": "",
+        "return_value": null,
+        "deprecated": null,
+        "since": null,
+        "has_param_details": true,
+        "params": [
+          [
+            "x",
+            "The string to store in flash memory"
+          ]
+        ]
+      },
+      {
+        "base_url": "_geolux_camera_8h.html",
+        "id": "acad21f2087680c2523ace2b7275923ba",
+        "include": null,
+        "has_details": false,
+        "name": "GEOLUX_PROGMEM",
+        "initializer": null,
+        "brief": "Helper define when dealing with multiple processors variants and memory storage.",
         "description": "",
         "return_value": null,
         "deprecated": null,
         "since": null,
         "has_param_details": false,
-        "params": [
-          [
-            "x",
-            ""
-          ]
-        ]
+        "params": null
       },
       {
         "base_url": "_geolux_camera_8h.html",

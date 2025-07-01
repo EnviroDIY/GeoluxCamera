@@ -1,0 +1,17 @@
+{
+  "is_final": null,
+  "parent": null,
+  "parentGroup": null,
+  "id": "example_dated_image",
+  "kind": "page",
+  "name": "Dated Image Example",
+  "url": "example_dated_image.html",
+  "brief": "",
+  "has_details": 3,
+  "children": [],
+  "childrenClasses": [],
+  "childrenNamespaces": [],
+  "childrenCompoundRefs": [],
+  "deprecated": null,
+  "since": null
+}

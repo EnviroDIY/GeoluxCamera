@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8" />
-  <title>GeoluxCamera class | Geolux Camera0.1.2</title>
+  <title>GeoluxCamera class | Geolux Camera0.1.3</title>
   <link rel="stylesheet" href="m-EnviroDIY+documentation.compiled.css" />
 
 <style id="wp-emoji-styles-inline-css" type="text/css">
@@ -22,7 +22,7 @@
 <link
   rel="stylesheet"
   id="gp-parent-style-css"
-  href="https://www.envirodiy.org/wp-content/themes/socialize/style.css?ver=6.5.4"
+  href="https://www.envirodiy.org/wp-content/themes/socialize/style.css?ver=6.7.1"
   type="text/css"
   media="all"
 />
@@ -139,25 +139,25 @@
 <link
   rel="stylesheet"
   id="fontawesome-css"
-  href="https://www.envirodiy.org/wp-content/themes/socialize/lib/fonts/font-awesome/css/font-awesome.min.css?ver=6.5.4"
+  href="https://www.envirodiy.org/wp-content/themes/socialize/lib/fonts/font-awesome/css/font-awesome.min.css?ver=6.7.1"
   type="text/css"
   media="all"
 />
 <link
   rel="preload"
   as="style"
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.5.4"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.7.1"
 />
 <link
   rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.5.4"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.7.1"
   media="print"
   onload="this.media='all'"
 />
 <noscript
   ><link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.5.4"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500%7CRoboto%20Slab:400&#038;subset=latin&#038;display=swap&#038;ver=6.7.1"
 /></noscript>
 
 <style type="text/css" id="wp-custom-css">
@@ -1257,24 +1257,24 @@
     <header id="gp-main-header">
       <div class="gp-container">
         <div id="gp-logo">
-          <a href="index.html" title="Geolux Camera 0.1.2">
+          <a href="index.html" title="Geolux Camera 0.1.3">
             <img
               src="gp-desktop-logo.png"
-              alt="Geolux Camera 0.1.2"
+              alt="Geolux Camera 0.1.3"
               width="200"
               height="42"
               class="gp-desktop-logo"
             />
             <img
               src="gp-scrolling-logo.png"
-              alt="Geolux Camera 0.1.2"
+              alt="Geolux Camera 0.1.3"
               width="264"
               height="55"
               class="gp-scrolling-logo"
             />
             <img
               src="gp-mobile-logo.png"
-              alt="Geolux Camera 0.1.2"
+              alt="Geolux Camera 0.1.3"
               width="132"
               height="28"
               class="gp-mobile-logo"
@@ -1461,7 +1461,8 @@
           <h2>Public types</h2>
           <dl class="m-doc">
                           <dt>
-              <span class="m-doc-wrap-bumper">enum <a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_status</a> { </span><span class="m-doc-wrap"><a href="#af27739bd27e7b09d5ea1ab607520223ba5f185f52a20da43e27a77b285c59b71e" class="m-doc">OK</a> = 1,
+              <span class="m-doc-wrap-bumper">enum <a href="#af27739bd27e7b09d5ea1ab607520223b" class="m-doc">geolux_status</a> { </span><span class="m-doc-wrap"><a href="#af27739bd27e7b09d5ea1ab607520223bab40f9b9388df6461949e5b89cae0f746" class="m-doc">NO_RESPONSE</a> = 0,
+              <a href="#af27739bd27e7b09d5ea1ab607520223ba5f185f52a20da43e27a77b285c59b71e" class="m-doc">OK</a> = 1,
               <a href="#af27739bd27e7b09d5ea1ab607520223baaa09f3c35e9355fc896ac1e5afdd974d" class="m-doc">ERROR</a>,
               <a href="#af27739bd27e7b09d5ea1ab607520223baa32996969729c02f31687380bbc399c5" class="m-doc">BUSY</a>,
               <a href="#af27739bd27e7b09d5ea1ab607520223ba1074e14e121ecd149127cbef47ba2973" class="m-doc">NONE</a> }</span>
@@ -1817,7 +1818,7 @@
                           <dt id="ab9f4cb0db92cf22333a2e5253969eaa7">
               <span class="m-dim">Stream*</span> <a href="#ab9f4cb0db92cf22333a2e5253969eaa7" class="m-doc-self">_stream</a>
             </dt>
-            <dd>The stream instance (serial port) for communication with the Modbus slave (usually over RS485)</dd>
+            <dd>The stream instance (serial port) for communication over RS232.</dd>
           </dl>
         </section>
         <hr>
@@ -1833,6 +1834,12 @@
             <table class="m-table m-fullwidth m-flat m-doc">
               <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
               <tbody>
+                <tr>
+                  <td><a href="#af27739bd27e7b09d5ea1ab607520223bab40f9b9388df6461949e5b89cae0f746" class="m-doc-self" id="af27739bd27e7b09d5ea1ab607520223bab40f9b9388df6461949e5b89cae0f746">NO_RESPONSE</a></td>
+                  <td>
+                  <p>The camera didn&#x27;t respond.</p>
+                  </td>
+                </tr>
                 <tr>
                   <td><a href="#af27739bd27e7b09d5ea1ab607520223ba5f185f52a20da43e27a77b285c59b71e" class="m-doc-self" id="af27739bd27e7b09d5ea1ab607520223ba5f185f52a20da43e27a77b285c59b71e">OK</a></td>
                   <td>
@@ -3227,10 +3234,6 @@
                 <tr><th colspan="2">Template parameters</th></tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="m-template-parameter"  style="width: 1%">Args</td>
-                  <td></td>
-                </tr>
               </tbody>
               <thead>
                 <tr><th colspan="2">Parameters</th></tr>
@@ -3453,7 +3456,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td class="m-template-parameter"  style="width: 1%">T</td>
+                  <td style="width: 1%">T</td>
                   <td>A printable type</td>
                 </tr>
               </tbody>
@@ -3490,12 +3493,8 @@
               </thead>
               <tbody>
                 <tr>
-                  <td class="m-template-parameter"  style="width: 1%">T</td>
+                  <td style="width: 1%">T</td>
                   <td>A printable type</td>
-                </tr>
-                <tr>
-                  <td class="m-template-parameter" >Args</td>
-                  <td></td>
                 </tr>
               </tbody>
               <thead>
@@ -3707,7 +3706,7 @@
               >
             </p>
             <p>
-              Created with <a href="https://doxygen.org/">Doxygen</a> 1.13.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+              Created with <a href="https://doxygen.org/">Doxygen</a> 1.14.0 and <a href="https://mcss.mosra.cz/">m.css</a>.
             </p>
           </div>
         </div>

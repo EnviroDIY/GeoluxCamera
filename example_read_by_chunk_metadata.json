@@ -1,0 +1,17 @@
+{
+  "is_final": null,
+  "parent": null,
+  "parentGroup": null,
+  "id": "example_read_by_chunk",
+  "kind": "page",
+  "name": "Read By Chunk Example",
+  "url": "example_read_by_chunk.html",
+  "brief": "",
+  "has_details": 4,
+  "children": [],
+  "childrenClasses": [],
+  "childrenNamespaces": [],
+  "childrenCompoundRefs": [],
+  "deprecated": null,
+  "since": null
+}
