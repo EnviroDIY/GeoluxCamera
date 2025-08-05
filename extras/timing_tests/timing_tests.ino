@@ -38,7 +38,7 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 #endif  // SDCARD_SPI
 
 #if (defined(ARDUINO_ARCH_SAMD)) && !defined(__SAMD51__)
-// Dispite the 48MHz clock speed, the max SPI speed of a SAMD21 is 12 MHz
+// Despite the 48MHz clock speed, the max SPI speed of a SAMD21 is 12 MHz
 // see https://github.com/arduino/ArduinoCore-samd/pull/212
 // The Adafruit SAMD core does NOT automatically manage the SPI speed, so
 // this needs to be set.
@@ -79,7 +79,7 @@ FsFile metadataFile;
 
 // Construct a Serial object for Modbus
 #if defined(ARDUINO_AVR_UNO) || defined(ARDUINO_AVR_FEATHER328P)
-// The Uno only has 1 hardware serial port, which is dedicated to comunication with the
+// The Uno only has 1 hardware serial port, which is dedicated to communication with the
 // computer. If using an Uno, you will be restricted to using AltSofSerial or
 // SoftwareSerial
 #include <SoftwareSerial.h>
@@ -97,14 +97,14 @@ SoftwareSerial cameraSerial;
 #include <Adafruit_TinyUSB.h>
 HardwareSerial& cameraSerial = Serial1;
 #elif !defined(NO_GLOBAL_SERIAL1) && !defined(STM32_CORE_VERSION)
-// This is just a assigning another name to the same port, for convienence
+// This is just a assigning another name to the same port, for convenience
 // Unless it is unavailable, always prefer hardware serial.
-#pragma message("Using HarwareSerial / Serial1")
+#pragma message("Using HardwareSerial / Serial1")
 HardwareSerial& cameraSerial = Serial1;
 #else
-// This is just a assigning another name to the same port, for convienence
+// This is just a assigning another name to the same port, for convenience
 // Unless it is unavailable, always prefer hardware serial.
-#pragma message("Using HarwareSerial / Serial")
+#pragma message("Using HardwareSerial / Serial")
 HardwareSerial& cameraSerial = Serial;
 #endif
 
