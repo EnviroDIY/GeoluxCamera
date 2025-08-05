@@ -21,7 +21,9 @@
 GeoluxCamera  camera;
 const int32_t serialBaud = 115200;  // Baud rate for serial monitor
 // int16_t       camera_power_pin = 65;      // power pin for the camera
-int16_t camera_power_pin       = 22;  // power pin for the camera
+// int16_t camera_power_pin       = 22;  // power pin for the camera
+int16_t camera_power_pin       = 56;  // power pin for the camera
+int16_t adapter_power_pin      = 22;  // power pin for the RS232 adapter
 int16_t seconds_between_images = 30;  // how long to wait between snapshot attempts
 
 // SDCARD_SS_PIN is defined for the built-in SD on some boards.
@@ -144,6 +146,7 @@ void autofocus_camera() {
 void setup() {
     // power pin mode
     pinMode(camera_power_pin, OUTPUT);
+    pinMode(adapter_power_pin, OUTPUT);
 
     // Turn on the "main" serial port for debugging via USB Serial Monitor
     Serial.begin(serialBaud);
@@ -164,6 +167,7 @@ void setup() {
     // power the camera
     start_millis = millis();
     digitalWrite(camera_power_pin, HIGH);
+    digitalWrite(adapter_power_pin, HIGH);
     Serial.println(F("Wait up to 5s for power to settle and camera to warm up"));
     // wait until the start up message comes over
     while (cameraSerial.available() < 15 && millis() - start_millis < 5000L) {}

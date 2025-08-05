@@ -31,7 +31,9 @@ RV8803 rtc;
 GeoluxCamera  camera;
 const int32_t serialBaud = 115200;  // Baud rate for serial monitor
 // int16_t       camera_power_pin = 65;      // power pin for the camera
-int16_t camera_power_pin       = 22;     // power pin for the camera
+// int16_t camera_power_pin       = 22;  // power pin for the camera
+int16_t camera_power_pin       = 56;     // power pin for the camera
+int16_t adapter_power_pin      = 22;     // power pin for the RS232 adapter
 int16_t seconds_between_images = 300;    // how long to wait between snapshot attempts
 bool    test_power             = false;  // whether to test the boot-up time
 
@@ -172,6 +174,7 @@ void dateTime(uint16_t* date, uint16_t* time) {
 void setup() {
     // power pin mode
     pinMode(camera_power_pin, OUTPUT);
+    pinMode(adapter_power_pin, OUTPUT);
 
     // Turn on the "main" serial port for debugging via USB Serial Monitor
     Serial.begin(serialBaud);
@@ -218,6 +221,7 @@ void setup() {
     // power the camera
     if (test_power && camera_power_pin >= 0) {
         digitalWrite(camera_power_pin, LOW);
+        digitalWrite(adapter_power_pin, LOW);
         Serial.println(F("Wait 15s with power off"));
         for (uint8_t i = 15; i; i--) {
             Serial.print("wait...  ");
@@ -227,6 +231,7 @@ void setup() {
     }
     start_millis = millis();
     digitalWrite(camera_power_pin, HIGH);
+    digitalWrite(adapter_power_pin, HIGH);
     Serial.println(F("Wait up to 5s for power to settle and camera to warm up"));
     // wait until the start up message comes over
     while (cameraSerial.available() < 15 && millis() - start_millis < 5000L) {}
