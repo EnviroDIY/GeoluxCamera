@@ -43,11 +43,12 @@ GeoluxCamera::geolux_status GeoluxCamera::getStatus() {
     // this returns "READY" instead of "OK" and has no new line
     geolux_status resp = static_cast<geolux_status>(
         waitResponse(GF("READY"), GF("ERR"), GF("BUSY"), GF("NONE")));
-    streamFind('\n');  // skip to the end of the line
+    streamFind('\n');  // skip to the end of the line - ignore the returned image size
     return resp;
 }
 
 int32_t GeoluxCamera::getImageSize() {
+    // The image size is returned as part of the status response
     sendCommand(GF("get_status"));
     // this returns "READY" instead of "OK" and has no new line
     waitResponse(GF("READY"), GF("ERR"), GF("BUSY"), GF("NONE"));
@@ -90,7 +91,15 @@ uint32_t GeoluxCamera::getImageChunk(uint8_t* buf, size_t offset, size_t length)
 uint32_t GeoluxCamera::transferImage(Stream* xferStream, int32_t image_size,
                                      int32_t chunk_size) {
     // get the full image size, if not given
-    if (image_size == 0) { image_size = getImageSize(); }
+    if (image_size == 0) {
+        DBG_GLX(GF("Invalid request to transfer 0-byte image! Requesting image size "
+                   "from camera."));
+        image_size = getImageSize();
+    }
+    if (image_size == 0) {
+        DBG_GLX(GF("Camera reports 0-byte image! Aborting transfer."));
+        return 0;
+    }
 
     // bool got_start_tag        = false;
     // bool got_end_tag          = false;
@@ -240,8 +249,8 @@ bool GeoluxCamera::restart() {
     sendCommand(GF("reset"));
     bool resp = waitResponse() == 1;
     if (resp) {
-        waitResponse(10000L,
-                     GF("Geolux HydroCAM"));  // wait for a print out after restart
+        waitResponse(10000L, GF("Geolux HydroCAM"),
+                     GF("Geolux HydroCam"));  // wait for a print out after restart
         streamFind('\n');                     // skip to the end of the line
     }
     return resp;
@@ -473,7 +482,7 @@ bool GeoluxCamera::sleep(uint32_t sleepTimeout) {
 
 uint32_t GeoluxCamera::waitForReady(uint32_t initial_delay, uint32_t timeout) {
     geolux_status camera_status = geolux_status::NO_RESPONSE;
-    uint32_t      start_millis = millis();
+    uint32_t      start_millis  = millis();
     delay(initial_delay);
     while (camera_status != geolux_status::OK && camera_status != geolux_status::NONE &&
            millis() - start_millis < timeout) {
@@ -518,6 +527,11 @@ int8_t GeoluxCamera::waitResponse(uint32_t timeout_ms, String& data, GsmConstStr
             }
 #if defined GEOLUX_DEBUG
             else if (data.endsWith(GF("Geolux HydroCAM"))) {
+                data = "";
+                DBG_GLX("### Unexpected module reset!");
+                init();
+                return true;
+            } else if (data.endsWith(GF("Geolux HydroCam"))) {
                 data = "";
                 DBG_GLX("### Unexpected module reset!");
                 init();
