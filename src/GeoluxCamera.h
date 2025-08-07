@@ -122,7 +122,7 @@ static const char GEOLUX_BUSY[] GEOLUX_PROGMEM = "BUSY\r\n";
 static const char GEOLUX_NONE[] GEOLUX_PROGMEM = "NONE\r\n";
 
 /**
- * @brief The class for the Geoluxh HydroCAM
+ * @brief The class for the Geolux HydroCAM
  */
 class GeoluxCamera {
 

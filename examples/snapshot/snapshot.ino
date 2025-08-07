@@ -38,7 +38,7 @@ const uint8_t SD_CS_PIN = SDCARD_SS_PIN;
 #endif  // SDCARD_SPI
 
 #if (defined(ARDUINO_ARCH_SAMD)) && !defined(__SAMD51__)
-// Dispite the 48MHz clock speed, the max SPI speed of a SAMD21 is 12 MHz
+// Despite the 48MHz clock speed, the max SPI speed of a SAMD21 is 12 MHz
 // see https://github.com/arduino/ArduinoCore-samd/pull/212
 // The Adafruit SAMD core does NOT automatically manage the SPI speed, so
 // this needs to be set.
@@ -122,8 +122,10 @@ void autofocus_camera() {
         Serial.println("Autofocus failed!");
         return;
     }
-    // wait for focus; this takes ~30s (ridiculous...)
-    wait_time = camera.waitForReady(25000L);
+    // wait for focus
+    // for firmware < 2.0.1 this takes ~30s (ridiculous...)
+    // for firmware >= 2.0.1 this takes ~7s
+    wait_time = camera.waitForReady(5000L);
     if (wait_time) {
         Serial.print("Autofocus finished after ");
         Serial.print(wait_time);

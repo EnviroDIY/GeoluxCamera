@@ -132,8 +132,10 @@ void autofocus_camera() {
         Serial.println("Autofocus failed!");
         return;
     }
-    // wait for focus; this takes ~30s (ridiculous...)
-    wait_time = camera.waitForReady(25000L);
+    // wait for focus
+    // for firmware < 2.0.1 this takes ~30s (ridiculous...)
+    // for firmware >= 2.0.1 this takes ~7s
+    wait_time = camera.waitForReady(5000L);
     if (wait_time) {
         Serial.print("Autofocus finished after ");
         Serial.print(wait_time);
