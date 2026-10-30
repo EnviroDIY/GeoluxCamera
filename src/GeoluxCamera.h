@@ -28,44 +28,37 @@
 #define GEOLUX_CAMERA_RS232_CONFIG SERIAL_8N1
 
 // Helpers for strings stored in flash
-// These are blatantly copied from the TinyGSM library
 /**
  * @def GEOLUX_PROGMEM
- * @brief Helper define when dealing with multiple processors variants and memory
- * storage
+ * @brief A macro to put strings into flash memory for AVR boards but not for
+ * other boards that don't support it.
  *
- * @def TINY_GSM_PROGMEM
- * @brief A macro to use to put strings into flash memory for AVR boards but not
- * for other boards that don't support it.
- *
- * @typedef GsmConstStr
+ * @typedef GeoluxConstStr
  * @brief A type for a string stored in flash memory for AVR boards but not for
  * boards that don't support it.
  *
- * @def GFP(x)
+ * @def GEOLUX_FP(x)
  * @brief A macro to convert a string into a __FlashStringHelper (aka
- * GsmConstStr) for AVR boards but not for other boards that don't support it.
+ * GeoluxConstStr) for AVR boards but not for other boards that don't support
+ * it.
  * @param x The string to convert
  *
- * @def GF(x)
+ * @def GEOLUX_F(x)
  * @brief A macro to store string in flash memory for AVR boards but not for
  * other boards that don't support it.
  * @param x The string to store in flash memory
  */
-#if (defined(__AVR__) || defined(ARDUINO_ARCH_AVR)) && !defined(__AVR_ATmega4809__) && \
-    !defined(TINY_GSM_PROGMEM) && !defined(GFP) && !defined(GF)
-#define TINY_GSM_PROGMEM PROGMEM
-typedef const __FlashStringHelper* GsmConstStr;
-#define GFP(x) (reinterpret_cast<GsmConstStr>(x))
-#define GF(x) F(x)
-#elif !defined(TINY_GSM_PROGMEM) && !defined(GFP) && !defined(GF)
-#define TINY_GSM_PROGMEM
-typedef const char* GsmConstStr;
-#define GFP(x) x
-#define GF(x) x
-#endif
-#if !defined(GEOLUX_PROGMEM)
-#define GEOLUX_PROGMEM TINY_GSM_PROGMEM
+#if defined(PROGMEM) && (defined(__AVR__) || defined(ARDUINO_ARCH_AVR)) && \
+    !defined(__AVR_ATmega4809__)
+#define GEOLUX_PROGMEM PROGMEM
+typedef const __FlashStringHelper* GeoluxConstStr;
+#define GEOLUX_FP(x) (reinterpret_cast<GeoluxConstStr>(x))
+#define GEOLUX_F(x) F(x)
+#else
+#define GEOLUX_PROGMEM
+typedef const char* GeoluxConstStr;
+#define GEOLUX_FP(x) x
+#define GEOLUX_F(x) x
 #endif
 
 #ifdef GEOLUX_DEBUG
@@ -711,8 +704,8 @@ class GeoluxCamera {
     int8_t getZoomPosition();
 
     /**
-     * @brief Put the module to sleep, starting from the time the command is
-     * issued and ending when sleep timer expires.
+     * @brief Put the module to sleep, starting from the time the command is issued and
+     * ending when sleep timer expires.
      *
      * @note There is no way to wake the camera up early! There is also no way to return
      * the sleep timeout after sending the sleep command.
@@ -762,59 +755,53 @@ class GeoluxCamera {
      *
      * @param timeout_ms The time to wait for a response
      * @param data A string of data to fill in with response results
-     * @param r1 The first output to test against, optional with a default value
-     * of "OK"
-     * @param r2 The second output to test against, optional with a default value
-     * of "ERROR"
-     * @param r3 The third output to test against, optional with a default value
-     * of "BUSY"
-     * @param r4 The fourth output to test against, optional with a default value
-     * of "NONE"
+     * @param r1 The first output to test against, optional with a default value of "OK"
+     * @param r2 The second output to test against, optional with a default value of
+     * "ERROR"
+     * @param r3 The third output to test against, optional with a default value of
+     * "BUSY"
+     * @param r4 The fourth output to test against, optional with a default value of
+     * "NONE"
      * @return *int8_t* the index of the response input
      */
     int8_t waitResponse(uint32_t timeout_ms, String& data,
-                        GsmConstStr r1 = GFP(GEOLUX_OK),
-                        GsmConstStr r2 = GFP(GEOLUX_ERROR),
-                        GsmConstStr r3 = GFP(GEOLUX_BUSY),
-                        GsmConstStr r4 = GFP(GEOLUX_NONE));
+                        GeoluxConstStr r1 = GEOLUX_FP(GEOLUX_OK),
+                        GeoluxConstStr r2 = GEOLUX_FP(GEOLUX_ERROR),
+                        GeoluxConstStr r3 = GEOLUX_FP(GEOLUX_BUSY),
+                        GeoluxConstStr r4 = GEOLUX_FP(GEOLUX_NONE));
 
     /**
      * @brief Listen for responses to commands and handle URCs
      *
      * @param timeout_ms The time to wait for a response
-     * @param r1 The first output to test against, optional with a default value
-     * of "OK"
-     * @param r2 The second output to test against, optional with a default value
-     * of "ERROR"
-     * @param r3 The third output to test against, optional with a default value
-     * of NULL
-     * @param r4 The fourth output to test against, optional with a default value
-     * of NULL
+     * @param r1 The first output to test against, optional with a default value of "OK"
+     * @param r2 The second output to test against, optional with a default value of
+     * "ERROR"
+     * @param r3 The third output to test against, optional with a default value of NULL
+     * @param r4 The fourth output to test against, optional with a default value of
+     * NULL
      * @return *int8_t* the index of the response input
      */
-    int8_t waitResponse(uint32_t timeout_ms, GsmConstStr r1 = GFP(GEOLUX_OK),
-                        GsmConstStr r2 = GFP(GEOLUX_ERROR),
-                        GsmConstStr r3 = GFP(GEOLUX_BUSY),
-                        GsmConstStr r4 = GFP(GEOLUX_NONE));
+    int8_t waitResponse(uint32_t timeout_ms, GeoluxConstStr r1 = GEOLUX_FP(GEOLUX_OK),
+                        GeoluxConstStr r2 = GEOLUX_FP(GEOLUX_ERROR),
+                        GeoluxConstStr r3 = GEOLUX_FP(GEOLUX_BUSY),
+                        GeoluxConstStr r4 = GEOLUX_FP(GEOLUX_NONE));
 
     /**
-     * @brief Listen for responses to commands and handle URCs; listening for 1
-     * second.
+     * @brief Listen for responses to commands and handle URCs; listening for 1 second.
      *
-     * @param r1 The first output to test against, optional with a default value
-     * of "OK"
-     * @param r2 The second output to test against, optional with a default value
-     * of "ERROR"
-     * @param r3 The third output to test against, optional with a default value
-     * of NULL
-     * @param r4 The fourth output to test against, optional with a default value
-     * of NULL
+     * @param r1 The first output to test against, optional with a default value of "OK"
+     * @param r2 The second output to test against, optional with a default value of
+     * "ERROR"
+     * @param r3 The third output to test against, optional with a default value of NULL
+     * @param r4 The fourth output to test against, optional with a default value of
+     * NULL
      * @return *int8_t* the index of the response input
      */
-    int8_t waitResponse(GsmConstStr r1 = GFP(GEOLUX_OK),
-                        GsmConstStr r2 = GFP(GEOLUX_ERROR),
-                        GsmConstStr r3 = GFP(GEOLUX_BUSY),
-                        GsmConstStr r4 = GFP(GEOLUX_NONE));
+    int8_t waitResponse(GeoluxConstStr r1 = GEOLUX_FP(GEOLUX_OK),
+                        GeoluxConstStr r2 = GEOLUX_FP(GEOLUX_ERROR),
+                        GeoluxConstStr r3 = GEOLUX_FP(GEOLUX_BUSY),
+                        GeoluxConstStr r4 = GEOLUX_FP(GEOLUX_NONE));
 
     /**
      * @brief Utility template for writing on a stream
@@ -921,3 +908,5 @@ class GeoluxCamera {
 };
 
 #endif  // SRC_GEOLUXCAMERA_H_
+
+// cSpell:ignore QVGA QQVGA UXGA QXGA

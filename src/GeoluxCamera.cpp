@@ -34,24 +34,25 @@ void GeoluxCamera::begin(HardwareSerial& stream) {
 
 
 GeoluxCamera::geolux_status GeoluxCamera::takeSnapshot() {
-    sendCommand(GF("take_snapshot"));
+    sendCommand(GEOLUX_F("take_snapshot"));
     return static_cast<geolux_status>(waitResponse());
 }
 
 GeoluxCamera::geolux_status GeoluxCamera::getStatus() {
-    sendCommand(GF("get_status"));
+    sendCommand(GEOLUX_F("get_status"));
     // this returns "READY" instead of "OK" and has no new line
-    geolux_status resp = static_cast<geolux_status>(
-        waitResponse(GF("READY"), GF("ERR"), GF("BUSY"), GF("NONE")));
+    geolux_status resp = static_cast<geolux_status>(waitResponse(
+        GEOLUX_F("READY"), GEOLUX_F("ERR"), GEOLUX_F("BUSY"), GEOLUX_F("NONE")));
     streamFind('\n');  // skip to the end of the line - ignore the returned image size
     return resp;
 }
 
 int32_t GeoluxCamera::getImageSize() {
     // The image size is returned as part of the status response
-    sendCommand(GF("get_status"));
+    sendCommand(GEOLUX_F("get_status"));
     // this returns "READY" instead of "OK" and has no new line
-    waitResponse(GF("READY"), GF("ERR"), GF("BUSY"), GF("NONE"));
+    waitResponse(GEOLUX_F("READY"), GEOLUX_F("ERR"), GEOLUX_F("BUSY"),
+                 GEOLUX_F("NONE"));
     streamFind(',');  // skip the comma
     uint32_t resp = _stream->parseInt();
     streamFind('\n');  // skip to the end of the line
@@ -61,7 +62,7 @@ int32_t GeoluxCamera::getImageSize() {
 uint32_t GeoluxCamera::getImageChunk(uint8_t* buf, size_t offset, size_t length) {
     streamDump();
     uint32_t start_time = millis();
-    sendCommand(GF("get_image"), '=', offset, ',', length, ',', GF("RAW"));
+    sendCommand(GEOLUX_F("get_image"), '=', offset, ',', length, ',', GEOLUX_F("RAW"));
     while (_stream->available() < 3 && millis() - start_time < 5000L);
     if (!_stream->available()) {
         DBG_GLX("No response!");
@@ -82,7 +83,7 @@ uint32_t GeoluxCamera::getImageChunk(uint8_t* buf, size_t offset, size_t length)
     // reset the stream timeout
     _stream->setTimeout(prev_timeout);
     if (bytes_read != length) {
-        DBG_GLX(GF("Unexpected byte count: expected:"), length, GF("read:"),
+        DBG_GLX(GEOLUX_F("Unexpected byte count: expected:"), length, GEOLUX_F("read:"),
                 bytes_read);
     }
     return bytes_read;
@@ -92,12 +93,13 @@ uint32_t GeoluxCamera::transferImage(Stream* xferStream, int32_t image_size,
                                      int32_t chunk_size) {
     // get the full image size, if not given
     if (image_size == 0) {
-        DBG_GLX(GF("Invalid request to transfer 0-byte image! Requesting image size "
-                   "from camera."));
+        DBG_GLX(
+            GEOLUX_F("Invalid request to transfer 0-byte image! Requesting image size "
+                     "from camera."));
         image_size = getImageSize();
     }
     if (image_size == 0) {
-        DBG_GLX(GF("Camera reports 0-byte image! Aborting transfer."));
+        DBG_GLX(GEOLUX_F("Camera reports 0-byte image! Aborting transfer."));
         return 0;
     }
 
@@ -135,8 +137,8 @@ uint32_t GeoluxCamera::transferImage(Stream* xferStream, int32_t image_size,
         int32_t bytes_written = 0;
 
         uint32_t start_command_millis = millis();
-        sendCommand(GF("get_image"), '=', start_next_chunk, ',', bytesToRead, ',',
-                    GF("RAW"));
+        sendCommand(GEOLUX_F("get_image"), '=', start_next_chunk, ',', bytesToRead, ',',
+                    GEOLUX_F("RAW"));
         while (!_stream->available() &&
                millis() - start_command_millis < 5000L);  // wait for any characters
         if (!_stream->available()) {
@@ -187,7 +189,7 @@ uint32_t GeoluxCamera::transferImage(Stream* xferStream, int32_t image_size,
                 sprintf(zph, "%02x", b);
                 GEOLUX_DEBUG.print(zph);
             }
-            if (total_bytes_read == 16) { GEOLUX_DEBUG.print(GFP("...")); }
+            if (total_bytes_read == 16) { GEOLUX_DEBUG.print(GEOLUX_FP("...")); }
 #endif
             if (millis() - start_xfer_millis > 120000L) {
                 DBG_GLX("\n ----Timed out!----\n");
@@ -217,8 +219,8 @@ uint32_t GeoluxCamera::transferImage(Stream* xferStream, int32_t image_size,
         if (eof) { break; }
         if (bytes_read - start_data_byte != bytesToRead ||
             bytes_written != bytesToRead) {
-            DBG_GLX(GF("Unexpected byte count: expected:"), bytesToRead, GF("read:"),
-                    bytes_read, GF("written:"), bytes_written);
+            DBG_GLX(GEOLUX_F("Unexpected byte count: expected:"), bytesToRead,
+                    GEOLUX_F("read:"), bytes_read, GEOLUX_F("written:"), bytes_written);
             // all_chunks_succeeded = false;
         }
     }
@@ -227,14 +229,16 @@ uint32_t GeoluxCamera::transferImage(Stream* xferStream, int32_t image_size,
     uint32_t transfer_time = millis() - start_xfer_millis;
 #endif
 
-    DBG_GLX(GF("Used"), chunk_number, GF("chunks to read"), total_bytes_read,
-            GF("bytes in"), chunk_size, GF("bytes chunks."));
-    DBG_GLX(GF("Wrote"), total_bytes_written, GF("of expected"), image_size,
-            GF("bytes to the SD card - a difference of"),
-            abs(total_bytes_written - image_size), GF("bytes"));
-    DBG_GLX(GF("Total transfer time was"), transfer_time, GF("ms"));
-    DBG_GLX(GF("The maximum response time after a request was"), max_command_response,
-            GF("and the maximum spacing between characters was"), max_char_spacing);
+    DBG_GLX(GEOLUX_F("Used"), chunk_number, GEOLUX_F("chunks to read"),
+            total_bytes_read, GEOLUX_F("bytes in"), chunk_size,
+            GEOLUX_F("bytes chunks."));
+    DBG_GLX(GEOLUX_F("Wrote"), total_bytes_written, GEOLUX_F("of expected"), image_size,
+            GEOLUX_F("bytes to the SD card - a difference of"),
+            abs(total_bytes_written - image_size), GEOLUX_F("bytes"));
+    DBG_GLX(GEOLUX_F("Total transfer time was"), transfer_time, GEOLUX_F("ms"));
+    DBG_GLX(
+        GEOLUX_F("The maximum response time after a request was"), max_command_response,
+        GEOLUX_F("and the maximum spacing between characters was"), max_char_spacing);
 
 
     return static_cast<uint32_t>(total_bytes_written);
@@ -246,19 +250,20 @@ uint32_t GeoluxCamera::transferImage(Stream& xferStream, int32_t image_size,
 }
 
 bool GeoluxCamera::restart() {
-    sendCommand(GF("reset"));
+    sendCommand(GEOLUX_F("reset"));
     bool resp = waitResponse() == 1;
     if (resp) {
-        waitResponse(10000L, GF("Geolux HydroCAM"),
-                     GF("Geolux HydroCam"));  // wait for a print out after restart
-        streamFind('\n');                     // skip to the end of the line
+        waitResponse(
+            10000L, GEOLUX_F("Geolux HydroCAM"),
+            GEOLUX_F("Geolux HydroCam"));  // wait for a print out after restart
+        streamFind('\n');                  // skip to the end of the line
     }
     return resp;
 }
 
 void GeoluxCamera::printCameraInfo(Stream* outStream) {
     uint32_t start_time = millis();
-    sendCommand(GF("get_info"));
+    sendCommand(GEOLUX_F("get_info"));
     // wait for response
     while (!_stream->available() && millis() - start_time < 5000L);
     while (_stream->available()) {
@@ -286,12 +291,12 @@ uint32_t GeoluxCamera::getCameraSerialNumber() {
 }
 
 bool GeoluxCamera::runAutofocus() {
-    sendCommand(GF("run_autofocus"));
+    sendCommand(GEOLUX_F("run_autofocus"));
     return waitResponse() == 1;
 }
 
 bool GeoluxCamera::setResolution(const char* resolution) {
-    sendCommand(GF("set_resolution"), '=', resolution);
+    sendCommand(GEOLUX_F("set_resolution"), '=', resolution);
     return waitResponse() == 1;
 }
 
@@ -300,7 +305,7 @@ String GeoluxCamera::getResolution() {
 }
 
 bool GeoluxCamera::setQuality(uint8_t compression) {
-    sendCommand(GF("set_quality"), '=', compression);
+    sendCommand(GEOLUX_F("set_quality"), '=', compression);
     return waitResponse() == 1;
 }
 
@@ -309,7 +314,7 @@ int8_t GeoluxCamera::getQuality() {
 }
 
 bool GeoluxCamera::setJPEGMaximumSize(uint16_t size) {
-    sendCommand(GF("set_jpeg_maximum_size"), '=', size);
+    sendCommand(GEOLUX_F("set_jpeg_maximum_size"), '=', size);
     return waitResponse() == 1;
 }
 
@@ -320,16 +325,16 @@ uint32_t GeoluxCamera::getJPEGMaximumSize() {
 bool GeoluxCamera::setNightMode(geolux_night_mode mode) {
     switch (mode) {
         case DAY: {
-            sendCommand(GF("set_quality"), '=', GF("day"));
+            sendCommand(GEOLUX_F("set_quality"), '=', GEOLUX_F("day"));
             break;
         }
         case NIGHT: {
-            sendCommand(GF("set_quality"), '=', GF("night"));
+            sendCommand(GEOLUX_F("set_quality"), '=', GEOLUX_F("night"));
             break;
         }
         case AUTO:
         default: {
-            sendCommand(GF("set_quality"), '=', GF("auto"));
+            sendCommand(GEOLUX_F("set_quality"), '=', GEOLUX_F("auto"));
             break;
         }
     }
@@ -337,7 +342,7 @@ bool GeoluxCamera::setNightMode(geolux_night_mode mode) {
 }
 
 bool GeoluxCamera::setNightMode(const char* mode) {
-    sendCommand(GF("set_resolution"), '=', mode);
+    sendCommand(GEOLUX_F("set_resolution"), '=', mode);
     return waitResponse() == 1;
 }
 
@@ -348,16 +353,16 @@ String GeoluxCamera::getNightMode() {
 bool GeoluxCamera::setIRLEDMode(geolux_ir_mode mode) {
     switch (mode) {
         case IR_ON: {
-            sendCommand(GF("set_ir_led_mode"), '=', GF("on"));
+            sendCommand(GEOLUX_F("set_ir_led_mode"), '=', GEOLUX_F("on"));
             break;
         }
         case IR_OFF: {
-            sendCommand(GF("set_ir_led_mode"), '=', GF("off"));
+            sendCommand(GEOLUX_F("set_ir_led_mode"), '=', GEOLUX_F("off"));
             break;
         }
         case IR_AUTO:
         default: {
-            sendCommand(GF("set_ir_led_mode"), '=', GF("auto"));
+            sendCommand(GEOLUX_F("set_ir_led_mode"), '=', GEOLUX_F("auto"));
             break;
         }
     }
@@ -365,7 +370,7 @@ bool GeoluxCamera::setIRLEDMode(geolux_ir_mode mode) {
 }
 
 bool GeoluxCamera::setIRLEDMode(const char* mode) {
-    sendCommand(GF("set_resolution"), '=', mode);
+    sendCommand(GEOLUX_F("set_resolution"), '=', mode);
     return waitResponse() == 1;
 }
 
@@ -378,7 +383,7 @@ bool GeoluxCamera::getIRFilterStatus() {
 }
 
 bool GeoluxCamera::setAutofocusPoint(int8_t x, int8_t y) {
-    sendCommand(GF("set_autofocus_point"), '=', x, ',', y);
+    sendCommand(GEOLUX_F("set_autofocus_point"), '=', x, ',', y);
     return waitResponse() == 1;
 }
 
@@ -392,7 +397,8 @@ int8_t GeoluxCamera::getAutofocusY() {
 
 bool GeoluxCamera::setAutoexposureRegion(int8_t x, int8_t y, int8_t width,
                                          int8_t height) {
-    sendCommand(GF("set_autoexposure_region"), '=', x, ',', y, ',', width, ',', height);
+    sendCommand(GEOLUX_F("set_autoexposure_region"), '=', x, ',', y, ',', width, ',',
+                height);
     return waitResponse() == 1;
 }
 
@@ -421,7 +427,7 @@ uint32_t GeoluxCamera::getImageBrightness() {
 }
 
 bool GeoluxCamera::setWhiteBalanceOffset(int8_t red, int8_t green, int8_t blue) {
-    sendCommand(GF("set_wb_offset"), '=', red, ',', green, ',', blue);
+    sendCommand(GEOLUX_F("set_wb_offset"), '=', red, ',', green, ',', blue);
     return waitResponse() == 1;
 }
 
@@ -438,7 +444,7 @@ int8_t GeoluxCamera::getWhiteBalanceOffsetBlue() {
 }
 
 bool GeoluxCamera::setColorCorrectionMode(int8_t mode) {
-    sendCommand(GF("set_color_correction_mod"), '=', mode);
+    sendCommand(GEOLUX_F("set_color_correction_mod"), '=', mode);
     return waitResponse() == 1;
 }
 
@@ -447,7 +453,7 @@ bool GeoluxCamera::getColorCorrectionMode() {
 }
 
 bool GeoluxCamera::setAutoSnapshotInterval(uint32_t mode) {
-    sendCommand(GF("set_auto_snapshot_interval"), '=', mode);
+    sendCommand(GEOLUX_F("set_auto_snapshot_interval"), '=', mode);
     return waitResponse() == 1;
 }
 
@@ -458,7 +464,7 @@ uint32_t GeoluxCamera::getAutoSnapshotInterval() {
 }
 
 bool GeoluxCamera::moveFocus(int8_t offset) {
-    sendCommand(GF("move_focus"), '=', offset);
+    sendCommand(GEOLUX_F("move_focus"), '=', offset);
     return waitResponse() == 1;
 }
 
@@ -467,7 +473,7 @@ int16_t GeoluxCamera::getFocusPosition() {
 }
 
 bool GeoluxCamera::moveZoom(int8_t offset) {
-    sendCommand(GF("move_zoom"), '=', offset);
+    sendCommand(GEOLUX_F("move_zoom"), '=', offset);
     return waitResponse() == 1;
 }
 
@@ -476,7 +482,7 @@ int8_t GeoluxCamera::getZoomPosition() {
 }
 
 bool GeoluxCamera::sleep(uint32_t sleepTimeout) {
-    sendCommand(GF("sleep"), '=', sleepTimeout);
+    sendCommand(GEOLUX_F("sleep"), '=', sleepTimeout);
     return waitResponse() == 1;
 }
 
@@ -500,8 +506,9 @@ uint32_t GeoluxCamera::waitForReady(uint32_t initial_delay, uint32_t timeout) {
     }
 }
 
-int8_t GeoluxCamera::waitResponse(uint32_t timeout_ms, String& data, GsmConstStr r1,
-                                  GsmConstStr r2, GsmConstStr r3, GsmConstStr r4)
+int8_t GeoluxCamera::waitResponse(uint32_t timeout_ms, String& data, GeoluxConstStr r1,
+                                  GeoluxConstStr r2, GeoluxConstStr r3,
+                                  GeoluxConstStr r4)
 
 {
     data.reserve(32);
@@ -526,12 +533,12 @@ int8_t GeoluxCamera::waitResponse(uint32_t timeout_ms, String& data, GsmConstStr
                 goto finish;
             }
 #if defined GEOLUX_DEBUG
-            else if (data.endsWith(GF("Geolux HydroCAM"))) {
+            else if (data.endsWith(GEOLUX_F("Geolux HydroCAM"))) {
                 data = "";
                 DBG_GLX("### Unexpected module reset!");
                 init();
                 return true;
-            } else if (data.endsWith(GF("Geolux HydroCam"))) {
+            } else if (data.endsWith(GEOLUX_F("Geolux HydroCam"))) {
                 data = "";
                 DBG_GLX("### Unexpected module reset!");
                 init();
@@ -550,14 +557,15 @@ finish:
     return index;
 }
 
-int8_t GeoluxCamera::waitResponse(uint32_t timeout_ms, GsmConstStr r1, GsmConstStr r2,
-                                  GsmConstStr r3, GsmConstStr r4) {
+int8_t GeoluxCamera::waitResponse(uint32_t timeout_ms, GeoluxConstStr r1,
+                                  GeoluxConstStr r2, GeoluxConstStr r3,
+                                  GeoluxConstStr r4) {
     String data;
     return waitResponse(timeout_ms, data, r1, r2, r3, r4);
 }
 
-int8_t GeoluxCamera::waitResponse(GsmConstStr r1, GsmConstStr r2, GsmConstStr r3,
-                                  GsmConstStr r4) {
+int8_t GeoluxCamera::waitResponse(GeoluxConstStr r1, GeoluxConstStr r2,
+                                  GeoluxConstStr r3, GeoluxConstStr r4) {
     return waitResponse(5000L, r1, r2, r3, r4);
 }
 
@@ -566,7 +574,7 @@ String GeoluxCamera::getCameraInfoString(const char* searchStartTag, char search
                                          const char* searchSkipTag) {
     // send the get_info command
     uint32_t start_time = millis();
-    sendCommand(GF("get_info"));
+    sendCommand(GEOLUX_F("get_info"));
     // wait for response
     while (!_stream->available() && millis() - start_time < 5000L);
 
@@ -592,7 +600,7 @@ long GeoluxCamera::getCameraInfoInt(const char* searchStartTag, char searchEndTa
                                     int8_t numberSkips, const char* searchSkipTag) {
     // send the get_info command
     uint32_t start_time = millis();
-    sendCommand(GF("get_info"));
+    sendCommand(GEOLUX_F("get_info"));
     // wait for response
     while (!_stream->available() && millis() - start_time < 5000L);
 

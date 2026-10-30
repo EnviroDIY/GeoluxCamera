@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Use two power pins in examples
 - Do not attempt to transfer an image without a length. If 0 bytes are requested, verify length with the camera. If the camera reports 0 length, abort.
 - Check for both HydroCAM and HydroCam output as signs of reboot.
+- Rename the flash-string helpers to Geolux-specific names to avoid conflicts with TinyGSM.
 
 ### Added
 

@@ -16,17 +16,12 @@ GeoluxCamera	KEYWORD1
 GeoluxCamera	KEYWORD2
 ~GeoluxCamera	KEYWORD2
 begin	KEYWORD2
-begin	KEYWORD2
-begin	KEYWORD2
-begin	KEYWORD2
 takeSnapshot	KEYWORD2
 getStatus	KEYWORD2
 getImageSize	KEYWORD2
 getImageChunk	KEYWORD2
 transferImage	KEYWORD2
-transferImage	KEYWORD2
 restart	KEYWORD2
-printCameraInfo	KEYWORD2
 printCameraInfo	KEYWORD2
 getDeviceType	KEYWORD2
 getCameraFirmware	KEYWORD2
@@ -39,9 +34,7 @@ getQuality	KEYWORD2
 setJPEGMaximumSize	KEYWORD2
 getJPEGMaximumSize	KEYWORD2
 setNightMode	KEYWORD2
-setNightMode	KEYWORD2
 getNightMode	KEYWORD2
-setIRLEDMode	KEYWORD2
 setIRLEDMode	KEYWORD2
 getIRLEDMode	KEYWORD2
 getIRFilterStatus	KEYWORD2
@@ -71,19 +64,14 @@ sleep	KEYWORD2
 sendCommand	KEYWORD2
 waitForReady	KEYWORD2
 waitResponse	KEYWORD2
-waitResponse	KEYWORD2
-waitResponse	KEYWORD2
-streamWrite	KEYWORD2
 streamWrite	KEYWORD2
 streamDump	KEYWORD2
-streamFind	KEYWORD2
-getCameraInfoString	KEYWORD2
-getCameraInfoInt	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
 
+NO_RESPONSE	LITERAL1
 OK	LITERAL1
 ERROR	LITERAL1
 BUSY	LITERAL1
@@ -98,6 +86,6 @@ DEFAULT_XFER_CHUNK_SIZE	LITERAL1
 GEOLUX_CAMERA_RS232_BAUD	LITERAL1
 GEOLUX_CAMERA_RS232_CONFIG	LITERAL1
 GEOLUX_PROGMEM	LITERAL1
-GFP	LITERAL1
-GF	LITERAL1
+GEOLUX_FP	LITERAL1
+GEOLUX_F	LITERAL1
 DBG_GLX	LITERAL1
