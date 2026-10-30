@@ -2,11 +2,11 @@
 
 An Arduino library for communication with the [Geolux HydroCam](https://www.geolux-radars.com/hydrocam).
 
-[//]: # ( @tableofcontents )
+<!--! @tableofcontents -->
 
-[//]: # ( @m_footernavigation )
+<!--! @m_footernavigation -->
 
-[//]: # ( Start GitHub Only )
+<!--! @if GITHUB -->
 
 - [Geolux camera library for Arduino](#geolux-camera-library-for-arduino)
   - [Geolux HydroCam](#geolux-hydrocam)
@@ -14,7 +14,7 @@ An Arduino library for communication with the [Geolux HydroCam](https://www.geol
   - [License](#license)
   - [Acknowledgments](#acknowledgments)
 
-[//]: # ( End GitHub Only )
+<!--! @endif -->
 
 ## Geolux HydroCam
 
@@ -54,7 +54,7 @@ Documentation is licensed as [Creative Commons Attribution-ShareAlike 4.0](https
 
 [Sara Damiano](https://github.com/SRGDamia1) is the primary developer of the Geolux HydroCam library, with input from [other contributors](https://github.com/EnviroDIY/ModularSensors/graphs/contributors).
 
-This project has benefited from the support from the following funders:
+This project has benefited from the support from the following funding sources:
 
 - USGS Next Generation Water Observing System Rapid Deployment
 - Stroud Water Research Center endowment

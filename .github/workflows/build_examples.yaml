@@ -3,6 +3,9 @@ name: Build Examples
 # Triggers the workflow on push or pull request events
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -13,6 +16,28 @@ jobs:
     if: ${{ ! contains(github.event.head_commit.message, 'ci skip') }}
     uses: EnviroDIY/workflows/.github/workflows/build_examples.yaml@main
     with:
-      boards_to_build: mayfly,envirodiy_stonefly_m4,megaatmega2560,zeroUSB,mkrvidor4000,uno_wifi_rev2,nano_every,arduino_nano_esp32,uno_r4_wifi,nano33ble,portenta_h7_m7,adafruit_feather_m0,adafruit_feather_m4,adafruit_grandcentral_m4,huzzah,featheresp32,adafruit_feather_f405,nodemcu,nodemcuv2,esp32dev,esp32-s3-devkitm-1
-      examples_to_build: all
+      # # Comma-separated list of examples to build or "all" for all (default: all)
+      examples_to_build: "all"
+
+      # # Comma-separated list of boards to build with all compilers "all" for all (default: all)
+      # # Mutually exclusive with boards_to_ignore
+      boards_to_build: "mayfly,envirodiy_stonefly_m4,megaatmega2560,zeroUSB,mkrvidor4000,uno_wifi_rev2,nano_every,arduino_nano_esp32,uno_r4_wifi,nano33ble,portenta_h7_m7,adafruit_feather_m0,adafruit_feather_m4,adafruit_grandcentral_m4,huzzah,featheresp32,adafruit_feather_f405,nodemcu,nodemcuv2,esp32dev,esp32-s3-devkitm-1"
+      # # Comma-separated list of boards to skip with any compiler (default: empty)
+
+      # # Semicolon-separated list of comma-separated inline defines to expand the matrix
+      # # To set a value, use the format: NAME=VALUE.
+      # # These will be written to the top of the example code as #define statements.
+      # # These will NOT be passed to the compiler!
+      # inline_defines: "DEBUG,VERSION=1.0;VERSION=2.0"
+
+      # # Semicolon-separated list of comma-separated compiler flags to expand the matrix
+      # # For the Arduino CLI, these will be passed to the compiler
+      # # For PlatformIO, these will be ignored and must be set in the platformio.ini file for each environment.
+      # compiler_flags: "-Wall,-Wextra;-O2,-g"
+
+      # # Comma-separated list of fields to group logs by (default: compiler,board,example,inline_defines)
+      # log_grouping_fields: "compiler,board,example,inline_defines"
+
+      # # Comma-separated list of fields to group jobs by (default: compiler,board)
+      # job_grouping_fields: "compiler,board"
     secrets: inherit
