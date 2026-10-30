@@ -12,14 +12,22 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
+### Added
+
+### Removed
+
+### Fixed
+
+***
+
+## [0.1.4]
+
+### Changed
+
 - Use two power pins in examples
 - Do not attempt to transfer an image without a length. If 0 bytes are requested, verify length with the camera. If the camera reports 0 length, abort.
 - Check for both HydroCAM and HydroCam output as signs of reboot.
 - Rename the flash-string helpers to Geolux-specific names to avoid conflicts with TinyGSM.
-
-### Added
-
-### Removed
 
 ### Fixed
 
@@ -64,7 +72,8 @@ Initial release
 
 ***
 
-[Unreleased]: https://github.com/EnviroDIY/GeoluxCamera/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/EnviroDIY/GeoluxCamera/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/EnviroDIY/GeoluxCamera/releases/tag/v0.1.4
 [0.1.3]: https://github.com/EnviroDIY/GeoluxCamera/releases/tag/v0.1.3
 [0.1.2]: https://github.com/EnviroDIY/GeoluxCamera/releases/tag/v0.1.2
 [0.1.1]: https://github.com/EnviroDIY/GeoluxCamera/releases/tag/v0.1.1
